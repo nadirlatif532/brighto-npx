@@ -1,0 +1,86 @@
+<p-table
+  [value]="families"
+  selectionMode="single"
+  [(selection)]="selectedFamily"
+  (onRowSelect)="onRowSelect($event)"
+>
+  <ng-template pTemplate="caption">
+    List of Color Families
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Sr. #</th>
+      <th>Name</th>
+      <th>RGB</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-family let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="family">
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{ family.name }}</td>
+      <td style.background-color="rgb({{ family.r }}, {{family.g}}, {{family.b}})">
+        <strong>({{ family.r }}, {{family.g}}, {{family.b}})</strong>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div style="text-align:left">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-plus"
+        (click)="showDialogToAdd()"
+        label="Add"
+      ></button>
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  header="Color Details"
+  [(visible)]="displayDialog"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{ width: '300px' }"
+>
+  <div *ngIf="family">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="family.name"
+      />
+    </div>
+    <div class="form-row">
+      <div class="col-4">
+        <input type="text" pKeyFilter="pint" placeholder="R" class="form-control" [(ngModel)]="family.r" />
+      </div>
+      <div class="col-4">
+        <input type="text" pKeyFilter="pint" placeholder="G" class="form-control" [(ngModel)]="family.g" />
+      </div>
+      <div class="col-4">
+        <input type="text" pKeyFilter="pint" placeholder="B" class="form-control" [(ngModel)]="family.b" />
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-close"
+        (click)="delete()"
+        label="Delete"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="fa fa-check"
+        (click)="save()"
+        label="Save"
+      ></button>
+    </div>
+  </p-footer>
+</p-dialog>

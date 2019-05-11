@@ -80,6 +80,10 @@ export const routes: Routes = [
         loadChildren: './views/theme/theme.module#ThemeModule'
       },
       {
+        path: 'colors',
+        loadChildren: './views/colors/colors.module#ColorsModule'
+      },
+      {
         path: 'widgets',
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
       }
