@@ -94,6 +94,8 @@ export const routes: Routes = [
       {
         path: 'country',
         loadChildren: './views/countries/countries.module#CountriesModule'
+      },
+      {
         path: 'categories',
         loadChildren: './views/category/category.module#CategoryModule'
       }
