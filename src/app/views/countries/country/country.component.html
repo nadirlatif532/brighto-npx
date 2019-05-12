@@ -1,0 +1,48 @@
+<p-table [columns]="cols" [value]="countries" selectionMode="single" [(selection)]="selectedCountry" (onRowSelect)="onRowSelect($event)" >
+  <ng-template pTemplate="caption">
+      List of Countries
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Sr. #</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+      </tr>
+    </ng-template>
+  <ng-template pTemplate="body" let-country let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="country">
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{ country.id }}</td>
+      <td>{{country.name}}</td>
+      <td>{{country.createdAt | date}}</td>
+      <td>{{country.updatedAt | date}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+      </div>
+  </ng-template>    
+</p-table>
+
+<p-dialog header="Country Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+  <div class="ui-g ui-fluid" *ngIf="country">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="country.name"
+      />
+  </div>
+</div>
+  <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+          <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+      </div>
+  </p-footer>
+</p-dialog>

@@ -49,6 +49,11 @@ export const navItems: NavData[] = [
     icon: 'icon-drop'
   },
   {
+    name: 'Country',
+    url: '/country',
+    icon: 'icon-drop'
+  },
+  {
     name: 'Typography',
     url: '/theme/typography',
     icon: 'icon-pencil'

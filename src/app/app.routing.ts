@@ -86,6 +86,14 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
+      },
+      {
+        path: 'widgets',
+        loadChildren: './views/widgets/widgets.module#WidgetsModule'
+      },
+      {
+        path: 'country',
+        loadChildren: './views/countries/countries.module#CountriesModule'
       }
     ],
     canActivate: [AuthGuard]

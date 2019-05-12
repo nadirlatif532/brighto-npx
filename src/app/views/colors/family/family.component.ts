@@ -22,6 +22,7 @@ export class FamilyComponent implements OnInit {
     this.familyService.getAll().subscribe(
       next => this.families = next
     );
+
   }
 
   showDialogToAdd() {
