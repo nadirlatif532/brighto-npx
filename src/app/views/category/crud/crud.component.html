@@ -1,0 +1,71 @@
+<p-table
+  [value]="categories"
+  selectionMode="single"
+  [(selection)]="selectedCategory"
+  (onRowSelect)="onRowSelect($event)"
+>
+  <ng-template pTemplate="caption">
+    List of Categories
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Sr. #</th>
+      <th>Name</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-category let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="category">
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{ category.name }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div style="text-align:left">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-plus"
+        (click)="showDialogToAdd()"
+        label="Add"
+      ></button>
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  header="Category Details"
+  [(visible)]="displayDialog"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{ width: '300px' }"
+>
+  <div *ngIf="category">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="category.name"
+      />
+    </div>
+  </div>
+  <p-footer>
+    <div class="">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-close"
+        (click)="delete()"
+        label="Delete"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="fa fa-check"
+        (click)="save()"
+        label="Save"
+      ></button>
+    </div>
+  </p-footer>
+</p-dialog>

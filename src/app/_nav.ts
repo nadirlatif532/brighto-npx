@@ -40,17 +40,13 @@ export const navItems: NavData[] = [
     }
   },
   {
-    title: true,
-    name: 'Colors'
-  },
-  {
-    name: 'Family',
+    name: 'Color Family',
     url: '/colors/family',
     icon: 'icon-drop'
   },
   {
-    name: 'Typography',
-    url: '/theme/typography',
+    name: 'Categories',
+    url: '/categories',
     icon: 'icon-pencil'
   },
   {

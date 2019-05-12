@@ -7,7 +7,6 @@ import { ColorsRoutingModule } from './colors-routing.module';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { ColorPickerModule } from 'primeng/colorpicker';
 import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     TableModule,
     DialogModule,
     ButtonModule,
-    ColorPickerModule,
     KeyFilterModule
   ]
 })

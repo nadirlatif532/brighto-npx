@@ -84,8 +84,8 @@ export const routes: Routes = [
         loadChildren: './views/colors/colors.module#ColorsModule'
       },
       {
-        path: 'widgets',
-        loadChildren: './views/widgets/widgets.module#WidgetsModule'
+        path: 'categories',
+        loadChildren: './views/category/category.module#CategoryModule'
       }
     ],
     canActivate: [AuthGuard]
