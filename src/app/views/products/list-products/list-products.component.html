@@ -1,0 +1,103 @@
+<p-dataView #dv [value]="products" [paginator]="true" [rows]="10">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-4"></div>
+        <div class="ui-g-6 ui-md-4 filter-container">
+          <div style="position:relative">
+            <input
+              type="search"
+              pInputText
+              placeholder="Search by name"
+              (keyup)="dv.filter($event.target.value)"
+            />
+          </div>
+        </div>
+        <div class="ui-g-6 ui-md-4" style="text-align:right">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <ng-template let-product pTemplate="listItem">
+    <div class="ui-g-6" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+      <div class="ui-g-12 ui-md-3" style="text-align:center">
+        <img
+        src=""
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        width="100%"
+        />
+      </div>
+      <div class="ui-g-12 ui-md-8 product-details">
+        <div class="ui-g">
+          <div class="ui-g-2 ui-sm-6">Name:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ product.name }}</b>
+          </div>
+
+          <div class="ui-g-2 ui-sm-6">Category:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ product.Category.name }}</b>
+          </div>
+
+          <div class="ui-g-2 ui-sm-6">Spreading:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ product.spreading }}</b>
+          </div>
+
+          <div class="ui-g-2 ui-sm-6">Country:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b *ngFor="let country of product.Countries">{{ country.name }}, </b>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-1 search-icon">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-times"
+          (click)="deleteProduct(product)"
+        ></button>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-pencil"
+          (click)="editProduct(product)"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template let-product pTemplate="gridItem">
+    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+      <p-panel
+        [header]="product.name"
+        [style]="{ 'text-align': 'center' }"
+      >
+        <img
+          src=""
+          onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+          width="100%"
+        />
+        <div class="product-detail">
+          {{ product.Category.name }} -
+          {{ product.spreading }}
+        </div>
+        <hr class="ui-widget-content" style="border-top:0" />
+        <button
+          pButton
+          type="button"
+          icon="pi pi-times"
+          (click)="deleteProduct($event, product)"
+          style="margin-top:0"
+        ></button>
+        <button
+        pButton
+        type="button"
+        icon="pi pi-pencil"
+        (click)="editProduct(product)"
+      ></button>
+      </p-panel>
+    </div>
+  </ng-template>
+</p-dataView>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

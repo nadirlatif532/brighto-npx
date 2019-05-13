@@ -19,6 +19,13 @@
       <td>{{ category.name }}</td>
     </tr>
   </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="2">
+        No records found
+      </td>
+    </tr>
+  </ng-template>
   <ng-template pTemplate="summary">
     <div style="text-align:left">
       <button
