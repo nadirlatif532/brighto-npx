@@ -18,8 +18,8 @@
     <tr [pSelectableRow]="family">
       <td>{{ rowIndex + 1 }}</td>
       <td>{{ family.name }}</td>
-      <td style.background-color="rgb({{ family.r }}, {{family.g}}, {{family.b}})">
-        <strong>({{ family.r }}, {{family.g}}, {{family.b}})</strong>
+      <td style.background-color="rgb({{ family.color.r }}, {{family.color.g}}, {{family.color.b}})">
+        <strong>({{ family.color.r }}, {{family.color.g}}, {{family.color.b}})</strong>
       </td>
     </tr>
   </ng-template>
