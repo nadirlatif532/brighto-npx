@@ -63,6 +63,16 @@ export const navItems: NavData[] = [
     ]
   },
   {
+    name: 'Surface',
+    url: '/surface',
+    icon: 'icon-puzzle'
+  },
+  {
+    name: 'Project',
+    url: '/project',
+    icon: 'icon-puzzle'
+  },
+  {
     divider: true
   }
 ];
