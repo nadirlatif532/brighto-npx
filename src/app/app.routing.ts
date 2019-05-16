@@ -102,6 +102,14 @@ export const routes: Routes = [
       {
         path: 'products',
         loadChildren: './views/products/products.module#ProductsModule'
+      },
+      {
+        path: 'surface',
+        loadChildren: './views/surfaces/surfaces.module#SurfacesModule'
+      },
+      {
+        path: 'project',
+        loadChildren: './views/project/project.module#ProjectModule'
       }
     ],
     canActivate: [AuthGuard]
