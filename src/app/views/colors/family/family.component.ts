@@ -61,7 +61,7 @@ export class FamilyComponent implements OnInit {
   }
 
   cloneFamily(family) {
-    let fam: Family = {id: family.id, name: family.name, r: family.r, g: family.g, b: family.b};
+    let fam: Family = {id: family.id, name: family.name, r: family.color.r, g: family.color.g, b: family.color.b};
     return fam;
   }
 
