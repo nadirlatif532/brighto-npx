@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
-import { Surface } from '../models/surface.interface';
+import { Finish } from '../models/finish.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SurfaceService {
+export class FinishService {
 
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('admin/surface/').pipe(
+    return this.api.get('admin/finish-type/').pipe(
       map((response: any) => {
         return response.data;
       })
     );
   }
 
-  public save(surface: Surface) {
-    const name = {name:surface['name']};
-    return this.api.post('admin/surface/create', name );
+  public save(finish: Finish) {
+    return this.api.post('admin/finish-type/create', finish );
   }
 
-  public update(surface: Surface) {
-    return this.api.put(`admin/surface/${surface.id}`, surface);
+  public update(finish: Finish) {
+    return this.api.put(`admin/finish-type/${finish.id}`, finish);
   }
 
-  public delete(surface: Surface) {
-    return this.api.delete(`admin/surface/${surface.id}`);
+  public delete(finish: Finish) {
+    return this.api.delete(`admin/finish-type/${finish.id}`);
   }
 }

@@ -1,0 +1,58 @@
+<p-table [columns]="cols" [value]="finishes" selectionMode="single" [(selection)]="selectedFinish" (onRowSelect)="onRowSelect($event)" >
+  <ng-template pTemplate="caption">
+      List of Finishes
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Sr. #</th>
+        <th>Name</th>
+        <th>Image</th>
+      </tr>
+    </ng-template>
+  <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="finish">
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{project.name}}</td>
+      <td>{{project.image}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+      </div>
+  </ng-template>    
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="2">
+        No records found
+      </td>
+    </tr>
+</ng-template>
+</p-table>
+
+<p-dialog header="Finish Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+  <div *ngIf="finish">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="finish.name"
+      />
+      <label for="name">Image</label>
+      <input
+        type="text"
+        class="form-control"
+        id="image"
+        [(ngModel)]="finish.image"
+      />
+  </div>
+</div>
+  <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+          <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+      </div>
+  </p-footer>
+</p-dialog>
