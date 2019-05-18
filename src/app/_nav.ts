@@ -73,6 +73,11 @@ export const navItems: NavData[] = [
     icon: 'icon-puzzle'
   },
   {
+    name: 'Finish Type',
+    url: '/finish-type',
+    icon: 'icon-puzzle'
+  },
+  {
     divider: true
   }
 ];

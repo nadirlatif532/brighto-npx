@@ -110,6 +110,10 @@ export const routes: Routes = [
       {
         path: 'project',
         loadChildren: './views/project/project.module#ProjectModule'
+      },
+      {
+        path: 'finish-type',
+        loadChildren: './views/finishtype/finishtype.module#FinishtypeModule'
       }
     ],
     canActivate: [AuthGuard]
