@@ -1,0 +1,137 @@
+<p-table
+  [value]="shades"
+  selectionMode="single"
+  [(selection)]="selectedShade"
+  (onRowSelect)="onRowSelect($event)"
+>
+  <ng-template pTemplate="caption">
+    List of Shades
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Sr. #</th>
+      <th>Item Code</th>
+      <th>Name</th>
+      <th>RGB</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-shade let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="shade">
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{ shade.itemCode }}</td>
+      <td>{{ shade.name }}</td>
+      <td style.background-color="rgb({{ shade.color.r }}, {{shade.color.g}}, {{shade.color.b}})">
+        <strong>({{ shade.color.r }}, {{shade.color.g}}, {{shade.color.b}})</strong>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="4">
+        No records found
+      </td>
+    </tr>
+</ng-template>
+  <ng-template pTemplate="summary">
+    <div style="text-align:left">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-plus"
+        (click)="showDialogToAdd()"
+        label="Add"
+      ></button>
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  header="Shade Details"
+  [(visible)]="displayDialog"
+  showEffect="fade"
+  [modal]="true"
+  [contentStyle]="{'overflow':'auto','max-height':'500px'}"
+  [style]="{width: '500px', 'position':'absolute'}"
+>
+  <div *ngIf="shade">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="shade.name"
+      />
+    </div>
+    <div class="form-group">
+        <label for="product">Product</label>
+        <p-dropdown 
+          [style]="{ width: '100%' }"
+          [autoDisplayFirst]="false"
+          name="product"
+          [filter]="true"
+          required [options]="products" [(ngModel)]="shade.product" optionLabel="name"></p-dropdown>
+
+      </div>
+    <div class="form-group">
+        <label for="item_code">Item Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="item_code"
+          [(ngModel)]="shade.itemCode"
+        />
+      </div>
+      <div class="form-group">
+        <p-checkbox name="grop1" value="AC" label="All Colors" binary="true" [(ngModel)]="isAC"></p-checkbox>
+        <p-checkbox name="grop2" value="RM" label="Ready Made" binary="true" [(ngModel)]="isRM"></p-checkbox>
+      </div>
+      <div class="form-group">
+        <label for="">Available In</label>
+        <p-listbox [options]="countries" name="country" multiple="multiple" checkbox="checkbox" filter="filter" [(ngModel)]="selectedCountries" optionLabel="name" required></p-listbox>
+      </div>
+      <div class="form-group">
+        <label for="">Belongs to</label>
+        <p-dropdown 
+        [style]="{ width: '100%' }"
+        [autoDisplayFirst]="false"
+        name="countries"
+        [filter]="true"
+        required [options]="families" [(ngModel)]="shade.family" optionLabel="name"></p-dropdown>
+      </div>
+
+    <div class="form-row">
+      <div class="col-4">
+        <input type="text" pKeyFilter="pint" placeholder="R" class="form-control" [(ngModel)]="shade.r" />
+      </div>
+      <div class="col-4">
+        <input type="text" pKeyFilter="pint" placeholder="G" class="form-control" [(ngModel)]="shade.g" />
+      </div>
+      <div class="col-4">
+        <input type="text" pKeyFilter="pint" placeholder="B" class="form-control" [(ngModel)]="shade.b" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="textarea-input" name="description" [(ngModel)]="shade.description" rows="4" class="form-control" required></textarea>
+    </div>
+  </div>
+  <p-footer>
+    <div class="">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-close"
+        (click)="delete()"
+        label="Delete"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="fa fa-check"
+        (click)="save()"
+        label="Save"
+      ></button>
+    </div>
+  </p-footer>
+</p-dialog>

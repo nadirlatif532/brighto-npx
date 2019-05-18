@@ -8,9 +8,13 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { ShadeComponent } from './shade/shade.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ListboxModule } from 'primeng/listbox';
 
 @NgModule({
-  declarations: [FamilyComponent],
+  declarations: [FamilyComponent, ShadeComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,7 +22,10 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     TableModule,
     DialogModule,
     ButtonModule,
-    KeyFilterModule
+    KeyFilterModule,
+    DropdownModule,
+    CheckboxModule,
+    ListboxModule
   ]
 })
 export class ColorsModule { }

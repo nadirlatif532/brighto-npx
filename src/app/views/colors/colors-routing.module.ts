@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FamilyComponent } from './family/family.component';
+import { ShadeComponent } from './shade/shade.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
         data: {
           title: 'Family'
         }
+      },
+      {
+        path: 'shades',
+        component: ShadeComponent
       }
     ]
   }

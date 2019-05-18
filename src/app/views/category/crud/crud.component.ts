@@ -23,7 +23,7 @@ export class CrudComponent implements OnInit {
 
   onRowSelect(event) {
     this.newCategory = false;
-    this.category = {id: event.data.id, name: event.data.name};
+    this.category = {id: event.data.id, name: event.data.name, image: "https://images.unsplash.com/photo-1558122104-355edad709f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"};
     this.displayDialog = true;
   }
 
@@ -35,6 +35,7 @@ export class CrudComponent implements OnInit {
 
   save() {
     if (this.newCategory) {
+      this.category.image = "https://images.unsplash.com/photo-1558122104-355edad709f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80";
       this.categoryService.save(this.category).subscribe(
         () => this.ngOnInit()
       );

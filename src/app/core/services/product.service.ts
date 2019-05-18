@@ -11,7 +11,7 @@ export class ProductService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('u/products').pipe(
+    return this.api.post('u/products').pipe(
       map((response: any) => {
         return response.data;
       })
