@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Project} from '../../../../core/models/project.interface';
 import {ProjectService} from '../../../../core/services/project.service'
+import { SharedService } from '../../../../shared/services/shared.service';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -15,8 +16,8 @@ export class ProjectComponent implements OnInit {
     newProject: boolean = false;
     selectedProject: Project;
   
-    constructor(private projectService: ProjectService) { }
-  
+    constructor(private projectService: ProjectService,private sharedService: SharedService) { }
+    baseURL = this.sharedService.baseURL;
     ngOnInit() {
         this.projectService.getAll().subscribe(
           next => {
@@ -33,7 +34,10 @@ export class ProjectComponent implements OnInit {
   
     save() {
       if(this.newProject) {
-        this.projectService.save(this.project).subscribe(
+        let formData = new FormData();
+        formData.append('image',this.project.image);
+        formData.append('name',this.project.name);
+        this.projectService.save(formData).subscribe(
           () => this.ngOnInit()
         )
       } else {

@@ -11,7 +11,7 @@ export class ProductService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('u/products').pipe(
+    return this.api.post('u/products').pipe(
       map((response: any) => {
         return response.data;
       })
@@ -26,12 +26,12 @@ export class ProductService {
     );
   }
 
-  public save(product: Product) {
-    return this.api.post('admin/products/create', product);
+  public save(product: any) {
+    return this.api.postStringified('admin/products/create', product);
   }
 
   public update(product: Product) {
-    return this.api.put(`admin/products/${product.id}`, product);
+    return this.api.putStringified(`admin/products/${product.id}`, product);
   }
 
   public delete(product: Product) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Surface} from '../../../../core/models/surface.interface';
 import { SurfaceService } from '../../../../core/services/surface.service';
+import { SharedService } from '../../../../shared/services/shared.service';
 @Component({
   selector: 'app-surface',
   templateUrl: './surface.component.html',
@@ -14,14 +15,19 @@ export class SurfaceComponent implements OnInit {
   newSurface: boolean = false;
   selectedSurface: Surface;
 
-  constructor(private surfaceService: SurfaceService) { }
+  constructor(private surfaceService: SurfaceService, private sharedService:SharedService) { }
 
+  baseURL = this.sharedService.baseURL;
   ngOnInit() {
       this.surfaceService.getAll().subscribe(
         next => {
           this.surfaces = next;
         }
       );
+  }
+
+  handleFileInput(files: FileList) {
+    this.surface.image = files.item(0);
   }
 
   showDialogToAdd() {
@@ -32,7 +38,10 @@ export class SurfaceComponent implements OnInit {
 
   save() {
     if(this.newSurface) {
-      this.surfaceService.save(this.surface).subscribe(
+      let formData = new FormData();
+      formData.append('image',this.surface.image);
+      formData.append('name',this.surface.name);
+      this.surfaceService.save(formData).subscribe(
         () => this.ngOnInit()
       )
     } else {

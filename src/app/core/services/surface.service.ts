@@ -18,12 +18,12 @@ export class SurfaceService {
     );
   }
 
-  public save(surface: Surface) {
-    return this.api.post('admin/surface/create', surface );
+  public save(surface: any) {
+    return this.api.postStringified('admin/surface/create', surface );
   }
 
   public update(surface: Surface) {
-    return this.api.put(`admin/surface/${surface.id}`, surface);
+    return this.api.putStringified(`admin/surface/${surface.id}`, surface);
   }
 
   public delete(surface: Surface) {

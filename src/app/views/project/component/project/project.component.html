@@ -13,7 +13,7 @@
     <tr [pSelectableRow]="project">
       <td>{{ rowIndex + 1 }}</td>
       <td>{{project.name}}</td>
-      <td>{{project.image}}</td>
+      <td><img src="{{baseURL}}/images/{{project.image}}"/></td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>

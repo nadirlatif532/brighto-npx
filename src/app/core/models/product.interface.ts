@@ -9,6 +9,6 @@ export interface Product {
   description: Text,
   spreading: number,
   is_active: boolean,
-  image: string,
+  image: any,
   countries: Country[]
 }

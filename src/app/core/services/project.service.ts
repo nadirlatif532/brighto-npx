@@ -19,12 +19,12 @@ export class ProjectService {
     );
   }
 
-  public save(project: Project) {
-    return this.api.post('admin/project-type/create', project );
+  public save(project: any) {
+    return this.api.postStringified('admin/project-type/create', project );
   }
 
   public update(project: Surface) {
-    return this.api.put(`admin/project-type/${project.id}`, project);
+    return this.api.putStringified(`admin/project-type/${project.id}`, project);
   }
 
   public delete(project: Project) {

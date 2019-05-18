@@ -3,6 +3,7 @@ import { ProductService } from '../../../core/services/product.service';
 import { Product } from '../../../core/models/product.interface';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-list-products',
@@ -12,12 +13,13 @@ import { Router } from '@angular/router';
 export class ListProductsComponent implements OnInit {
 
   products: Product[];
-
   constructor(
     private productService: ProductService,
+    private sharedService: SharedService,
     private confirmationService: ConfirmationService,
     private router: Router) { }
-
+  
+  baseURL = this.sharedService.baseURL;
   ngOnInit() {
     this.productService.getAll().subscribe(next => this.products = next);
   }

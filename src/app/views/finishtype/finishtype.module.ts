@@ -19,7 +19,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     DialogModule,
     ButtonModule,
     ColorPickerModule,
-    KeyFilterModule
+    KeyFilterModule,
   ]
 })
 export class FinishtypeModule { }
