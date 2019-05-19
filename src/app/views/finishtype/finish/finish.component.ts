@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Finish} from '../../../core/models/finish.interface'
+import { Finish } from '../../../core/models/finish.interface'
 import { FinishService } from '../../../core/services/finish.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class FinishComponent implements OnInit {
   finish: Finish;
   displayDialog: boolean = false;
   newFinish: boolean = false;
+  image: any;
 
   constructor(private finishService: FinishService) { }
 
@@ -23,8 +24,12 @@ export class FinishComponent implements OnInit {
 
   onRowSelect(event) {
     this.newFinish = false;
-    this.finish = this.cloneProject(event);
+    this.finish = this.cloneProject(event.data);
     this.displayDialog = true;
+  }
+
+  myUploader(event) {
+    this.finish.image = event.files[0];
   }
 
   showDialogToAdd() {
@@ -32,22 +37,22 @@ export class FinishComponent implements OnInit {
     this.finish = {} as Finish;
     this.displayDialog = true;
   }
-  handleFileInput(files: FileList) {
-    this.finish.image = files.item(0);
-  }
+
   save() {
+    let formData = new FormData();
+    formData.append('image', this.finish.image, this.finish.image.name);
+    formData.append('name', this.finish.name);
+
     if (this.newFinish) {
-      let formData = new FormData();
-      formData.append('image',this.finish.image);
-      formData.append('name',this.finish.name);
       this.finishService.save(formData).subscribe(
         () => this.ngOnInit()
       );
     } else {
-      this.finishService.update(this.finish).subscribe(
+      this.finishService.update(formData, this.finish.id).subscribe(
         () => this.ngOnInit()
       );
     }
+
     this.finish = null;
     this.displayDialog = false;
   }
@@ -61,11 +66,8 @@ export class FinishComponent implements OnInit {
     )
   }
  
-
-cloneProject(project) {
-  let count: Finish = {id: project.id, name: project.name, image:project.image};
-  return count;
-}
-
-
+  cloneProject(finish) {
+    let count: Finish = {id: finish.id, name: finish.name, image: finish.image};
+    return count;
+  }
 }

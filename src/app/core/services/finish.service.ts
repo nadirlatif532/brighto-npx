@@ -22,8 +22,8 @@ export class FinishService {
     return this.api.postStringified('admin/finish-type/create', finish );
   }
 
-  public update(finish: Finish) {
-    return this.api.putStringified(`admin/finish-type/${finish.id}`, finish);
+  public update(finish: any, id: number) {
+    return this.api.putStringified(`admin/finish-type/${id}`, finish);
   }
 
   public delete(finish: Finish) {

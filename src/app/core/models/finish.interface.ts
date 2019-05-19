@@ -1,5 +1,5 @@
 export interface Finish {
-    id: number;
-    name: string;
-    image: any;
-  }
+  id: number;
+  name: string;
+  image: any;
+}
