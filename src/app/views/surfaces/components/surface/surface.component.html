@@ -1,36 +1,52 @@
-<p-table [columns]="cols" [value]="surfaces" selectionMode="single" [(selection)]="selectedSurface" (onRowSelect)="onRowSelect($event)" >
+<p-table
+  [value]="surfaces"
+  selectionMode="single"
+  [(selection)]="selectedSurface"
+  (onRowSelect)="onRowSelect($event)"
+>
   <ng-template pTemplate="caption">
-      List of Surfaces
+    List of Surfaces
   </ng-template>
-  <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th>Sr. #</th>
-        <th>Name</th>
-        <th>Image</th>
-      </tr>
-    </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Sr. #</th>
+      <th>Name</th>
+    </tr>
+  </ng-template>
   <ng-template pTemplate="body" let-surface let-rowIndex="rowIndex">
     <tr [pSelectableRow]="surface">
       <td>{{ rowIndex + 1 }}</td>
-      <td>{{surface.name}}</td>
-      <td><img src="{{baseURL}}/images/{{surface.image}}"/></td>
+      <td>{{ surface.name }}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
-      <div style="text-align:left">
-          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
-      </div>
-  </ng-template>    
+    <div style="text-align:left">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-plus"
+        (click)="showDialogToAdd()"
+        label="Add"
+      ></button>
+    </div>
+  </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="3">
+      <td [attr.colspan]="2">
         No records found
       </td>
     </tr>
-</ng-template>
+  </ng-template>
 </p-table>
 
-<p-dialog header="Surface Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+<p-dialog
+  header="Surface Details"
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{ width: '400px' }"
+>
   <div *ngIf="surface">
     <div class="form-group">
       <label for="name">Name</label>
@@ -40,18 +56,35 @@
         id="name"
         [(ngModel)]="surface.name"
       />
+    </div>
+    <div class="form-group">
       <label for="name">Image</label>
-      <input
-        type="file"
-        name="image"
-        accept="image/*" 
-       (change)="handleFileInput($event.target.files)">
+      <p-fileUpload
+        auto="true"
+        name="myfile"
+        accept="image/*"
+        maxFileSize="1000000"
+        customUpload="true"
+        (uploadHandler)="myUploader($event)"
+      ></p-fileUpload>
+    </div>
   </div>
-</div>
   <p-footer>
-      <div class="ui-dialog-buttonpane ui-helper-clearfix">
-          <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
-          <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
-      </div>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-close"
+        (click)="delete()"
+        label="Delete"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="fa fa-check"
+        (click)="save()"
+        label="Save"
+      ></button>
+    </div>
   </p-footer>
 </p-dialog>

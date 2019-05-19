@@ -22,8 +22,8 @@ export class SurfaceService {
     return this.api.postStringified('admin/surface/create', surface );
   }
 
-  public update(surface: Surface) {
-    return this.api.putStringified(`admin/surface/${surface.id}`, surface);
+  public update(surface: any, id: number) {
+    return this.api.putStringified(`admin/surface/${id}`, surface);
   }
 
   public delete(surface: Surface) {

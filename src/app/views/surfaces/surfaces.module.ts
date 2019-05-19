@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [SurfaceComponent],
@@ -19,7 +20,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     DialogModule,
     ButtonModule,
     ColorPickerModule,
-    KeyFilterModule
+    KeyFilterModule,
+    FileUploadModule
   ]
 })
 export class SurfacesModule { }
