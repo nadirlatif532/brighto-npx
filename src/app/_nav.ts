@@ -31,7 +31,11 @@ export interface NavData {
 
 export const navItems: NavData[] = [
   {
-    name: 'Color Family',
+    title: true,
+    name: 'Colors'
+  },
+  {
+    name: 'Family',
     url: '/colors/family',
     icon: 'icon-drop'
   },
@@ -41,14 +45,32 @@ export const navItems: NavData[] = [
     icon: 'icon-drop'
   },
   {
-    name: 'Country',
-    url: '/country',
-    icon: 'icon-drop'
+    title: true,
+    name: 'Filters'
+  },
+  {
+    name: 'Project',
+    url: '/project',
+    icon: 'icon-puzzle'
   },
   {
     name: 'Categories',
     url: '/categories',
     icon: 'icon-pencil'
+  },
+  {
+    name: 'Surface',
+    url: '/surface',
+    icon: 'icon-puzzle'
+  },
+  {
+    name: 'Finish Type',
+    url: '/finish-type',
+    icon: 'icon-puzzle'
+  },
+  {
+    title: true,
+    name: 'Master Data'
   },
   {
     name: 'Products',
@@ -68,19 +90,9 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Surface',
-    url: '/surface',
-    icon: 'icon-puzzle'
-  },
-  {
-    name: 'Project',
-    url: '/project',
-    icon: 'icon-puzzle'
-  },
-  {
-    name: 'Finish Type',
-    url: '/finish-type',
-    icon: 'icon-puzzle'
+    name: 'Country',
+    url: '/country',
+    icon: 'icon-drop'
   },
   {
     divider: true
