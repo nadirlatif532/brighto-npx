@@ -18,12 +18,12 @@ export class CategoryService {
     );
   }
 
-  public save(category: Category) {
-    return this.api.post('admin/category/create', category);
+  public save(category: any) {
+    return this.api.postStringified('admin/category/create', category);
   }
 
-  public update(category: Category) {
-    return this.api.put(`admin/category/${category.id}`, category);
+  public update(category: any, id: number) {
+    return this.api.putStringified(`admin/category/${id}`, category);
   }
 
   public delete(category: Category) {

@@ -64,7 +64,7 @@ export const navItems: NavData[] = [
     icon: 'icon-puzzle'
   },
   {
-    name: 'Finish Type',
+    name: 'Finish',
     url: '/finish-type',
     icon: 'icon-puzzle'
   },

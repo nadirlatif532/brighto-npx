@@ -6,7 +6,7 @@ import { CategoryRoutingModule } from './category-routing.module';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   declarations: [CrudComponent],
@@ -16,7 +16,8 @@ import { ButtonModule } from 'primeng/button';
     CategoryRoutingModule,
     TableModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    FileUploadModule
   ]
 })
 export class CategoryModule { }

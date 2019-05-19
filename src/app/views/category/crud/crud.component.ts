@@ -14,6 +14,7 @@ export class CrudComponent implements OnInit {
   category: Category;
   displayDialog: boolean = false;
   newCategory: boolean = false;
+  image: any;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -23,8 +24,12 @@ export class CrudComponent implements OnInit {
 
   onRowSelect(event) {
     this.newCategory = false;
-    this.category = {id: event.data.id, name: event.data.name, image: "https://images.unsplash.com/photo-1558122104-355edad709f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"};
+    this.category = {id: event.data.id, name: event.data.name, image: event.data.image};
     this.displayDialog = true;
+  }
+
+  myUploader(event) {
+    this.category.image = event.files[0];
   }
 
   showDialogToAdd() {
@@ -34,13 +39,16 @@ export class CrudComponent implements OnInit {
   }
 
   save() {
+    let formData = new FormData();
+    formData.append('image', this.category.image, this.category.image.name);
+    formData.append('name', this.category.name);
+
     if (this.newCategory) {
-      this.category.image = "https://images.unsplash.com/photo-1558122104-355edad709f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80";
-      this.categoryService.save(this.category).subscribe(
+      this.categoryService.save(formData).subscribe(
         () => this.ngOnInit()
       );
     } else {
-      this.categoryService.update(this.category).subscribe(
+      this.categoryService.update(formData, this.category.id).subscribe(
         () => this.ngOnInit()
       );
     }

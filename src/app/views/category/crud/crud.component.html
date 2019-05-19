@@ -44,7 +44,7 @@
   [(visible)]="displayDialog"
   showEffect="fade"
   [modal]="true"
-  [style]="{ width: '300px' }"
+  [style]="{ width: '400px' }"
 >
   <div *ngIf="category">
     <div class="form-group">
@@ -55,6 +55,17 @@
         id="name"
         [(ngModel)]="category.name"
       />
+    </div>
+    <div class="form-group">
+      <label for="name">Image</label>
+      <p-fileUpload
+        auto="true"
+        name="myfile"
+        accept="image/*"
+        maxFileSize="1000000"
+        customUpload="true"
+        (uploadHandler)="myUploader($event)"
+      ></p-fileUpload>
     </div>
   </div>
   <p-footer>
