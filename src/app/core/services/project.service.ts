@@ -23,8 +23,8 @@ export class ProjectService {
     return this.api.postStringified('admin/project-type/create', project );
   }
 
-  public update(project: Surface) {
-    return this.api.putStringified(`admin/project-type/${project.id}`, project);
+  public update(project: any, id: number) {
+    return this.api.putStringified(`admin/project-type/${id}`, project);
   }
 
   public delete(project: Project) {

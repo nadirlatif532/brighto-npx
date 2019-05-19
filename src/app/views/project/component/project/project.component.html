@@ -1,36 +1,52 @@
-<p-table [columns]="cols" [value]="projects" selectionMode="single" [(selection)]="selectedProject" (onRowSelect)="onRowSelect($event)" >
+<p-table
+  [value]="projects"
+  selectionMode="single"
+  [(selection)]="selectedProject"
+  (onRowSelect)="onRowSelect($event)"
+>
   <ng-template pTemplate="caption">
-      List of Projects
+    List of Projects
   </ng-template>
   <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th>Sr. #</th>
-        <th>Name</th>
-        <th>Image</th>
-      </tr>
-    </ng-template>
+    <tr>
+      <th>Sr. #</th>
+      <th>Name</th>
+    </tr>
+  </ng-template>
   <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
     <tr [pSelectableRow]="project">
       <td>{{ rowIndex + 1 }}</td>
-      <td>{{project.name}}</td>
-      <td><img src="{{baseURL}}/images/{{project.image}}"/></td>
+      <td>{{ project.name }}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
-      <div style="text-align:left">
-          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
-      </div>
-  </ng-template>    
+    <div style="text-align:left">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-plus"
+        (click)="showDialogToAdd()"
+        label="Add"
+      ></button>
+    </div>
+  </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="3">
+      <td [attr.colspan]="2">
         No records found
       </td>
     </tr>
-</ng-template>
+  </ng-template>
 </p-table>
 
-<p-dialog header="Surface Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+<p-dialog
+  header="Project Details"
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{ width: '400px' }"
+>
   <div *ngIf="project">
     <div class="form-group">
       <label for="name">Name</label>
@@ -40,19 +56,35 @@
         id="name"
         [(ngModel)]="project.name"
       />
+    </div>
+    <div class="form-group">
       <label for="name">Image</label>
-      <input
-        type="text"
-        class="form-control"
-        id="image"
-        [(ngModel)]="project.image"
-      />
+      <p-fileUpload
+        auto="true"
+        name="myfile"
+        accept="image/*"
+        maxFileSize="1000000"
+        customUpload="true"
+        (uploadHandler)="myUploader($event)"
+      ></p-fileUpload>
+    </div>
   </div>
-</div>
   <p-footer>
-      <div class="ui-dialog-buttonpane ui-helper-clearfix">
-          <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
-          <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
-      </div>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-close"
+        (click)="delete()"
+        label="Delete"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="fa fa-check"
+        (click)="save()"
+        label="Save"
+      ></button>
+    </div>
   </p-footer>
 </p-dialog>
