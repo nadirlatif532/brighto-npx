@@ -11,7 +11,7 @@ export class CountryService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('admin/country/').pipe(
+    return this.api.get('u/country/').pipe(
       map((response: any) => {
         return response.data;
       })

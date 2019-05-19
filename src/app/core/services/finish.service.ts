@@ -11,7 +11,7 @@ export class FinishService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('admin/finish-type/').pipe(
+    return this.api.get('u/finish-type/').pipe(
       map((response: any) => {
         return response.data;
       })

@@ -12,7 +12,7 @@ export class ProjectService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('admin/project-type/').pipe(
+    return this.api.get('u/project-type/').pipe(
       map((response: any) => {
         return response.data;
       })

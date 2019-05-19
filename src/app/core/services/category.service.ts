@@ -11,7 +11,7 @@ export class CategoryService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('admin/category').pipe(
+    return this.api.get('u/category').pipe(
       map((response: any) => {
         return response.data;
       })
