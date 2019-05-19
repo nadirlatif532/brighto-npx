@@ -21,9 +21,16 @@ export class ApiService {
   public post(path: string, body: object = {}): Observable<any> {
     return this.http.post(BASE_URL + path, JSON.stringify(body), this.options).pipe(catchError(this.formatErrors));
   }
+  
+  public postStringified(path: string, body: object = {}): Observable<any> {
+    return this.http.post(BASE_URL + path, body).pipe(catchError(this.formatErrors));
+  }
 
   public put(path: string, body: object = {}): Observable<any> {
     return this.http.put(BASE_URL + path, JSON.stringify(body), this.options).pipe(catchError(this.formatErrors));
+  }
+  public putStringified(path: string, body: object = {}): Observable<any> {
+    return this.http.put(BASE_URL + path, body).pipe(catchError(this.formatErrors));
   }
 
   public delete(path: string): Observable<any> {

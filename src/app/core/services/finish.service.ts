@@ -18,12 +18,12 @@ export class FinishService {
     );
   }
 
-  public save(finish: Finish) {
-    return this.api.post('admin/finish-type/create', finish );
+  public save(finish: any) {
+    return this.api.postStringified('admin/finish-type/create', finish );
   }
 
   public update(finish: Finish) {
-    return this.api.put(`admin/finish-type/${finish.id}`, finish);
+    return this.api.putStringified(`admin/finish-type/${finish.id}`, finish);
   }
 
   public delete(finish: Finish) {

@@ -13,7 +13,7 @@
     <tr [pSelectableRow]="finish">
       <td>{{ rowIndex + 1 }}</td>
       <td>{{project.name}}</td>
-      <td>{{project.image}}</td>
+      <td><img src="{{baseURL}}/images/{{finish.image}}"/></td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
@@ -40,12 +40,12 @@
         id="name"
         [(ngModel)]="finish.name"
       />
-      <label for="name">Image</label>
+      <label for="name">Image</label> 
       <input
-        type="text"
-        class="form-control"
-        id="image"
-        [(ngModel)]="finish.image"
+        type="file"
+        name="image"
+        accept="image/*" 
+       (change)="handleFileInput($event.target.files)">
       />
   </div>
 </div>

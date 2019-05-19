@@ -39,10 +39,22 @@ export class CreateProductComponent implements OnInit {
     );
   }
 
+  handleFileInput(files: FileList) {
+    this.product.image = files.item(0);
+  }
+
   submit() {
     this.product.countries = this.selectedCountries;
     this.product.CategoryId = this.product.category.id; 
-    this.productService.save(this.product).subscribe(
+    let formData = new FormData();
+    formData.append('image',this.product.image);
+    formData.append('name',this.product.name);
+    formData.append('spreading',this.product.spreading.toString());
+    formData.append('CategoryId',this.product.CategoryId.toString());
+    formData.append('description',this.product.description.toString());
+    formData.append('countries',this.product.countries.toString());
+    formData.append('category',this.product.category.toString());
+    this.productService.save(formData).subscribe(
       () => this.router.navigate(['products', 'list'])
     );
   }

@@ -26,12 +26,12 @@ export class ProductService {
     );
   }
 
-  public save(product: Product) {
-    return this.api.post('admin/products/create', product);
+  public save(product: any) {
+    return this.api.postStringified('admin/products/create', product);
   }
 
   public update(product: Product) {
-    return this.api.put(`admin/products/${product.id}`, product);
+    return this.api.putStringified(`admin/products/${product.id}`, product);
   }
 
   public delete(product: Product) {

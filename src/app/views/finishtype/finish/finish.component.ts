@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Finish} from '../../../core/models/finish.interface'
 import { FinishService } from '../../../core/services/finish.service';
+
 @Component({
   selector: 'app-finish',
   templateUrl: './finish.component.html',
@@ -31,10 +32,15 @@ export class FinishComponent implements OnInit {
     this.finish = {} as Finish;
     this.displayDialog = true;
   }
-
+  handleFileInput(files: FileList) {
+    this.finish.image = files.item(0);
+  }
   save() {
     if (this.newFinish) {
-      this.finishService.save(this.finish).subscribe(
+      let formData = new FormData();
+      formData.append('image',this.finish.image);
+      formData.append('name',this.finish.name);
+      this.finishService.save(formData).subscribe(
         () => this.ngOnInit()
       );
     } else {

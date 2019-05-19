@@ -13,7 +13,7 @@
     <tr [pSelectableRow]="surface">
       <td>{{ rowIndex + 1 }}</td>
       <td>{{surface.name}}</td>
-      <td>{{surface.image}}</td>
+      <td><img src="{{baseURL}}/images/{{surface.image}}"/></td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
@@ -42,11 +42,10 @@
       />
       <label for="name">Image</label>
       <input
-        type="text"
-        class="form-control"
-        id="image"
-        [(ngModel)]="surface.image"
-      />
+        type="file"
+        name="image"
+        accept="image/*" 
+       (change)="handleFileInput($event.target.files)">
   </div>
 </div>
   <p-footer>
