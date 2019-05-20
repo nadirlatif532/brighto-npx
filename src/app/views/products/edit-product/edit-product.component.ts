@@ -6,6 +6,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CountryService } from '../../../core/services/country.service';
 import { ProductService } from '../../../core/services/product.service';
 import { CategoryService } from '../../../core/services/category.service';
+import { forkJoin } from 'rxjs';
+import { Project } from '../../../core/models/project.interface';
+import { Surface } from '../../../core/models/surface.interface';
+import { Finish } from '../../../core/models/finish.interface';
+import { ProjectService } from '../../../core/services/project.service';
+import { SurfaceService } from '../../../core/services/surface.service';
+import { FinishService } from '../../../core/services/finish.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -16,7 +23,10 @@ export class EditProductComponent implements OnInit {
 
   categories: Category[];
   selectedCategory: Category;
+  projectTypes: Project[];
+  surfaces: Surface[];
   countries: Country[];
+  finishes: Finish[];
   selectedCountries: Country[];
   product: Product = {} as Product;
 
@@ -24,39 +34,68 @@ export class EditProductComponent implements OnInit {
     private categoryService: CategoryService,
     private productService: ProductService,
     private countryService: CountryService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private projectService: ProjectService,
+    private surfaceService: SurfaceService,
+    private finishService: FinishService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+    ) {
+    this.product.is_active = true;
+  }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
 
-    this.categoryService.getAll().subscribe(
-      next => this.categories = next
-    );
-
-    if (id) {
-      this.productService.findById(id).subscribe(
-        next => {
-          this.product = next;
-          this.selectedCountries = this.product["Countries"];
-          this.product.category = this.product["Category"];
-          // for (let category of this.categories) {
-          //   if (category.id == this.product.CategoryId) {
-          //     this.product.category = category;
-          //   }
-          // }
+    forkJoin(
+      this.categoryService.getAll(),
+      this.countryService.getAll(),
+      this.projectService.getAll(),
+      this.surfaceService.getAll(),
+      this.finishService.getAll()
+    ).subscribe(
+      next => {
+        this.categories = next[0];
+        this.countries = next[1];
+        this.projectTypes = next[2];
+        this.surfaces = next[3];
+        this.finishes = next[4];
+      },
+      () => {},
+      () => {
+        if (id) {
+          this.productService.findById(id).subscribe(
+            next => {
+              this.product = next;
+              for (let project of this.projectTypes) {
+                if (project.id == this.product.ProjectTypeId) this.product.project = project;
+              }
+              for (let category of this.categories) {
+                if (category.id == this.product.CategoryId) this.product.category = category;
+              }
+              for (let surface of this.surfaces) {
+                if (surface.id == this.product.SurfaceId) this.product.surface = surface;
+              }
+              for (let finish of this.finishes) {
+                if (finish.id == this.product.FinishTypeId) this.product.finish = finish;
+              }
+              this.selectedCountries = this.product.Countries;
+            }
+          );
         }
-      );
-    }
-    
-    this.countryService.getAll().subscribe(
-      next => this.countries = next
+      }
     );
   }
 
+  myUploader(event) {
+    this.product.image = event.files[0];
+  }
+
   submit() {
-    this.product.countries = this.selectedCountries;
-    this.product.CategoryId = this.product.category.id; 
+    this.product.Countries = this.selectedCountries;
+    this.product.CategoryId = this.product.category.id;
+    this.product.ProjectTypeId = this.product.project.id;
+    this.product.SurfaceId = this.product.surface.id;
+    this.product.FinishTypeId = this.product.finish.id; 
     this.productService.update(this.product).subscribe(
       () => this.router.navigate(['products', 'list'])
     );

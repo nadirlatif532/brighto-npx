@@ -13,15 +13,45 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="category" class="col-md-3 col-form-label">Category</label>
-            <div class="col-md-9">
-              <p-dropdown [style]="{ width: '100%' }"
-              [autoDisplayFirst]="false"
-              name="category"
-              [filter]="true"
-              required [options]="categories" [(ngModel)]="product.category" optionLabel="name"></p-dropdown>
+              <label for="project" class="col-md-3 col-form-label">Project</label>
+              <div class="col-md-9">
+                <p-dropdown [style]="{ width: '100%' }"
+                [autoDisplayFirst]="false"
+                name="project"
+                [filter]="true"
+                required [options]="projectTypes" [(ngModel)]="product.project" optionLabel="name"></p-dropdown>
+              </div>
             </div>
-          </div>
+            <div class="form-group row">
+                <label for="category" class="col-md-3 col-form-label">Category</label>
+                <div class="col-md-9">
+                  <p-dropdown [style]="{ width: '100%' }"
+                  [autoDisplayFirst]="false"
+                  name="category"
+                  [filter]="true"
+                  required [options]="categories" [(ngModel)]="product.category" optionLabel="name"></p-dropdown>
+                </div>
+              </div>
+              <div class="form-group row">
+                  <label for="surface" class="col-md-3 col-form-label">Surface</label>
+                  <div class="col-md-9">
+                    <p-dropdown [style]="{ width: '100%' }"
+                    [autoDisplayFirst]="false"
+                    name="surface"
+                    [filter]="true"
+                    required [options]="surfaces" [(ngModel)]="product.surface" optionLabel="name"></p-dropdown>
+                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="finish" class="col-md-3 col-form-label">Finish</label>
+                <div class="col-md-9">
+                  <p-dropdown [style]="{ width: '100%' }"
+                  [autoDisplayFirst]="false"
+                  name="finish"
+                  [filter]="true"
+                  required [options]="finishes" [(ngModel)]="product.finish" optionLabel="name"></p-dropdown>
+                </div>
+              </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="spreading">Spreading</label>
             <div class="col-md-9">
@@ -41,15 +71,18 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="country">Image</label>
-            <div class="col-md-9">
-              <input
-              type="file"
-              name="image"
-              accept="image/*" 
-             (change)="handleFileInput($event.target.files)">
+              <label class="col-md-3 col-form-label" for="image">Image</label>
+              <div class="col-md-9">
+                <p-fileUpload
+                  auto="true"
+                  name="myfile"
+                  accept="image/*"
+                  maxFileSize="1000000"
+                  customUpload="true"
+                  (uploadHandler)="myUploader($event)"
+                ></p-fileUpload>
+              </div>
             </div>
-          </div>
       </div>
       <div class="card-footer" style="text-align: right;">
         <button [disabled]="!addForm.form.valid" type="submit" pButton icon="fa fa-plus" label="Submit"></button>
