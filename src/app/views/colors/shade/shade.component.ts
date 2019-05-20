@@ -76,9 +76,15 @@ export class ShadeComponent implements OnInit {
         coun = country;
       }
     }
+    let fam: Family;
+    for (let family of this.families) {
+      if (family.id == s.FamilyId) {
+        fam = family;
+      }
+    }
     this.isAC = s.isAC;
     this.isRM = s.isRM;
-    let shade: Shade = {id: s.id, family: s.family, country: coun, ProductId: null, name: s.name, r: s.color.r, g: s.color.g, b: s.color.b, description: s.description, itemCode: s.itemCode, isAC: s.isAC, isRM: s.isRM, product: prod};
+    let shade: Shade = {id: s.id, family: fam, FamilyId: null, countries: s.countries, ProductId: null, name: s.name, r: s.color.r, g: s.color.g, b: s.color.b, description: s.description, itemCode: s.itemCode, isAC: s.isAC, isRM: s.isRM, product: prod};
     return shade;
   }
 
@@ -89,6 +95,8 @@ export class ShadeComponent implements OnInit {
     this.isRM = false;
 
     this.shade.ProductId = this.shade.product.id;
+    this.shade.countries = this.selectedCountries;
+    this.shade.FamilyId = this.shade.family.id;
     if (this.newShade) {
       this.shadeService.save(this.shade).subscribe(
         () => this.ngOnInit()
@@ -106,6 +114,8 @@ export class ShadeComponent implements OnInit {
     this.shadeService.delete(this.shade).subscribe(
       () => {
         this.displayDialog = false;
+        this.isAC = false;
+        this.isRM = false;
         this.ngOnInit();
       }
     );

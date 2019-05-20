@@ -91,12 +91,20 @@ export class EditProductComponent implements OnInit {
   }
 
   submit() {
+    let formData = new FormData();
+    formData.append('image', this.product.image, this.product.image.name);
+
     this.product.Countries = this.selectedCountries;
-    this.product.CategoryId = this.product.category.id;
-    this.product.ProjectTypeId = this.product.project.id;
-    this.product.SurfaceId = this.product.surface.id;
-    this.product.FinishTypeId = this.product.finish.id; 
-    this.productService.update(this.product).subscribe(
+
+    formData.append('name',this.product.name);
+    formData.append('ProjectTypeId', this.product.project.id.toString());
+    formData.append('CategoryId',this.product.category.id.toString());
+    formData.append('SurfaceId', this.product.surface.id.toString());
+    formData.append('FinishTypeId', this.product.finish.id.toString());
+    formData.append('spreading',this.product.spreading.toString());
+    formData.append('description',this.product.description.toString());
+    formData.append('countries', JSON.stringify(this.product.Countries));
+    this.productService.update(formData, this.product.id).subscribe(
       () => this.router.navigate(['products', 'list'])
     );
   }

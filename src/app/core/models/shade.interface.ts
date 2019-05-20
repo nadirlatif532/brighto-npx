@@ -14,6 +14,7 @@ export interface Shade {
   isAC: boolean;
   isRM: boolean;
   product: Product;
-  country: Country;
+  countries: Country[];
+  FamilyId: number;
   family: Family;
 }

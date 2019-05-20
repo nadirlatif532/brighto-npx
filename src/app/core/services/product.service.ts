@@ -30,8 +30,8 @@ export class ProductService {
     return this.api.postStringified('admin/products/create', product);
   }
 
-  public update(product: Product) {
-    return this.api.putStringified(`admin/products/${product.id}`, product);
+  public update(product: any, id: number) {
+    return this.api.putStringified(`admin/products/${id}`, product);
   }
 
   public delete(product: Product) {

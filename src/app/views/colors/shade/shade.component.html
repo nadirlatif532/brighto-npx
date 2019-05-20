@@ -73,6 +73,15 @@
           required [options]="products" [(ngModel)]="shade.product" optionLabel="name"></p-dropdown>
 
       </div>
+      <div class="form-group">
+        <label for="">Belongs to</label>
+        <p-dropdown 
+        [style]="{ width: '100%' }"
+        [autoDisplayFirst]="false"
+        name="countries"
+        [filter]="true"
+        required [options]="families" [(ngModel)]="shade.family" optionLabel="name"></p-dropdown>
+      </div>
     <div class="form-group">
         <label for="item_code">Item Code</label>
         <input
@@ -91,15 +100,7 @@
         <p-listbox [options]="countries" name="country" multiple="multiple" checkbox="checkbox" filter="filter" [(ngModel)]="selectedCountries" optionLabel="name" required></p-listbox>
       </div>
       <div class="form-group">
-        <label for="">Belongs to</label>
-        <p-dropdown 
-        [style]="{ width: '100%' }"
-        [autoDisplayFirst]="false"
-        name="countries"
-        [filter]="true"
-        required [options]="families" [(ngModel)]="shade.family" optionLabel="name"></p-dropdown>
-      </div>
-
+        <div class="form-group">
     <div class="form-row">
       <div class="col-4">
         <input type="text" pKeyFilter="pint" placeholder="R" class="form-control" [(ngModel)]="shade.r" />
@@ -111,6 +112,8 @@
         <input type="text" pKeyFilter="pint" placeholder="B" class="form-control" [(ngModel)]="shade.b" />
       </div>
     </div>
+  </div>
+  </div>
     <div class="form-group">
       <label for="description">Description</label>
       <textarea id="textarea-input" name="description" [(ngModel)]="shade.description" rows="4" class="form-control" required></textarea>
