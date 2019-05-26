@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [SurfaceComponent],
@@ -21,7 +22,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     ButtonModule,
     ColorPickerModule,
     KeyFilterModule,
-    FileUploadModule
+    FileUploadModule,
+    DropdownModule
   ]
 })
 export class SurfacesModule { }

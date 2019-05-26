@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Surface} from '../../../../core/models/surface.interface';
 import { SurfaceService } from '../../../../core/services/surface.service';
+import { CategoryService } from '../../../../core/services/category.service';
+import { forkJoin } from 'rxjs';
+import { Category } from '../../../../core/models/category.interface';
 
 @Component({
   selector: 'app-surface',
@@ -11,13 +14,25 @@ export class SurfaceComponent implements OnInit {
 
   surfaces: Surface[];
   surface: Surface;
+  categories: Category[];
   displayDialog: boolean = false;
   newSurface: boolean = false;
   selectedSurface: Surface;
 
-  constructor(private surfaceService: SurfaceService) { }
+  constructor(
+    private surfaceService: SurfaceService,
+    private categoryService: CategoryService) { }
 
   ngOnInit() {
+    forkJoin(
+      this.surfaceService.getAll(),
+      this.categoryService.getAll()
+    ).subscribe(
+      next => {
+        this.surfaces = next[0];
+        this.categories = next[1];
+      }
+    );
     this.surfaceService.getAll().subscribe(next => this.surfaces = next);
   }
 
@@ -35,6 +50,7 @@ export class SurfaceComponent implements OnInit {
     let formData = new FormData();
     formData.append('image', this.surface.image, this.surface.image.name);
     formData.append('name', this.surface.name);
+    formData.append('CategoryId', this.surface.category.id.toString());
 
     if(this.newSurface) {
       this.surfaceService.save(formData).subscribe(
@@ -66,7 +82,7 @@ export class SurfaceComponent implements OnInit {
   }
 
   cloneSurface(surface) {
-    let count: Surface = {id: surface.id, name: surface.name, image: surface.image};
+    let count: Surface = {id: surface.id, name: surface.name, category: surface.category, image: surface.image};
     return count;
   }
 }
