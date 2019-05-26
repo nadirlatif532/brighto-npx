@@ -19,7 +19,9 @@ export class ProductService {
   }
 
   public findById(id: number) {
-    return this.api.get('u/products/' + id).pipe(
+    let formData = new FormData();
+    formData.append('id', id.toString());
+    return this.api.postStringified('u/product/id', formData).pipe(
       map((response: any) => {
         return response.data[0];
       })
