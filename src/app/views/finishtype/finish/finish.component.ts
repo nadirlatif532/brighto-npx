@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Finish } from '../../../core/models/finish.interface'
 import { FinishService } from '../../../core/services/finish.service';
+import { SurfaceService } from '../../../core/services/surface.service';
+import { forkJoin } from 'rxjs';
+import { Surface } from '../../../core/models/surface.interface';
 
 @Component({
   selector: 'app-finish',
@@ -11,14 +14,26 @@ export class FinishComponent implements OnInit {
 
   finishes: Finish[];
   selectedFinish: Finish;
+  surfaces: Surface[];
   finish: Finish;
   displayDialog: boolean = false;
   newFinish: boolean = false;
   image: any;
 
-  constructor(private finishService: FinishService) { }
+  constructor(
+    private finishService: FinishService,
+    private surfaceService: SurfaceService) { }
 
   ngOnInit() {
+    forkJoin(
+      this.finishService.getAll(),
+      this.surfaceService.getAll()
+    ).subscribe(
+      next => {
+        this.finishes = next[0];
+        this.surfaces = next[1];
+      }
+    );
     this.finishService.getAll().subscribe(next => this.finishes = next);
   }
 
@@ -42,6 +57,7 @@ export class FinishComponent implements OnInit {
     let formData = new FormData();
     formData.append('image', this.finish.image, this.finish.image.name);
     formData.append('name', this.finish.name);
+    formData.append('SurfaceId', this.finish.surface.id.toString());
 
     if (this.newFinish) {
       this.finishService.save(formData).subscribe(
@@ -67,7 +83,7 @@ export class FinishComponent implements OnInit {
   }
  
   cloneProject(finish) {
-    let count: Finish = {id: finish.id, name: finish.name, image: finish.image};
+    let count: Finish = {id: finish.id, name: finish.name, surface: finish.surface, image: finish.image};
     return count;
   }
 }

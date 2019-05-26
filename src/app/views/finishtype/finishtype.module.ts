@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FinishComponent } from './finish/finish.component';
-import {FinishTypeRoutingModule} from './finishtype-routing.module';
+import { FinishTypeRoutingModule } from './finishtype-routing.module';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import {FileUploadModule} from 'primeng/fileupload';
+import { FileUploadModule } from 'primeng/fileupload';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [FinishComponent],
@@ -21,7 +22,8 @@ import {FileUploadModule} from 'primeng/fileupload';
     ButtonModule,
     ColorPickerModule,
     KeyFilterModule,
-    FileUploadModule
+    FileUploadModule,
+    DropdownModule
   ]
 })
 export class FinishtypeModule { }
