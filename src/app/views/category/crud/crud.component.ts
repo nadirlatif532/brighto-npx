@@ -39,7 +39,7 @@ export class CrudComponent implements OnInit {
 
   onRowSelect(event) {
     this.newCategory = false;
-    this.category = {id: event.data.id, name: event.data.name, project: event.data.project , image: event.data.image};
+    this.category = {id: event.data.id, name: event.data.name, projects: event.data.ProjectTypes , image: event.data.image};
     this.displayDialog = true;
   }
 
@@ -57,7 +57,11 @@ export class CrudComponent implements OnInit {
     let formData = new FormData();
     formData.append('image', this.category.image, this.category.image.name);
     formData.append('name', this.category.name);
-    formData.append('ProjectTypeId', this.category.project.id.toString());
+    let projectarr = [];
+    for (let project of this.category.projects) {
+      projectarr.push(project.id);
+    }
+    formData.append('ProjectTypeId', JSON.stringify(projectarr));
 
     if (this.newCategory) {
       this.categoryService.save(formData).subscribe(

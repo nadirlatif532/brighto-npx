@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [CrudComponent],
@@ -19,7 +20,8 @@ import { DropdownModule } from 'primeng/dropdown';
     DialogModule,
     ButtonModule,
     FileUploadModule,
-    DropdownModule
+    DropdownModule,
+    MultiSelectModule
   ]
 })
 export class CategoryModule { }

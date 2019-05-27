@@ -58,16 +58,16 @@
     </div>
     <div class="form-group">
       <label for="project">Project Type</label>
-        <p-dropdown 
-        [style]="{ width: '100%' }"
-        [autoDisplayFirst]="false"
-        name="project"
-        [filter]="true"
-        required 
-        [options]="projectTypes" 
-        [(ngModel)]="category.project" 
-        optionLabel="name">
-      </p-dropdown>
+        <p-multiSelect 
+          [options]="projectTypes" 
+          [(ngModel)]="category.projects"
+          optionLabel="name"
+          appendTo="body"
+          [style]="{ width: '100%' }"
+          name="project"
+
+          >
+        </p-multiSelect>
     </div>
     <div class="form-group">
       <label for="name">Image</label>
