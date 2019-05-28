@@ -3,6 +3,6 @@ import { Project } from './project.interface';
 export interface Category {
   id: number;
   name: string;
-  projects: Project[];
+  ProjectTypes: Project[];
   image: any;
 }
