@@ -10,6 +10,7 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [FinishComponent],
@@ -23,7 +24,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ColorPickerModule,
     KeyFilterModule,
     FileUploadModule,
-    DropdownModule
+    DropdownModule,
+    MultiSelectModule
   ]
 })
 export class FinishtypeModule { }

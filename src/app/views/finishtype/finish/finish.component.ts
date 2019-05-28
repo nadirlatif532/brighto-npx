@@ -34,7 +34,6 @@ export class FinishComponent implements OnInit {
         this.surfaces = next[1];
       }
     );
-    this.finishService.getAll().subscribe(next => this.finishes = next);
   }
 
   onRowSelect(event) {
@@ -57,7 +56,9 @@ export class FinishComponent implements OnInit {
     let formData = new FormData();
     formData.append('image', this.finish.image, this.finish.image.name);
     formData.append('name', this.finish.name);
-    formData.append('SurfaceId', this.finish.surface.id.toString());
+    let arr = [];
+    for (let surface of this.finish.Surfaces) arr.push(surface.id);
+    formData.append('SurfaceId', JSON.stringify(arr));
 
     if (this.newFinish) {
       this.finishService.save(formData).subscribe(
@@ -83,7 +84,7 @@ export class FinishComponent implements OnInit {
   }
  
   cloneProject(finish) {
-    let count: Finish = {id: finish.id, name: finish.name, surface: finish.surface, image: finish.image};
+    let count: Finish = {id: finish.id, name: finish.name, Surfaces: finish.Surfaces, image: finish.image};
     return count;
   }
 }
