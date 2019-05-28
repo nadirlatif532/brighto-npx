@@ -33,7 +33,6 @@ export class SurfaceComponent implements OnInit {
         this.categories = next[1];
       }
     );
-    this.surfaceService.getAll().subscribe(next => this.surfaces = next);
   }
 
   myUploader(event) {
@@ -50,7 +49,9 @@ export class SurfaceComponent implements OnInit {
     let formData = new FormData();
     formData.append('image', this.surface.image, this.surface.image.name);
     formData.append('name', this.surface.name);
-    formData.append('CategoryId', this.surface.category.id.toString());
+    let arr = [];
+    for (let category of this.surface.Categories) arr.push(category.id);
+    formData.append('CategoryId', JSON.stringify(arr));
 
     if(this.newSurface) {
       this.surfaceService.save(formData).subscribe(
@@ -82,7 +83,7 @@ export class SurfaceComponent implements OnInit {
   }
 
   cloneSurface(surface) {
-    let count: Surface = {id: surface.id, name: surface.name, category: surface.category, image: surface.image};
+    let count: Surface = {id: surface.id, name: surface.name, Categories: surface.Categories, image: surface.image};
     return count;
   }
 }

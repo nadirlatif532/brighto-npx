@@ -60,15 +60,14 @@
     <div class="form-group">
       <label for="category">Category</label>
       <div>
-        <p-dropdown 
-        [style]="{ width: '100%' }"
-        [autoDisplayFirst]="false"
-        name="category"
-        [filter]="true"
-        required 
-        [options]="categories" 
-        [(ngModel)]="surface.category" 
-        optionLabel="name"></p-dropdown>
+        <p-multiSelect 
+          [options]="categories" 
+          [(ngModel)]="surface.Categories"
+          optionLabel="name"
+          appendTo="body"
+          [style]="{ width: '100%' }"
+          name="category">
+        </p-multiSelect>
       </div>
     </div>
     <div class="form-group">
