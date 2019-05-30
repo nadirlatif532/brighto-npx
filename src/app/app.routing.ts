@@ -114,6 +114,10 @@ export const routes: Routes = [
       {
         path: 'finish-type',
         loadChildren: './views/finishtype/finishtype.module#FinishtypeModule'
+      },
+      {
+        path: 'color-trends',
+        loadChildren: './views/color-trends/color-trends.module#ColorTrendsModule'
       }
     ],
     canActivate: [AuthGuard]

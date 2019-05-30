@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header">
+          <strong>Create</strong> Color Trend
+        </div>
+        <form #addForm="ngForm" (ngSubmit)="submit()" class="form-horizontal">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="name">Name</label>
+              <div class="col-md-9">
+                <input type="text" [(ngModel)]="colortrend.trendName" id="text-input" name="name" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="shade1" class="col-md-3 col-form-label">Shade 1</label>
+                <div class="col-md-9">
+                  <p-dropdown [style]="{ width: '100%' }"
+                  [autoDisplayFirst]="false"
+                  name="shade1"
+                  [filter]="true"
+                   [options]="shades" [(ngModel)]="colortrend.shade1" optionLabel="name"></p-dropdown>
+                </div>
+              </div>
+              <div class="form-group row">
+                  <label for="shade2" class="col-md-3 col-form-label">Shade 2</label>
+                  <div class="col-md-9">
+                    <p-dropdown [style]="{ width: '100%' }"
+                    [autoDisplayFirst]="false"
+                    name="shade2"
+                    [filter]="true"
+                     [options]="shades" [(ngModel)]="colortrend.shade2" optionLabel="name"></p-dropdown>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label for="shade3" class="col-md-3 col-form-label">Shade 3</label>
+                    <div class="col-md-9">
+                      <p-dropdown [style]="{ width: '100%' }"
+                      [autoDisplayFirst]="false"
+                      name="shade3"
+                      [filter]="true"
+                       [options]="shades" [(ngModel)]="colortrend.shade3" optionLabel="name" ></p-dropdown>
+                    </div>
+                </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="image">Image</label>
+                <div class="col-md-9">
+                  <p-fileUpload
+                    auto="true"
+                    name="myfile"
+                    accept="image/*"
+                    maxFileSize="1000000"
+                    customUpload="true"
+                    (uploadHandler)="myUploader($event)"
+                  ></p-fileUpload>
+                </div>
+              </div>
+        </div>
+        <div class="card-footer" style="text-align: right;">
+          <button [disabled]="!addForm.form.valid" type="submit" pButton icon="fa fa-plus" label="Submit"></button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
