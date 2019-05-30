@@ -95,6 +95,28 @@ export const navItems: NavData[] = [
     icon: 'icon-drop'
   },
   {
+    name: 'City',
+    url: '/city',
+    icon: 'icon-drop'
+  },
+  {
+    name: 'Pallets',
+    url: '/pallets',
+    icon: 'icon-puzzle',
+    children: [
+      {
+        name: 'List',
+        url: '/pallets/list',
+        icon: 'icon-cursor'
+      },
+      {
+        name: 'Add',
+        url: '/pallets/add',
+        icon: 'icon-cursor'
+      }
+    ]
+  },
+  {
     divider: true
   }
 ];
