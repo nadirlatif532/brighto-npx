@@ -31,7 +31,7 @@ export class CityComponent implements OnInit {
         this.dropdown = next.map((item) => {
           return {label: item.name,value: {id:item.id,name:item.name}}
         })
-        this.dropdown.unshift({label:'Select City', value:null});
+        this.dropdown.unshift({label:'Select Country', value:null});
         console.log(this.dropdown);
       }
     )
