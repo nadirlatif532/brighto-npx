@@ -118,6 +118,10 @@ export const routes: Routes = [
       {
         path: 'color-trends',
         loadChildren: './views/color-trends/color-trends.module#ColorTrendsModule'
+      },
+      {
+        path: 'pallets',
+        loadChildren: './views/pallets/pallets.module#PalletsModule'
       }
     ],
     canActivate: [AuthGuard]

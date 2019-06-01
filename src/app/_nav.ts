@@ -112,6 +112,23 @@ export const navItems: NavData[] = [
     ]
   },
   {
+    name: 'Pallets',
+    url: '/pallets',
+    icon: 'icon-puzzle',
+    children: [
+      {
+        name: 'List',
+        url: '/pallets/list',
+        icon: 'icon-cursor'
+      },
+      {
+        name: 'Add',
+        url: '/pallets/add',
+        icon: 'icon-cursor'
+      }
+    ]
+  },
+  {
     divider: true
   }
 ];

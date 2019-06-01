@@ -1,0 +1,117 @@
+<p-table [columns]="cols" [value]="pallets" selectionMode="single" [(selection)]="selectedPallete" (onRowSelect)="onRowSelect($event)" >
+    <ng-template pTemplate="caption">
+        List of Pallets
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th>Sr. #</th>
+          <th>Name</th>
+          <th>Likes</th>
+          <th>Pallete By</th>
+          <th>Color#1 </th>
+          <th>Color#2 </th>
+          <th>Color#3 </th>
+          <th>Color#4 </th>
+        </tr>
+      </ng-template>
+    <ng-template pTemplate="body" let-pallete let-rowIndex="rowIndex">
+      <tr [pSelectableRow]="pallete">
+        <td>{{ rowIndex + 1 }}</td>
+        <td>{{pallete.name}}</td>
+        <td>{{pallete.likes}}</td>
+        <td>{{pallete.pallete_by}}</td>
+        <td><span *ngIf="pallete.color_1 && pallete.color_1.name">{{pallete.color_1.name}}</span></td>
+        <td><span *ngIf="pallete.color_2 && pallete.color_2.name">{{pallete.color_2.name}}</span></td>
+        <td><span *ngIf="pallete.color_3 && pallete.color_3.name">{{pallete.color_3.name}}</span></td>
+        <td><span *ngIf="pallete.color_4 && pallete.color_4.name">{{pallete.color_4.name}}</span></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+        <div style="text-align:left">
+            <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+        </div>
+    </ng-template>    
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="8">
+          No records found
+        </td>
+      </tr>
+  </ng-template>
+  </p-table>
+  
+  <p-dialog header="Pallete Details" 
+  [(visible)]="displayDialog" 
+  [responsive]="true" 
+  showEffect="fade" 
+  [modal]="true" 
+  [contentStyle]="{'overflow':'auto','max-height':'500px'}"
+  [style]="{width: '500px', 'position':'absolute'}">
+    <div *ngIf="pallete">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="pallete.name"
+        />
+      </div>
+      <div class="form-group">
+            <label for="likes">Likes</label>
+            <input
+              type="number"
+              class="form-control"
+              id="likes"
+              [(ngModel)]="pallete.likes"
+            />
+      </div> 
+     <div class="form-group">
+            <label for="pallete_by">Pallete By</label>
+            <input
+              type="text"
+              class="form-control"
+              id="pallete_by"
+              [(ngModel)]="pallete.pallete_by"
+            />
+      </div> 
+      <div class="form-group">
+            <label for="color1">Color #1</label>
+             <p-dropdown [style]="{ width: '100%' }"
+              [autoDisplayFirst]="false"
+              name="color1"
+              [filter]="true"
+              [options]="shades" [(ngModel)]="pallete.color_1" optionLabel="name"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="color1">Color #2</label>
+         <p-dropdown [style]="{ width: '100%' }"
+          [autoDisplayFirst]="false"
+          name="color2"
+          [filter]="true"
+          [options]="shades" [(ngModel)]="pallete.color_2" optionLabel="name"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="color1">Color #3</label>
+        <p-dropdown [style]="{ width: '100%' }"
+         [autoDisplayFirst]="false"
+         name="color3"
+         [filter]="true"
+         [options]="shades" [(ngModel)]="pallete.color_3" optionLabel="name"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="color1">Color #4</label>
+        <p-dropdown [style]="{ width: '100%' }"
+         [autoDisplayFirst]="false"
+         name="color4"
+         [filter]="true"
+         [options]="shades" [(ngModel)]="pallete.color_4" optionLabel="name"></p-dropdown>
+      </div>
+  </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+            <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+        </div>
+    </p-footer>
+  </p-dialog>
