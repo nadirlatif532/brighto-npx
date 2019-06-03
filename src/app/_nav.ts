@@ -112,6 +112,11 @@ export const navItems: NavData[] = [
     ]
   },
   {
+    name: 'City',
+    url: '/city',
+    icon: 'icon-drop'
+  },
+  {
     name: 'Pallets',
     url: '/pallets',
     icon: 'icon-puzzle',

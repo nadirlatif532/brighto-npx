@@ -122,6 +122,14 @@ export const routes: Routes = [
       {
         path: 'pallets',
         loadChildren: './views/pallets/pallets.module#PalletsModule'
+      },
+      {
+        path: 'country',
+        loadChildren: './views/countries/countries.module#CountriesModule'
+      },
+      {
+        path: 'city',
+        loadChildren: './views/cities/cities.module#CitiesModule'
       }
     ],
     canActivate: [AuthGuard]
