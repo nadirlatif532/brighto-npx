@@ -1,0 +1,89 @@
+<p-dataView #dv [value]="colortrends" [paginator]="true" [rows]="10">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-4"></div>
+        <div class="ui-g-6 ui-md-4 filter-container">
+          <div style="position:relative">
+            <input
+              type="search"
+              pInputText
+              placeholder="Search by name"
+              (keyup)="dv.filter($event.target.value)"
+            />
+          </div>
+        </div>
+        <div class="ui-g-6 ui-md-4" style="text-align:right">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <ng-template let-colors pTemplate="listItem" >
+    <div class="ui-g-6" style="padding: 2em;border-bottom: 1px solid #d9d9d9" >
+      <div class="ui-g-12 ui-md-3" style="text-align:center" >
+        <img
+        src="{{baseURL}}+/images/{{ colortrends.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        width="100%"
+        />
+      </div>
+      <div class="ui-g-12 ui-md-8 product-details" >
+        <div class="ui-g" >
+          <div class="ui-g-2 ui-sm-6">Name:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ colors.trendName }}</b>
+          </div>
+
+          <div class="ui-g-2 ui-sm-6">Shade 1:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ colors.shade1.name }}</b>
+          </div>
+
+          <div class="ui-g-2 ui-sm-6">Shade 2:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ colors.shade2.name }}</b>
+          </div>
+
+          <div class="ui-g-2 ui-sm-6">Shade 3:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ colors.shade3.name }}</b>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-1 search-icon">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-times"
+          (click)="deleteColorTrend(colors)"
+        ></button>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-pencil"
+          (click)="editColorTrend(colors)"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template let-product pTemplate="gridItem">
+    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+        <hr class="ui-widget-content" style="border-top:0" />
+        <button
+          pButton
+          type="button"
+          icon="pi pi-times"
+          (click)="deleteColorTrend($event, colors)"
+          style="margin-top:0"
+        ></button>
+        <button
+        pButton
+        type="button"
+        icon="pi pi-pencil"
+        (click)="editColorTrend(colors)"
+      ></button>
+    </div>
+  </ng-template>
+</p-dataView>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

@@ -29,6 +29,7 @@ export class CountryComponent implements OnInit {
   showDialogToAdd() {
       this.newCountry = true;
       this.country = {} as Country;
+      console.log(this.country)
       this.displayDialog = true;
   }
 
@@ -56,6 +57,7 @@ export class CountryComponent implements OnInit {
   }
 
   onRowSelect(event) {
+    console.log(event);
       this.newCountry = false;
       this.country = this.cloneCountry(event.data);
       this.displayDialog = true;

@@ -6,9 +6,11 @@ export interface Shade {
   id: number;
   ProductId: number;
   name: string;
-  r: number;
-  g: number;
-  b: number;  
+  color: {
+    r: number;
+    g: number;
+    b: number;  
+  };
   description: string;
   itemCode: string;
   isAC: boolean;

@@ -84,7 +84,7 @@ export class ShadeComponent implements OnInit {
     }
     this.isAC = s.isAC;
     this.isRM = s.isRM;
-    let shade: Shade = {id: s.id, family: fam, FamilyId: null, countries: s.countries, ProductId: null, name: s.name, r: s.color.r, g: s.color.g, b: s.color.b, description: s.description, itemCode: s.itemCode, isAC: s.isAC, isRM: s.isRM, product: prod};
+    let shade: Shade = {id: s.id, family: fam, FamilyId: null, countries: s.countries, ProductId: null, name: s.name, color: {r: s.r, g: s.g, b: s.b}, description: s.description, itemCode: s.itemCode, isAC: s.isAC, isRM: s.isRM, product: prod};
     return shade;
   }
 
