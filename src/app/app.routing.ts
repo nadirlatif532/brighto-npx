@@ -114,6 +114,18 @@ export const routes: Routes = [
       {
         path: 'finish-type',
         loadChildren: './views/finishtype/finishtype.module#FinishtypeModule'
+      },
+      {
+        path: 'pallets',
+        loadChildren: './views/pallets/pallets.module#PalletsModule'
+      },
+      {
+        path: 'country',
+        loadChildren: './views/countries/countries.module#CountriesModule'
+      },
+      {
+        path: 'city',
+        loadChildren: './views/cities/cities.module#CitiesModule'
       }
     ],
     canActivate: [AuthGuard]
