@@ -135,5 +135,13 @@ export const navItems: NavData[] = [
   },
   {
     divider: true
+  },
+  {
+    name: 'Dealers',
+    url: '/dealers',
+    icon: 'icon-puzzle',
+  },
+  {
+    divider: true
   }
 ];
