@@ -50,45 +50,55 @@
   showEffect="fade"
   [modal]="true"
   [style]="{ width: '300px' }"
+  [focusOnShow]="false"
 >
-  <div *ngIf="family">
+  <form #familyForm="ngForm">
+    <div *ngIf="family">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          pKeyFilter="alphanum"
+          name="name"
+          id="name"
+          required
+          [(ngModel)]="family.name"
+        />
+      </div>
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-4">
+            <input type="text" name="r" pKeyFilter="pint" required placeholder="R" class="form-control" [(ngModel)]="family.r" />
+          </div>
+          <div class="col-4">
+            <input type="text" name="g" pKeyFilter="pint" required placeholder="G" class="form-control" [(ngModel)]="family.g" />
+          </div>
+          <div class="col-4">
+            <input type="text" name="b" pKeyFilter="pint" required placeholder="B" class="form-control" [(ngModel)]="family.b" />
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="form-group">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        [(ngModel)]="family.name"
-      />
+      <p-footer>
+        <button
+          type="button"
+          pButton
+          icon="fa fa-close"
+          [disabled]="!familyForm.form.valid || newFamily"
+          (click)="delete()"
+          label="Delete"
+        ></button>
+        <button
+          type="button"
+          [disabled]="!familyForm.form.valid"
+          pButton
+          icon="fa fa-check"
+          (click)="save()"
+          label="Save"
+        ></button>
+      </p-footer>
     </div>
-    <div class="form-row">
-      <div class="col-4">
-        <input type="text" pKeyFilter="pint" placeholder="R" class="form-control" [(ngModel)]="family.r" />
-      </div>
-      <div class="col-4">
-        <input type="text" pKeyFilter="pint" placeholder="G" class="form-control" [(ngModel)]="family.g" />
-      </div>
-      <div class="col-4">
-        <input type="text" pKeyFilter="pint" placeholder="B" class="form-control" [(ngModel)]="family.b" />
-      </div>
-    </div>
-  </div>
-  <p-footer>
-    <div class="">
-      <button
-        type="button"
-        pButton
-        icon="fa fa-close"
-        (click)="delete()"
-        label="Delete"
-      ></button>
-      <button
-        type="button"
-        pButton
-        icon="fa fa-check"
-        (click)="save()"
-        label="Save"
-      ></button>
-    </div>
-  </p-footer>
+  </form>
 </p-dialog>
