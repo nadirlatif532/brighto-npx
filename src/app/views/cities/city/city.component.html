@@ -31,34 +31,53 @@
 </p-table>
 
 <p-dialog header="City Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
-  <div *ngIf="city">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        [(ngModel)]="city.name"
-      />
-  </div>
-
-  <div class="form-group">
-      <label for="country-dropdown">Countries</label>
-      <p-dropdown 
-      [options]="dropdown" 
-      id="country-dropdown" 
-      [filter]="true" 
-      appendTo="body"
-      [autoDisplayFirst]="false"
-      [style]="{ width: '100%' }"
-      [(ngModel)]="city.Country">
-    </p-dropdown>
-  </div>
-</div>
-  <p-footer>
-      <div class="ui-dialog-buttonpane ui-helper-clearfix">
-          <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
-          <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+  <form #cityForm="ngForm">
+    <div *ngIf="city">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="city.name"
+        />
       </div>
-  </p-footer>
+      <div class="form-group">
+        <label for="country-dropdown">Countries</label>
+        <p-dropdown 
+          [options]="dropdown" 
+          id="country-dropdown" 
+          [filter]="true"
+          required
+          name="country-dropdown"
+          appendTo="body"
+          [autoDisplayFirst]="false"
+          [style]="{ width: '100%' }"
+          [(ngModel)]="city.Country"
+        ></p-dropdown>
+      </div>
+    </div>
+    <div class="form-group">
+      <p-footer>
+        <button 
+          type="button" 
+          pButton 
+          icon="fa fa-close"
+          [disabled]="!cityForm.form.valid || newCity"
+          (click)="delete()" 
+          label="Delete"
+        ></button>
+        <button 
+          type="button"
+          pButton 
+          icon="fa fa-check"
+          [disabled]="!cityForm.form.valid"
+          (click)="save()" 
+          label="Save"
+        ></button>
+      </p-footer>
+    </div>
+  </form>
 </p-dialog>
