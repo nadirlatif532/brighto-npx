@@ -5,7 +5,7 @@ import { Family } from '../../../core/models/family.interface';
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
-  styleUrls: ['./family.component.scss']
+  styleUrls: []
 })
 export class FamilyComponent implements OnInit {
 
