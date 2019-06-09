@@ -100,6 +100,11 @@ export const navItems: NavData[] = [
     icon: 'icon-drop'
   },
   {
+    name: 'Dealers',
+    url: '/dealers',
+    icon: 'icon-puzzle',
+  },
+  {
     name: 'Color Trends',
     url: '/color-trends',
     icon: 'icon-puzzle',
@@ -117,7 +122,7 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Pallets',
+    name: 'Color Pallets',
     url: '/pallets',
     icon: 'icon-puzzle',
     children: [
@@ -133,15 +138,4 @@ export const navItems: NavData[] = [
       }
     ]
   },
-  {
-    divider: true
-  },
-  {
-    name: 'Dealers',
-    url: '/dealers',
-    icon: 'icon-puzzle',
-  },
-  {
-    divider: true
-  }
 ];
