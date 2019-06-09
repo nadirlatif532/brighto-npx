@@ -12,28 +12,27 @@ import { FamilyService } from '../../../core/services/family.service';
 @Component({
   selector: 'app-shade',
   templateUrl: './shade.component.html',
-  styleUrls: ['./shade.component.scss']
+  styleUrls: []
 })
 export class ShadeComponent implements OnInit {
 
   products: Product[];
   shades: Shade[];
   countries: Country[];
-  selectedCountries: Country[];
   families: Family[];
   shade: Shade;
   selectedShade: Shade;
+  selectedProducts: Product[] = [];
   newShade: boolean = false;
   displayDialog: boolean = false;
-  isAC: boolean = false;
-  isRM: boolean = false;
+  radioVal: string = 'RM';
+  limit: number = 1;
 
   constructor(
     private shadeService: ShadeService,
     private productService: ProductService,
     private countryService: CountryService,
-    private familyService: FamilyService
-    ) { }
+    private familyService: FamilyService) { }
 
   ngOnInit() {
     forkJoin(
@@ -51,52 +50,44 @@ export class ShadeComponent implements OnInit {
     );
   }
 
+  swapDropdown() {
+    this.limit = this.radioVal == 'RM' ? 1 : null;
+    this.selectedProducts = [];
+  }
+
   showDialogToAdd() {
     this.newShade = true;
     this.shade = {} as Shade;
+    this.shade.color = {r: null, g: null, b: null};
     this.displayDialog = true;
   }
 
   onRowSelect(event) {
     this.newShade = false;
     this.shade = this.cloneShade(event.data);
+    this.radioVal = event.data.isAC ? 'AC' : 'RM';
+    this.limit = this.radioVal == 'RM' ? 1 : null;
     this.displayDialog = true;
   }
 
   cloneShade(s): Shade {
-    let prod: Product;
-    for (let product of this.products) {
-      if (product.id == s.ProductId) {
-        prod = product;
+    this.selectedProducts = [];
+    for (let product of s.Products) {
+      for (let pro of this.products) {
+        if (pro.id == product.id) {
+          this.selectedProducts.push(pro);
+        }
       }
     }
-    let coun: Country;
-    for (let country of this.countries) {
-      if (country.id == s.country) {
-        coun = country;
-      }
-    }
-    let fam: Family;
-    for (let family of this.families) {
-      if (family.id == s.FamilyId) {
-        fam = family;
-      }
-    }
-    this.isAC = s.isAC;
-    this.isRM = s.isRM;
-    let shade: Shade = {id: s.id, family: fam, FamilyId: null, countries: s.countries, ProductId: null, name: s.name, color: {r: s.r, g: s.g, b: s.b}, description: s.description, itemCode: s.itemCode, isAC: s.isAC, isRM: s.isRM, product: prod};
+    let shade: Shade = {id: s.id, name: s.name, color: {r: s.color.r, g: s.color.g, b: s.color.b}, description: s.description, itemCode: s.itemCode, isAC: s.isAC, isRM: s.isRM, Products: null, Countries: s.Countries, Family: s.Family };
     return shade;
   }
 
   save() {
-    this.shade.isAC = this.isAC ? true : false;
-    this.shade.isRM = this.isRM ? true : false;
-    this.isAC = false;
-    this.isRM = false;
+    this.shade.isAC = this.radioVal == 'AC' ? true : false;
+    this.shade.isRM = this.radioVal == 'RM' ? true : false;
+    this.shade.Products = this.selectedProducts;
 
-    this.shade.ProductId = this.shade.product.id;
-    this.shade.countries = this.selectedCountries;
-    this.shade.FamilyId = this.shade.family.id;
     if (this.newShade) {
       this.shadeService.save(this.shade).subscribe(
         () => this.ngOnInit()
@@ -108,17 +99,18 @@ export class ShadeComponent implements OnInit {
     }
     this.shade = null;
     this.displayDialog = false;
+    this.selectedProducts = [];
+    this.radioVal = 'RM';
+    this.limit = 1;
   }
 
   delete() {
     this.shadeService.delete(this.shade).subscribe(
-      () => {
-        this.displayDialog = false;
-        this.isAC = false;
-        this.isRM = false;
-        this.ngOnInit();
-      }
+      () => this.ngOnInit()
     );
+    this.displayDialog = false;
+    this.selectedProducts = [];
+    this.radioVal = 'RM';
+    this.limit = 1;
   }
-
 }

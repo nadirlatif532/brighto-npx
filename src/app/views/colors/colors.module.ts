@@ -12,6 +12,8 @@ import { ShadeComponent } from './shade/shade.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ListboxModule } from 'primeng/listbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [FamilyComponent, ShadeComponent],
@@ -25,7 +27,9 @@ import { ListboxModule } from 'primeng/listbox';
     KeyFilterModule,
     DropdownModule,
     CheckboxModule,
-    ListboxModule
+    ListboxModule,
+    RadioButtonModule,
+    MultiSelectModule
   ]
 })
 export class ColorsModule { }

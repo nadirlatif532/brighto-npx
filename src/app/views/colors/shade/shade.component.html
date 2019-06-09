@@ -52,89 +52,112 @@
   [modal]="true"
   [contentStyle]="{'overflow':'auto','max-height':'500px'}"
   [style]="{width: '500px', 'position':'absolute'}"
+  [focusOnShow]="false"
 >
-  <div *ngIf="shade">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        [(ngModel)]="shade.name"
-      />
-    </div>
-    <div class="form-group">
-        <label for="product">Product</label>
-        <p-dropdown 
-          [style]="{ width: '100%' }"
-          [autoDisplayFirst]="false"
-          name="product"
-          [filter]="true"
-          required [options]="products" [(ngModel)]="shade.product" optionLabel="name"></p-dropdown>
-
+  <form #shadeForm="ngForm">
+    <div *ngIf="shade">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="shade.name"
+        />
       </div>
       <div class="form-group">
-        <label for="">Belongs to</label>
+        <p-radioButton name="type" value="AC" label="All Colors" (onClick)="swapDropdown()" [(ngModel)]="radioVal"></p-radioButton>
+        <p-radioButton name="type" [style]="{'margin-left': '5%'}" value="RM" label="Ready Mix" (onClick)="swapDropdown()" [(ngModel)]="radioVal"></p-radioButton>
+      </div>
+      <div class="form-group">
+        <label for="product">Product</label>
+        <p-multiSelect 
+          [options]="products" 
+          [(ngModel)]="selectedProducts"
+          appendTo="body"
+          [style]="{ width: '100%' }"
+          name="products"
+          filter="true"
+          selectionLimit="{{limit}}"
+          required
+          optionLabel="name">
+        </p-multiSelect>
+      </div>
+      <div class="form-group">
+        <label for="countries">Family</label>
         <p-dropdown 
         [style]="{ width: '100%' }"
         [autoDisplayFirst]="false"
         name="countries"
         [filter]="true"
-        required [options]="families" [(ngModel)]="shade.family" optionLabel="name"></p-dropdown>
+        required [options]="families" [(ngModel)]="shade.Family" optionLabel="name"></p-dropdown>
       </div>
-    <div class="form-group">
+      <div class="form-group">
         <label for="item_code">Item Code</label>
         <input
           type="text"
           class="form-control"
+          required
+          name="item_code"
           id="item_code"
           [(ngModel)]="shade.itemCode"
         />
       </div>
       <div class="form-group">
-        <p-checkbox name="grop1" value="AC" label="All Colors" binary="true" [(ngModel)]="isAC"></p-checkbox>
-        <p-checkbox name="grop2" value="RM" label="Ready Made" binary="true" [(ngModel)]="isRM"></p-checkbox>
-      </div>
-      <div class="form-group">
         <label for="">Available In</label>
-        <p-listbox [options]="countries" name="country" multiple="multiple" checkbox="checkbox" filter="filter" [(ngModel)]="selectedCountries" optionLabel="name" required></p-listbox>
+        <p-listbox 
+          [options]="countries" 
+          name="country" 
+          multiple="multiple" 
+          checkbox="checkbox" 
+          filter="filter" 
+          [(ngModel)]="shade.Countries" 
+          optionLabel="name" 
+          required
+          [style]="{width: '100%'}"
+        ></p-listbox>
       </div>
       <div class="form-group">
         <div class="form-group">
-    <div class="form-row">
-      <div class="col-4">
-        <input type="text" pKeyFilter="pint" placeholder="R" class="form-control" [(ngModel)]="shade.r" />
+          <div class="form-row" *ngIf="shade.color">
+            <div class="col-4">
+              <input type="text" name="r" required pKeyFilter="pint" placeholder="R" class="form-control" [(ngModel)]="shade.color.r" />
+            </div>
+            <div class="col-4">
+              <input type="text" name="g" required pKeyFilter="pint" placeholder="G" class="form-control" [(ngModel)]="shade.color.g" />
+            </div>
+            <div class="col-4">
+              <input type="text" name="b" required pKeyFilter="pint" placeholder="B" class="form-control" [(ngModel)]="shade.color.b" />
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-4">
-        <input type="text" pKeyFilter="pint" placeholder="G" class="form-control" [(ngModel)]="shade.g" />
-      </div>
-      <div class="col-4">
-        <input type="text" pKeyFilter="pint" placeholder="B" class="form-control" [(ngModel)]="shade.b" />
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="textarea-input" name="description" required [(ngModel)]="shade.description" rows="4" class="form-control" required></textarea>
       </div>
     </div>
-  </div>
-  </div>
     <div class="form-group">
-      <label for="description">Description</label>
-      <textarea id="textarea-input" name="description" [(ngModel)]="shade.description" rows="4" class="form-control" required></textarea>
+      <p-footer>
+        <button
+          type="button"
+          pButton
+          icon="fa fa-close"
+          (click)="delete()"
+          [disabled]="!shadeForm.form.valid || newShade"
+          label="Delete"
+        ></button>
+        <button
+          type="button"
+          pButton
+          icon="fa fa-check"
+          [disabled]="!shadeForm.form.valid"
+          (click)="save()"
+          label="Save"
+        ></button>
+      </p-footer>
     </div>
-  </div>
-  <p-footer>
-    <div class="">
-      <button
-        type="button"
-        pButton
-        icon="fa fa-close"
-        (click)="delete()"
-        label="Delete"
-      ></button>
-      <button
-        type="button"
-        pButton
-        icon="fa fa-check"
-        (click)="save()"
-        label="Save"
-      ></button>
-    </div>
-  </p-footer>
+  </form>
 </p-dialog>

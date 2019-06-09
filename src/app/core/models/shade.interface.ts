@@ -4,7 +4,6 @@ import { Family } from './family.interface';
 
 export interface Shade {
   id: number;
-  ProductId: number;
   name: string;
   color: {
     r: number;
@@ -15,8 +14,7 @@ export interface Shade {
   itemCode: string;
   isAC: boolean;
   isRM: boolean;
-  product: Product;
-  countries: Country[];
-  FamilyId: number;
-  family: Family;
+  Products: Product[];
+  Countries: Country[];
+  Family: Family;
 }
