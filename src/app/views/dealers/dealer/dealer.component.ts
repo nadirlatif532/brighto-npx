@@ -5,11 +5,12 @@ import { CountryService } from '../../../core/services/country.service';
 import { Country } from '../../../core/models/country.interface';
 import { City } from '../../../core/models/city.interface';
 import { CityService } from '../../../core/services/city.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-dealer',
   templateUrl: './dealer.component.html',
-  styleUrls: ['./dealer.component.scss']
+  styleUrls: []
 })
 export class DealerComponent implements OnInit {
 
@@ -22,34 +23,32 @@ export class DealerComponent implements OnInit {
   selectedDealer: Dealer;
   countries: Country[];
   cities: City[];
+  loading: boolean = true;
   selectedStatus: string = "";
 
-  constructor(private dealerService: DealerService,private countryService: CountryService,private cityService: CityService) { }
+  constructor(
+    private dealerService: DealerService,
+    private countryService: CountryService,
+    private cityService: CityService) { }
 
   ngOnInit() {
-    this.dealerService.getAll().subscribe(
+    forkJoin(
+      this.dealerService.getAll(),
+      this.countryService.getAll(),
+      this.cityService.getAll()
+    ).subscribe(
       next => {
-        this.dealers = next;
+        this.dealers = next[0];
         this.dealers.map((item) => {
-          if(item['isAC']) {
-            item['status'] = "All Colors";
-          }
-          else {
-            item['status'] = "Ready Mix";
-          }
+          if (item['isAC']) item['status'] = "All Colors";
+          else item['status'] = "Ready Mix";
         });
-      }
+        this.countries = next[1];
+        this.cities = next[2];
+      },
+      () => {},
+      () => this.loading = false
     );
-    this.countryService.getAll().subscribe(
-      next => {
-        this.countries = next;
-      }
-    );
-    this.cityService.getAll().subscribe(
-      next => {
-        this.cities = next;
-      }
-    )
   }
 
   showDialogToAdd() {
@@ -69,7 +68,7 @@ export class DealerComponent implements OnInit {
     this.dealer['isAC'] = 1;
     this.dealer['isRM'] = 0;
     }
-   
+    this.loading = true;
     if(this.newDealer) {
       this.dealerService.save(this.dealer).subscribe(
         () => this.ngOnInit()
@@ -82,13 +81,13 @@ export class DealerComponent implements OnInit {
       this.dealer = null;
       this.displayDialog = false;
   }
+
   delete() {
+    this.loading = true;
     this.dealerService.delete(this.selectedDealer).subscribe(
-      ()=>{
-        this.displayDialog = false;
-        this.ngOnInit();
-      }
-    )
+      ()=>this.ngOnInit()
+    );
+    this.displayDialog = false;
   }
 
   onRowSelect(event) {
@@ -103,8 +102,7 @@ export class DealerComponent implements OnInit {
     } else {
       this.selectedStatus = "isRM";
     }
-    let count: Dealer = {id: dealer.id,name: dealer.name,address:dealer.address,longitude:dealer.longitude,latitude: dealer.latitude, country: dealer.country,city:dealer.city,status:dealer.status};
+    let count: Dealer = {id: dealer.id,name: dealer.name,address:dealer.address,longitude:dealer.longitude,latitude: dealer.latitude, Country: dealer.Country,City:dealer.City,status:dealer.status};
     return count;
   }
-
 }
