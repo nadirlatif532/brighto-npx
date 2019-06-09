@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { City } from '../../../core/models/city.interface';
 import { CityService } from '../../../core/services/city.service';
 import { CountryService } from '../../../core/services/country.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-city',
   templateUrl: './city.component.html',
-  styleUrls: ['./city.component.scss']
+  styleUrls: []
 })
 export class CityComponent implements OnInit {
 
@@ -17,24 +18,27 @@ export class CityComponent implements OnInit {
   newCity: boolean = false;
   selectedCity: City;
   dropdown:any = [];
+  loading: boolean = true;
 
-  constructor(private cityService: CityService,private countryService: CountryService) { }
+  constructor(
+    private cityService: CityService,
+    private countryService: CountryService) { }
 
   ngOnInit() {
-    this.cityService.getAll().subscribe(
+    forkJoin(
+      this.cityService.getAll(),
+      this.countryService.getAll()
+    ).subscribe(
       next => {
-        this.cities = next;
-      }
+        this.cities = next[0];
+        this.dropdown = next[1].map(item => { 
+            return { label: item.name, value: {id: item.id, name: item.name} }
+          }
+        );
+      },
+      () => {},
+      () => this.loading = false
     );
-    this.countryService.getAll().subscribe(
-      next => {
-        this.dropdown = next.map((item) => {
-          return {label: item.name,value: {id:item.id,name:item.name}}
-        })
-        this.dropdown.unshift({label:'Select Country', value:null});
-        console.log(this.dropdown);
-      }
-    )
   }
 
   showDialogToAdd() {
@@ -44,26 +48,25 @@ export class CityComponent implements OnInit {
   }
 
   save() {
-    if(this.newCity) {
-      this.city.CountryId = this.city.CountryId['id'];
-      this.cityService.save(this.city).subscribe(
-        () => this.ngOnInit()
-      )
+    this.loading = true;
+    let formData = new FormData();
+    formData.append('name', this.city.name)
+    formData.append('CountryId', this.city.Country.id.toString());
+
+    if (this.newCity) {
+      this.cityService.save(formData).subscribe(() => this.ngOnInit())
     } else {
-      this.cityService.update(this.city).subscribe(
-        () => this.ngOnInit()
-      )
+      this.cityService.update(formData, this.city.id).subscribe(() => this.ngOnInit())
     }
     this.city = null;
     this.displayDialog = false;
   }
 
   delete() {
+    this.loading = true;
+    this.displayDialog = false;
     this.cityService.delete(this.selectedCity).subscribe(
-      () => {
-        this.displayDialog = false;
-        this.ngOnInit();
-      }
+      () => this.ngOnInit()
     );
   }
 
@@ -74,8 +77,7 @@ export class CityComponent implements OnInit {
   }
 
   cloneCity(city) {
-    let count: City = {id: city.id,name: city.name, CountryId: city.CountryId};
+    let count: City = {id: city.id,name: city.name, Country: city.Country};
     return count;
   }
-
 }

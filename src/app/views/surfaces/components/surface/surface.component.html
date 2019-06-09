@@ -1,5 +1,6 @@
 <p-table
   [value]="surfaces"
+  [loading]="loading"
   selectionMode="single"
   [(selection)]="selectedSurface"
   (onRowSelect)="onRowSelect($event)"

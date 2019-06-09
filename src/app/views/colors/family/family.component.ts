@@ -11,6 +11,7 @@ export class FamilyComponent implements OnInit {
 
   families: Family[];
   selectedFamily: Family;
+  loading: boolean = true;
   family: Family;
   color: any;
   displayDialog: boolean = false;
@@ -19,10 +20,12 @@ export class FamilyComponent implements OnInit {
   constructor(private familyService: FamilyService) {}
 
   ngOnInit() {
+    this.loading = true;
     this.familyService.getAll().subscribe(
-      next => this.families = next
+      next => this.families = next,
+      () => {},
+      () => this.loading = false
     );
-
   }
 
   showDialogToAdd() {
@@ -32,6 +35,7 @@ export class FamilyComponent implements OnInit {
   }
 
   delete() {
+    this.loading = true;
     this.familyService.delete(this.selectedFamily).subscribe(
       () => {
         this.displayDialog = false;
@@ -41,6 +45,7 @@ export class FamilyComponent implements OnInit {
   }
 
   save() {
+    this.loading = true;
     if (this.newFamily) {
       this.familyService.save(this.family).subscribe(
         () => this.ngOnInit()

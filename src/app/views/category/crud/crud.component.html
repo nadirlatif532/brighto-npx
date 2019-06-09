@@ -1,5 +1,6 @@
 <p-table
   [value]="categories"
+  [loading]="loading"
   selectionMode="single"
   [(selection)]="selectedCategory"
   (onRowSelect)="onRowSelect($event)"

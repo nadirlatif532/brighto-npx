@@ -19,6 +19,7 @@ export class FinishComponent implements OnInit {
   displayDialog: boolean = false;
   newFinish: boolean = false;
   image: any;
+  loading: boolean = true;
 
   constructor(
     private finishService: FinishService,
@@ -32,7 +33,9 @@ export class FinishComponent implements OnInit {
       next => {
         this.finishes = next[0];
         this.surfaces = next[1];
-      }
+      },
+      () => {},
+      () => this.loading = false
     );
   }
 
@@ -59,7 +62,7 @@ export class FinishComponent implements OnInit {
     let arr = [];
     for (let surface of this.finish.Surfaces) arr.push(surface.id);
     formData.append('SurfaceId', JSON.stringify(arr));
-
+    this.loading = true;
     if (this.newFinish) {
       this.finishService.save(formData).subscribe(
         () => this.ngOnInit()
@@ -75,6 +78,7 @@ export class FinishComponent implements OnInit {
   }
 
   delete() {
+    this.loading = true;
     this.finishService.delete(this.selectedFinish).subscribe(
       () => {
         this.displayDialog = false;

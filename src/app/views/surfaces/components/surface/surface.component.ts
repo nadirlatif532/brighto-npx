@@ -18,6 +18,7 @@ export class SurfaceComponent implements OnInit {
   displayDialog: boolean = false;
   newSurface: boolean = false;
   selectedSurface: Surface;
+  loading: boolean = true;
 
   constructor(
     private surfaceService: SurfaceService,
@@ -31,7 +32,9 @@ export class SurfaceComponent implements OnInit {
       next => {
         this.surfaces = next[0];
         this.categories = next[1];
-      }
+      },
+      () => {},
+      () => this.loading = false
     );
   }
 
@@ -52,7 +55,7 @@ export class SurfaceComponent implements OnInit {
     let arr = [];
     for (let category of this.surface.Categories) arr.push(category.id);
     formData.append('CategoryId', JSON.stringify(arr));
-
+    this.loading = true;
     if(this.newSurface) {
       this.surfaceService.save(formData).subscribe(
         () => this.ngOnInit()
@@ -68,6 +71,7 @@ export class SurfaceComponent implements OnInit {
   }
 
   delete() {
+    this.loading = true;
     this.surfaceService.delete(this.selectedSurface).subscribe(
       () => {
         this.displayDialog = false;

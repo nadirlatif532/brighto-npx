@@ -5,7 +5,7 @@ import { Country } from '../../../core/models/country.interface';
 @Component({
   selector: 'app-country',
   templateUrl: './country.component.html',
-  styleUrls: ['./country.component.scss']
+  styleUrls: []
 })
 export class CountryComponent implements OnInit {
 
@@ -15,25 +15,26 @@ export class CountryComponent implements OnInit {
   country: Country;
   newCountry: boolean = false;
   selectedCountry: Country;
+  loading: boolean = true;
 
   constructor(private countryService: CountryService) { }
 
   ngOnInit() {
-      this.countryService.getAll().subscribe(
-        next => {
-          this.countries = next;
-        }
-      );
+    this.countryService.getAll().subscribe(
+      next => this.countries = next,
+      () => {},
+      () => this.loading = false
+    );
   }
 
   showDialogToAdd() {
-      this.newCountry = true;
-      this.country = {} as Country;
-      console.log(this.country)
-      this.displayDialog = true;
+    this.newCountry = true;
+    this.country = {} as Country;
+    this.displayDialog = true;
   }
 
   save() {
+    this.loading = true;
     if(this.newCountry) {
       this.countryService.save(this.country).subscribe(
         () => this.ngOnInit()
@@ -48,6 +49,7 @@ export class CountryComponent implements OnInit {
   }
 
   delete() {
+    this.loading = true;
     this.countryService.delete(this.selectedCountry).subscribe(
       () => {
         this.displayDialog = false;
@@ -57,10 +59,9 @@ export class CountryComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    console.log(event);
-      this.newCountry = false;
-      this.country = this.cloneCountry(event.data);
-      this.displayDialog = true;
+    this.newCountry = false;
+    this.country = this.cloneCountry(event.data);
+    this.displayDialog = true;
   }
 
   cloneCountry(country) {
@@ -68,5 +69,3 @@ export class CountryComponent implements OnInit {
     return count;
   }
 }
-
-

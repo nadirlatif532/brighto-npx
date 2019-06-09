@@ -18,12 +18,12 @@ export class CityService {
     );
   }
 
-  public save(city: City) {
-    return this.api.post('admin/city/create', city );
+  public save(city: any) {
+    return this.api.postStringified('admin/city/create', city );
   }
 
-  public update(city: City) {
-    return this.api.put(`admin/city/${city.id}`, city);
+  public update(city: any, id: number) {
+    return this.api.putStringified(`admin/city/${id}`, city);
   }
 
   public delete(city: City) {

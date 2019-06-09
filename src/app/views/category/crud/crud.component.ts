@@ -19,11 +19,11 @@ export class CrudComponent implements OnInit {
   displayDialog: boolean = false;
   newCategory: boolean = false;
   image: any;
+  loading: boolean = true;
 
   constructor(
     private categoryService: CategoryService,
-    private projectService: ProjectService    
-    ) { }
+    private projectService: ProjectService) { }
 
   ngOnInit() {
     forkJoin(
@@ -33,7 +33,9 @@ export class CrudComponent implements OnInit {
       next => {
         this.categories = next[0];
         this.projectTypes = next[1];
-      }
+      },
+      () => {},
+      () => this.loading = false
     );
   }
 
@@ -62,7 +64,7 @@ export class CrudComponent implements OnInit {
       projectarr.push(project.id);
     }
     formData.append('ProjectTypeId', JSON.stringify(projectarr));
-
+    this.loading = true;
     if (this.newCategory) {
       this.categoryService.save(formData).subscribe(
         () => this.ngOnInit()
@@ -77,6 +79,7 @@ export class CrudComponent implements OnInit {
   }
 
   delete() {
+    this.loading = true;
     this.categoryService.delete(this.selectedCategory).subscribe(
       () => {
         this.displayDialog = false;
@@ -84,5 +87,4 @@ export class CrudComponent implements OnInit {
       }
     )
   }
-
 }

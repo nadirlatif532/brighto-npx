@@ -1,4 +1,4 @@
-<p-table [columns]="cols" [value]="cities" selectionMode="single" [(selection)]="selectedCity" (onRowSelect)="onRowSelect($event)" >
+<p-table [loading]="loading" [columns]="cols" [value]="cities" selectionMode="single" [(selection)]="selectedCity" (onRowSelect)="onRowSelect($event)" >
   <ng-template pTemplate="caption">
       List of Cities
   </ng-template>
@@ -23,7 +23,7 @@
   </ng-template>    
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="2">
+      <td [attr.colspan]="3">
         No records found
       </td>
     </tr>
@@ -49,8 +49,9 @@
       id="country-dropdown" 
       [filter]="true" 
       appendTo="body"
+      [autoDisplayFirst]="false"
       [style]="{ width: '100%' }"
-      [(ngModel)]="city.CountryId">
+      [(ngModel)]="city.Country">
     </p-dropdown>
   </div>
 </div>

@@ -95,6 +95,11 @@ export const navItems: NavData[] = [
     icon: 'icon-drop'
   },
   {
+    name: 'City',
+    url: '/city',
+    icon: 'icon-drop'
+  },
+  {
     name: 'Color Trends',
     url: '/color-trends',
     icon: 'icon-puzzle',
@@ -110,11 +115,6 @@ export const navItems: NavData[] = [
         icon: 'icon-cursor'
       }
     ]
-  },
-  {
-    name: 'City',
-    url: '/city',
-    icon: 'icon-drop'
   },
   {
     name: 'Pallets',

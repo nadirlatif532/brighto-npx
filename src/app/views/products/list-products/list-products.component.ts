@@ -8,20 +8,27 @@ import { SharedService } from '../../../shared/services/shared.service';
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
-  styleUrls: ['./list-products.component.scss']
+  styleUrls: []
 })
 export class ListProductsComponent implements OnInit {
 
   products: Product[];
+  loading: boolean = true;
+  baseURL: any;
+
   constructor(
     private productService: ProductService,
     private sharedService: SharedService,
     private confirmationService: ConfirmationService,
     private router: Router) { }
   
-  baseURL = this.sharedService.baseURL;
   ngOnInit() {
-    this.productService.getAll().subscribe(next => this.products = next);
+    this.productService.getAll().subscribe(
+      next => this.products = next,
+      () => {},
+      () => this.loading = false
+    );
+    this.sharedService.baseURL;
   }
 
   editProduct(product: Product) {
@@ -31,8 +38,11 @@ export class ListProductsComponent implements OnInit {
   deleteProduct(product: Product) {
     this.confirmationService.confirm({ message: 'Are you sure?' , 
     accept: () => {
+      this.loading = true;
       this.productService.delete(product).subscribe(
-        () => this.ngOnInit()
+        () => this.ngOnInit(),
+        () => {},
+        () => this.loading = false
       );
     }}); 
   }

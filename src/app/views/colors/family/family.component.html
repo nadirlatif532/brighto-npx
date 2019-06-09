@@ -1,5 +1,6 @@
 <p-table
   [value]="families"
+  [loading]="loading"
   selectionMode="single"
   [(selection)]="selectedFamily"
   (onRowSelect)="onRowSelect($event)"

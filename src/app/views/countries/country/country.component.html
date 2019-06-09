@@ -1,4 +1,4 @@
-<p-table [columns]="cols" [value]="countries" selectionMode="single" [(selection)]="selectedCountry" (onRowSelect)="onRowSelect($event)" >
+<p-table [loading]="loading" [columns]="cols" [value]="countries" selectionMode="single" [(selection)]="selectedCountry" (onRowSelect)="onRowSelect($event)" >
   <ng-template pTemplate="caption">
       List of Countries
   </ng-template>
