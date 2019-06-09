@@ -29,21 +29,39 @@
 </p-table>
 
 <p-dialog header="Country Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
-  <div *ngIf="country">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        [(ngModel)]="country.name"
-      />
-  </div>
-</div>
-  <p-footer>
-      <div class="ui-dialog-buttonpane ui-helper-clearfix">
-          <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
-          <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+  <form #countryForm="ngForm">
+    <div *ngIf="country">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="country.name"
+        />
       </div>
-  </p-footer>
+    </div>
+    <div class="form-group">
+      <p-footer>
+        <button 
+          type="button" 
+          pButton 
+          icon="fa fa-close"
+          [disabled]="!countryForm.form.valid || newCountry"
+          (click)="delete()" 
+          label="Delete"
+        ></button>
+        <button 
+          type="button" 
+          pButton 
+          icon="fa fa-check" 
+          [disabled]="!countryForm.form.valid"
+          (click)="save()" 
+          label="Save"
+        ></button>
+      </p-footer>
+    </div>
+  </form>
 </p-dialog>
