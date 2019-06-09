@@ -1,0 +1,114 @@
+<p-table [columns]="cols" [value]="dealers" selectionMode="single" [(selection)]="selectedDealer" (onRowSelect)="onRowSelect($event)" >
+  <ng-template pTemplate="caption">
+      List of Dealers
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Sr. #</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Status</th>
+        <th>Country</th>
+        <th>City</th>
+      </tr>
+    </ng-template>
+  <ng-template pTemplate="body" let-dealer let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="dealer">
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{dealer.name}}</td>
+      <td>{{dealer.address}}</td>
+      <td>{{dealer.longitude}}</td>
+      <td>{{dealer.latitude}}</td>
+      <td>{{dealer.status}}</td>
+      <td *ngIf="dealer.Country">{{dealer.Country.name}}</td>
+      <td *ngIf="dealer.City">{{dealer.City.name}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+      </div>
+  </ng-template>    
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="8">
+        No records found
+      </td>
+    </tr>
+</ng-template>
+</p-table>
+
+<p-dialog header="Dealer Details" 
+[(visible)]="displayDialog" [responsive]="true" 
+showEffect="fade" [modal]="true"  
+[contentStyle]="{'overflow':'auto','max-height':'500px'}"
+[style]="{width: '500px', 'position':'absolute'}">
+  <div *ngIf="dealer">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="dealer.name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        [(ngModel)]="dealer.address"
+      />
+    </div>
+    <div class="form-group">
+      <label for="longitude">Longitude</label>
+      <input
+        type="text"
+        class="form-control"
+        id="longitude"
+        [(ngModel)]="dealer.longitude"
+      />
+    </div>
+    <div class="form-group">
+      <label for="latitude">Latitude</label>
+      <input
+        type="text"
+        class="form-control"
+        id="latitude"
+        [(ngModel)]="dealer.latitude"
+      />
+    </div>
+    <div class="form-group">
+      <label for="status">All Colors</label>
+      <p-radioButton name="isAC" value="isAC" [(ngModel)]="selectedStatus"></p-radioButton>
+      <label for="status">Ready Mix</label>
+      <p-radioButton name="isRM" value="isRM" [(ngModel)]="selectedStatus"></p-radioButton>
+    </div>
+    <div class="form-group">
+      <label for="country">Country</label>
+       <p-dropdown [style]="{ width: '100%' }"
+        [autoDisplayFirst]="false"
+        name="country"
+        [filter]="true"
+        [options]="countries" [(ngModel)]="dealer.Country" optionLabel="name"></p-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+       <p-dropdown [style]="{ width: '100%' }"
+        [autoDisplayFirst]="false"
+        name="city"
+        [filter]="true"
+        [options]="cities" [(ngModel)]="dealer.City" optionLabel="name"></p-dropdown>
+    </div>
+</div>
+  <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+          <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+      </div>
+  </p-footer>
+</p-dialog>

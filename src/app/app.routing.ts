@@ -130,6 +130,10 @@ export const routes: Routes = [
       {
         path: 'city',
         loadChildren: './views/cities/cities.module#CitiesModule'
+      },
+      {
+        path: 'dealers',
+        loadChildren: './views/dealers/dealers.module#DealersModule'
       }
     ],
     canActivate: [AuthGuard]
