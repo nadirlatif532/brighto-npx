@@ -11,7 +11,7 @@ export class ShadeService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.post('u/shades').pipe(
+    return this.api.get('u/shades').pipe(
       map((response: any) => {
         return response.result;
       })
