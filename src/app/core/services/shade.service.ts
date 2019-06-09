@@ -13,7 +13,7 @@ export class ShadeService {
   public getAll() {
     return this.api.get('u/shades').pipe(
       map((response: any) => {
-        return response.result;
+        return response.data;
       })
     );
   }
