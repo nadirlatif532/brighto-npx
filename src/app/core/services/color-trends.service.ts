@@ -11,7 +11,7 @@ export class ColorTrendService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('u/color-trends/').pipe(
+    return this.api.get('a/color-trends/').pipe(
       map((response: any) => {
         return response.data;
       })
@@ -21,7 +21,7 @@ export class ColorTrendService {
   public findById(id: number) {
     let formData = new FormData();
     formData.append('id', id.toString());
-    return this.api.postStringified(`u/color-trends/id`, formData).pipe(
+    return this.api.postStringified(`a/color-trends/id`, formData).pipe(
       map((response: any) => {
         return response.data[0];
       })

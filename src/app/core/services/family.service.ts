@@ -11,7 +11,7 @@ export class FamilyService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('u/family').pipe(
+    return this.api.get('a/family').pipe(
       map((response: any) => {
         return response.data;
       })

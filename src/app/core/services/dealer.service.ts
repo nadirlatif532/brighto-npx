@@ -11,7 +11,7 @@ export class DealerService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('u/dealer/').pipe(
+    return this.api.get('a/dealer/').pipe(
       map((response: any) => {
         return response.data;
       })

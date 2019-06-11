@@ -11,7 +11,7 @@ export class CityService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('u/city/').pipe(
+    return this.api.get('a/city/').pipe(
       map((response: any) => {
         return response.data;
       })

@@ -11,7 +11,7 @@ export class PalleteService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('u/pallet/').pipe(
+    return this.api.get('a/pallet/').pipe(
       map((response: any) => {
         return response.data;
       })
@@ -19,7 +19,7 @@ export class PalleteService {
   }
 
   public save(pallete: Pallete) {
-    return this.api.post('u/pallet/create', pallete );
+    return this.api.post('a/pallet/create', pallete );
   }
 
   public update(pallete: Pallete) {
