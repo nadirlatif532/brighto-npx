@@ -71,10 +71,10 @@ export class CreateProductComponent implements OnInit {
     this.product.Countries = this.selectedCountries;
 
     formData.append('name',this.product.name);
-    formData.append('ProjectTypeId', this.product.project.id.toString());
-    formData.append('CategoryId',this.product.category.id.toString());
-    formData.append('SurfaceId', this.product.surface.id.toString());
-    formData.append('FinishTypeId', this.product.finish.id.toString());
+    formData.append('ProjectTypeId', this.product.ProjectType.id.toString());
+    formData.append('CategoryId',this.product.Category.id.toString());
+    formData.append('SurfaceId', this.product.Surface.id.toString());
+    formData.append('FinishTypeId', this.product.FinishType.id.toString());
     formData.append('spreading',this.product.spreading.toString());
     formData.append('description',this.product.description.toString());
     formData.append('countries', JSON.stringify(this.product.Countries));

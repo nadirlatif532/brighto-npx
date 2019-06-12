@@ -11,7 +11,7 @@ export class ProductService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.post('a/products').pipe(
+    return this.api.get('a/products').pipe(
       map((response: any) => {
         return response.data;
       })
@@ -20,7 +20,7 @@ export class ProductService {
 
   public findById(id: number) {
     let formData = new FormData();
-    formData.append('id', id.toString());
+    formData.append('product_id', id.toString());
     return this.api.postStringified('a/product/id', formData).pipe(
       map((response: any) => {
         return response.data[0];

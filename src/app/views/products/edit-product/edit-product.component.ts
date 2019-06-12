@@ -66,19 +66,16 @@ export class EditProductComponent implements OnInit {
           this.productService.findById(id).subscribe(
             next => {
               this.product = next;
-              for (let project of this.projectTypes) {
-                if (project.id == this.product.ProjectTypeId) this.product.project = project;
-              }
-              for (let category of this.categories) {
-                if (category.id == this.product.CategoryId) this.product.category = category;
+              for (let finish of this.finishes) {
+                if (finish.id == this.product.FinishType.id) {
+                  this.product.FinishType = finish;
+                }
               }
               for (let surface of this.surfaces) {
-                if (surface.id == this.product.SurfaceId) this.product.surface = surface;
+                if (surface.id == this.product.Surface.id) {
+                  this.product.Surface = surface;
+                }
               }
-              for (let finish of this.finishes) {
-                if (finish.id == this.product.FinishTypeId) this.product.finish = finish;
-              }
-              this.selectedCountries = this.product.Countries;
             }
           );
         }
@@ -94,13 +91,11 @@ export class EditProductComponent implements OnInit {
     let formData = new FormData();
     formData.append('image', this.product.image, this.product.image.name);
 
-    this.product.Countries = this.selectedCountries;
-
     formData.append('name',this.product.name);
-    formData.append('ProjectTypeId', this.product.project.id.toString());
-    formData.append('CategoryId',this.product.category.id.toString());
-    formData.append('SurfaceId', this.product.surface.id.toString());
-    formData.append('FinishTypeId', this.product.finish.id.toString());
+    formData.append('ProjectTypeId', this.product.ProjectType.id.toString());
+    formData.append('CategoryId',this.product.Category.id.toString());
+    formData.append('SurfaceId', this.product.Surface.id.toString());
+    formData.append('FinishTypeId', this.product.FinishType.id.toString());
     formData.append('spreading',this.product.spreading.toString());
     formData.append('description',this.product.description.toString());
     formData.append('countries', JSON.stringify(this.product.Countries));

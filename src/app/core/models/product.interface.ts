@@ -7,17 +7,13 @@ import { Finish } from './finish.interface';
 export interface Product {
   id: number;
   name: string;
-  category: Category,
-  ProjectTypeId: number,
-  CategoryId: number,
-  SurfaceId: number,
-  FinishTypeId: number,
   description: Text,
   spreading: number,
   is_active: boolean,
   image: any,
-  project: Project,
-  surface: Surface,
-  finish: Finish,
+  ProjectType: Project,
+  Category: Category,
+  Surface: Surface,
+  FinishType: Finish,
   Countries: Country[]
 }
