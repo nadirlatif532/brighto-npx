@@ -23,7 +23,7 @@
     <div class="ui-g-6" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
       <div class="ui-g-12 ui-md-3" style="text-align:center">
         <img
-        src="{{baseURL}}+/images/{{ product.image }}"
+        src="{{baseUrl}}images/{{ product.image }}"
         onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
         width="100%"
         />
@@ -35,9 +35,9 @@
             <b>{{ product.name }}</b>
           </div>
 
-          <div class="ui-g-2 ui-sm-6">Category:</div>
+          <div class="ui-g-2 ui-sm-6">Description:</div>
           <div class="ui-g-10 ui-sm-6">
-            <b>{{ product.Category.name }}</b>
+            <b>{{ product.description }}</b>
           </div>
 
           <div class="ui-g-2 ui-sm-6">Spreading:</div>
@@ -45,9 +45,9 @@
             <b>{{ product.spreading }}</b>
           </div>
 
-          <div class="ui-g-2 ui-sm-6">Country:</div>
+          <div class="ui-g-2 ui-sm-6">Active:</div>
           <div class="ui-g-10 ui-sm-6">
-            <b *ngFor="let country of product.Countries">{{ country.name }}, </b>
+            <b>{{ product.isActive }}</b>
           </div>
         </div>
       </div>

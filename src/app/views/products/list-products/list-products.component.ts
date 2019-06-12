@@ -14,7 +14,7 @@ export class ListProductsComponent implements OnInit {
 
   products: Product[];
   loading: boolean = true;
-  baseURL: any;
+  baseUrl: string;
 
   constructor(
     private productService: ProductService,
@@ -28,7 +28,7 @@ export class ListProductsComponent implements OnInit {
       () => {},
       () => this.loading = false
     );
-    this.sharedService.baseURL;
+    this.baseUrl = this.sharedService.baseUrl;
   }
 
   editProduct(product: Product) {
