@@ -21,31 +21,20 @@ export class ColorTrendsComponent implements OnInit {
   newColorTrend: boolean = false;
   selectedColorTrend: ColorTrends;
   shades:any = [];
-  baseURL = this.sharedService.baseURL;
+  baseURL = this.sharedService.baseUrl;
 
-  constructor(private colorTrends: ColorTrendService,
-    private shadeService: ShadeService,
+  constructor(
+    private colorTrends: ColorTrendService,
     private sharedService: SharedService,
     private router:Router,
     private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.colorTrends.getAll().subscribe(
-      next => {
-        this.colortrends = next;
-        console.log(this.colortrend)
-      }
+      next => this.colortrends = next
     );
-    // this.shadeService.getAll().subscribe(
-    //   next => {
-    //     this.shades = next.map((item) => {
-    //       return {label: item.name, value:{id:item.id,name:item.name}}
-    //     })
-    //     this.shades.unshift({label:'Select Shade', value:null})
-    //   }
-    // )
-    // console.log(this.colortrend)
   }
+  
   editColorTrend(colortrend: any) {
     this.router.navigate(['color-trends','edit',colortrend.id])
   }

@@ -6,6 +6,7 @@ import { SharedService } from '../../../shared/services/shared.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { Shade } from '../../../core/models/shade.interface';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-color-trends',
@@ -21,27 +22,26 @@ export class AddColorTrendsComponent implements OnInit {
   newColorTrend: boolean = false;
   selectedColorTrend: ColorTrends;
   shades:Shade[];
-  baseURL = this.sharedService.baseURL;
+  baseURL = this.sharedService.baseUrl;
 
-  constructor(private colorTrends: ColorTrendService,
+  constructor(
+    private colorTrends: ColorTrendService,
     private shadeService: ShadeService,
     private sharedService: SharedService,
-    private router:Router,
-    private confirmationService: ConfirmationService) { }
+    private router:Router) { }
 
   ngOnInit() {
-    this.colorTrends.getAll().subscribe(
+    forkJoin(
+      this.colorTrends.getAll(),
+      this.shadeService.getAll()
+    ).subscribe(
       next => {
-        this.colortrends = next;
+        this.colorTrends = next[0];
+        this.shades = next[1];
       }
     );
-    this.shadeService.getAll().subscribe(
-      next => {
-        this.shades = next;
-      }
-    )
-    console.log(this.shades)
   }
+
   submit(){
     let formData = new FormData();
     formData.append('image', this.colortrend.image, this.colortrend.image['name']);
@@ -59,6 +59,5 @@ export class AddColorTrendsComponent implements OnInit {
   myUploader(event) {
     this.colortrend.image = event.files[0];
   }
-
 
 }
