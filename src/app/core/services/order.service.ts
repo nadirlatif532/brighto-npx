@@ -11,7 +11,7 @@ export class OrderService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('a/order/').pipe(
+    return this.api.get('u/order/').pipe(
       map((response: any) => {
         return response.data;
       })

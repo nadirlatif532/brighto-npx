@@ -10,7 +10,7 @@ export class UserService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('a/user/').pipe(
+    return this.api.get('u/user/').pipe(
       map((response: any) => {
         return response.data;
       })

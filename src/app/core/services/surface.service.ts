@@ -11,7 +11,7 @@ export class SurfaceService {
   constructor(private api: ApiService) { }
 
   public getAll() {
-    return this.api.get('a/surface/').pipe(
+    return this.api.get('u/surface/').pipe(
       map((response: any) => {
         return response.data;
       })
