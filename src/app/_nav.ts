@@ -128,19 +128,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Color Pallets',
-    url: '/pallets',
-    icon: 'icon-puzzle',
-    children: [
-      {
-        name: 'List',
-        url: '/pallets/list',
-        icon: 'icon-cursor'
-      },
-      {
-        name: 'Add',
-        url: '/pallets/add',
-        icon: 'icon-cursor'
-      }
-    ]
+    url: '/pallets/list',
+    icon: 'icon-puzzle'
   },
 ];
