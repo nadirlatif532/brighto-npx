@@ -27,6 +27,7 @@ export class ShadeComponent implements OnInit {
   displayDialog: boolean = false;
   radioVal: string = 'RM';
   limit: number = 1;
+  loading: boolean = true;
 
   constructor(
     private shadeService: ShadeService,
@@ -46,7 +47,9 @@ export class ShadeComponent implements OnInit {
         this.products = next[1];
         this.countries = next[2];
         this.families = next[3];
-      }
+      },
+      () => {},
+      () => this.loading = false
     );
   }
 
@@ -87,7 +90,7 @@ export class ShadeComponent implements OnInit {
     this.shade.isAC = this.radioVal == 'AC' ? true : false;
     this.shade.isRM = this.radioVal == 'RM' ? true : false;
     this.shade.Products = this.selectedProducts;
-
+    this.loading = true;
     if (this.newShade) {
       this.shadeService.save(this.shade).subscribe(
         () => this.ngOnInit()
@@ -105,6 +108,7 @@ export class ShadeComponent implements OnInit {
   }
 
   delete() {
+    this.loading = true;
     this.shadeService.delete(this.shade).subscribe(
       () => this.ngOnInit()
     );
