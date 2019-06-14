@@ -53,7 +53,6 @@ export class OrderComponent implements OnInit {
           item['status'] = {name:String(item['status'])};
           return item;
         })
-        console.log(this.orders);
         this.dealers = next[1];
         this.products = next[2];
         this.shades = next[3];
