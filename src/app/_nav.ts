@@ -105,6 +105,11 @@ export const navItems: NavData[] = [
     icon: 'icon-puzzle',
   },
   {
+    name: 'Orders',
+    url: '/orders',
+    icon: 'icon-puzzle',
+  },
+  {
     name: 'Color Trends',
     url: '/color-trends',
     icon: 'icon-puzzle',

@@ -1,0 +1,150 @@
+<p-table [loading]="loading" [columns]="cols" [value]="orders" selectionMode="single" [(selection)]="selectedOrder" (onRowSelect)="onRowSelect($event)" >
+  <ng-template pTemplate="caption">
+      List of Orders
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Sr. #</th>
+        <th>Order Details</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        <th>Dealer</th>
+        <th>Product</th>
+        <th>Shade</th>
+        <th>User</th>
+      </tr>
+    </ng-template>
+  <ng-template pTemplate="body" let-order let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="order">
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{order.orderDetails}}</td>
+      <td>{{order.quantity}}</td>
+      <td>{{order.status.name}}</td>
+      <td>{{order.Dealer.name}}</td>
+      <td>{{order.Product.name}}</td>
+      <td>{{order.Shade.name}}</td>
+      <td>{{order.User.username}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+      </div>
+  </ng-template>    
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="8">
+        No records found
+      </td>
+    </tr>
+</ng-template>
+</p-table>
+
+<p-dialog header="Order Details" 
+[(visible)]="displayDialog" [responsive]="true" 
+showEffect="fade" [modal]="true"  
+[contentStyle]="{'overflow':'auto','max-height':'500px'}"
+[style]="{width: '500px', 'position':'absolute'}">
+  <form #orderForm="ngForm">
+    <div *ngIf="order">
+      <div class="form-group">
+        <label for="name">Details</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="order.orderDetails"
+        />
+      </div>
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input
+          type="text"
+          class="form-control"
+          pKeyFilter="num"
+          id="quantity"
+          name="quantity"
+          required
+          [(ngModel)]="order.quantity"
+        />
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <p-dropdown 
+          [style]="{ width: '100%' }"
+          [autoDisplayFirst]="false"
+          name="status"
+          appendTo="body"
+          required
+          [filter]="true"
+          [options]="statuses" [(ngModel)]="order.status" optionLabel="name"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="dealer">Dealer</label>
+        <p-dropdown 
+          [style]="{ width: '100%' }"
+          [autoDisplayFirst]="false"
+          name="dealer"
+          appendTo="body"
+          required
+          [filter]="true"
+          [options]="dealers" [(ngModel)]="order.Dealer" optionLabel="name"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="product">Product</label>
+        <p-dropdown 
+          [style]="{ width: '100%' }"
+          [autoDisplayFirst]="false"
+          name="product"
+          appendTo="body"
+          required
+          [filter]="true"
+          [options]="products" [(ngModel)]="order.Product" optionLabel="name"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="shade">Shade</label>
+        <p-dropdown 
+          [style]="{ width: '100%' }"
+          [autoDisplayFirst]="false"
+          name="shade"
+          appendTo="body"
+          required
+          [filter]="true"
+          [options]="shades" [(ngModel)]="order.Shade" optionLabel="name"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="user">Users</label>
+        <p-dropdown 
+          [style]="{ width: '100%' }"
+          [autoDisplayFirst]="false"
+          name="user"
+          appendTo="body"
+          required
+          [filter]="true"
+          [options]="users" [(ngModel)]="order.User" optionLabel="username"></p-dropdown>
+      </div>  
+    </div>
+    <div class="form-group">    
+      <p-footer>
+        <button 
+          type="button" 
+          pButton 
+          icon="fa fa-close"
+          [disabled]="!orderForm.form.valid || newOrder"
+          (click)="delete()" 
+          label="Delete"
+        ></button>
+        <button 
+          type="button" 
+          pButton 
+          icon="fa fa-check"
+          [disabled]="!orderForm.form.valid"
+          (click)="save()" 
+          label="Save"
+        ></button>
+      </p-footer>
+    </div>
+  </form>
+</p-dialog>

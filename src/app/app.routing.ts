@@ -134,6 +134,10 @@ export const routes: Routes = [
       {
         path: 'dealers',
         loadChildren: './views/dealers/dealers.module#DealersModule'
+      },
+      {
+        path: 'orders',
+        loadChildren: './views/orders/orders.module#OrdersModule'
       }
     ],
     canActivate: [AuthGuard]
