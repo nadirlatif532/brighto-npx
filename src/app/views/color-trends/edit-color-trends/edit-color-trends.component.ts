@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ColorTrends } from '../../../core/models/color-trends.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ColorTrendService } from '../../../core/services/color-trends.service';
-import { forkJoin } from 'rxjs';
 import { ShadeService } from '../../../core/services/shade.service';
 import { Shade } from '../../../core/models/shade.interface';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-edit-color-trends',
@@ -13,33 +13,34 @@ import { Shade } from '../../../core/models/shade.interface';
 })
 export class EditColorTrendsComponent implements OnInit {
 
-
   colortrends: ColorTrends[];
-  selectedTrends: ColorTrends;
   colortrend: ColorTrends = {} as ColorTrends;
-  displayDialog: boolean;
   shades: Shade[];
 
   constructor(
     private colorTrendsService: ColorTrendService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private shadeService: ShadeService
-    ) {}
+    private shadeService: ShadeService) {}
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
-    this.colorTrendsService.findById(id).subscribe(
-      next => {
-        this.colortrends = next;
-        this.colortrend = {id:next.id,trendName:next.trendName,shade1:next.shade1,shade2:next.shade2,shade3:next.shade3,image:next.image};
+    forkJoin(
+      this.colorTrendsService.findById(id),
+      this.shadeService.getAll()
+    ).subscribe(
+      (next: any) => {
+        this.colortrend = { id: next[0].id, trendName: next[0].trendName, shade1: next[0].shade1, shade2: next[0].shade2, shade3: next[0].shade3, image: next[0].image };
+        this.shades = next[1].map(
+          shade => {
+            delete shade["Countries"];
+            delete shade["Family"];
+            delete shade["Products"];
+            return shade;
+          }
+        );
       }
     );
-    this.shadeService.getAll().subscribe(
-      next => {
-        this.shades = next;
-      }
-    )
   }
 
   myUploader(event) {
@@ -48,17 +49,15 @@ export class EditColorTrendsComponent implements OnInit {
 
   submit() {
     let formData = new FormData();
-    formData.append('image', this.colortrend.image, this.colortrend.image['trendName']);
+    formData.append('image', this.colortrend.image);
     formData.append('trendName', this.colortrend.trendName);
     formData.append('shade1Id', this.colortrend.shade1.id.toString());
     formData.append('shade2Id', this.colortrend.shade2.id.toString());
     formData.append('shade3Id', this.colortrend.shade3.id.toString());
-    this.colorTrendsService.update(formData).subscribe(
+    this.colorTrendsService.update(formData, this.colortrend.id).subscribe(
       () => this.router.navigate(['color-trends', 'list'])
     );
     this.colortrend = {} as ColorTrends;
-    this.displayDialog = false;
   }
-
 
 }

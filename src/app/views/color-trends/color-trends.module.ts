@@ -16,6 +16,8 @@ import { EditColorTrendsComponent } from './edit-color-trends/edit-color-trends.
 import { DataViewModule } from 'primeng/dataview';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PanelModule } from 'primeng/panel';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [ColorTrendsComponent, AddColorTrendsComponent, EditColorTrendsComponent],
@@ -32,7 +34,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DataViewModule,
     ConfirmDialogModule,
     ListboxModule,
-    ColorTrendsRoutingModule
+    ColorTrendsRoutingModule,
+    PanelModule,
+    InputTextModule
   ],
   providers: [
     ConfirmationService

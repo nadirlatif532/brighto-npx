@@ -29,11 +29,11 @@ export class ColorTrendService {
   }
 
   public save(trend: any) {
-    return this.api.postStringified('admin/color-trends/create', trend );
+    return this.api.postStringified('admin/color-trends/create', trend);
   }
 
-  public update(trend: any) {
-    return this.api.putStringified(`admin/color-trends/${trend.id}`, trend);
+  public update(trend: any, id: number) {
+    return this.api.putStringified(`admin/color-trends/${id}`, trend);
   }
 
   public delete(trend: ColorTrends) {

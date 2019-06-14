@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ColorTrends } from '../../../core/models/color-trends.interface';
 import { ColorTrendService } from '../../../core/services/color-trends.service';
 import { ShadeService } from '../../../core/services/shade.service';
-import { SharedService } from '../../../shared/services/shared.service';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
 import { Shade } from '../../../core/models/shade.interface';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-color-trends',
@@ -15,30 +12,17 @@ import { forkJoin } from 'rxjs';
 })
 export class AddColorTrendsComponent implements OnInit {
 
-  displayDialog: boolean;
-  cols: any[];
-  colortrends: ColorTrends[];
   colortrend: ColorTrends = {} as ColorTrends;
-  newColorTrend: boolean = false;
-  selectedColorTrend: ColorTrends;
-  shades:Shade[];
-  baseURL = this.sharedService.baseUrl;
+  shades: Shade[];
 
   constructor(
     private colorTrends: ColorTrendService,
     private shadeService: ShadeService,
-    private sharedService: SharedService,
     private router:Router) { }
 
   ngOnInit() {
-    forkJoin(
-      this.colorTrends.getAll(),
-      this.shadeService.getAll()
-    ).subscribe(
-      next => {
-        this.colorTrends = next[0];
-        this.shades = next[1];
-      }
+    this.shadeService.getAll().subscribe(
+      (next) => this.shades = next
     );
   }
 
@@ -53,7 +37,6 @@ export class AddColorTrendsComponent implements OnInit {
       () => this.router.navigate(['color-trends', 'list'])
     );
     this.colortrend = {} as ColorTrends;
-    this.displayDialog = false;
   }
 
   myUploader(event) {

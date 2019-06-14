@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ColorTrends } from '../../../core/models/color-trends.interface';
 import { ColorTrendService } from '../../../core/services/color-trends.service';
-import { ShadeService } from '../../../core/services/shade.service';
 import { SharedService } from '../../../shared/services/shared.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
@@ -14,14 +13,9 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class ColorTrendsComponent implements OnInit {
 
-  displayDialog: boolean;
-  cols: any[];
   colortrends: ColorTrends[];
-  colortrend: ColorTrends;
-  newColorTrend: boolean = false;
-  selectedColorTrend: ColorTrends;
-  shades:any = [];
-  baseURL = this.sharedService.baseUrl;
+  loading: boolean = true;
+  baseURL: string;
 
   constructor(
     private colorTrends: ColorTrendService,
@@ -30,8 +24,11 @@ export class ColorTrendsComponent implements OnInit {
     private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
+    this.baseURL = this.sharedService.baseUrl;
     this.colorTrends.getAll().subscribe(
-      next => this.colortrends = next
+      next => this.colortrends = next,
+      () => { },
+      () => this.loading = false
     );
   }
   
@@ -43,7 +40,9 @@ export class ColorTrendsComponent implements OnInit {
     this.confirmationService.confirm({ message: 'Are you sure?' , 
     accept: () => {
       this.colorTrends.delete(colortrend).subscribe(
-        () => this.ngOnInit()
+        () => this.ngOnInit(),
+        () => {},
+        () => this.loading = false
       );
     }}); 
   }
