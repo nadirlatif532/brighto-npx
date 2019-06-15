@@ -37,12 +37,12 @@ export const navItems: NavData[] = [
   {
     name: 'Family',
     url: '/colors/family',
-    icon: 'icon-drop'
+    icon: 'cui-brush'
   },
   {
     name: 'Shades',
     url: '/colors/shades',
-    icon: 'icon-drop'
+    icon: 'cui-brush'
   },
   {
     title: true,
@@ -51,22 +51,22 @@ export const navItems: NavData[] = [
   {
     name: 'Project',
     url: '/project',
-    icon: 'icon-puzzle'
+    icon: 'cui-settings'
   },
   {
     name: 'Categories',
     url: '/categories',
-    icon: 'icon-pencil'
+    icon: 'cui-settings'
   },
   {
     name: 'Surface',
     url: '/surface',
-    icon: 'icon-puzzle'
+    icon: 'cui-settings'
   },
   {
     name: 'Finish',
     url: '/finish-type',
-    icon: 'icon-puzzle'
+    icon: 'cui-settings'
   },
   {
     title: true,
@@ -75,60 +75,60 @@ export const navItems: NavData[] = [
   {
     name: 'Products',
     url: '/products',
-    icon: 'icon-puzzle',
+    icon: 'cui-globe',
     children: [
       {
         name: 'List',
         url: '/products/list',
-        icon: 'icon-cursor'
+        icon: 'cui-cursor'
       },
       {
         name: 'Add',
         url: '/products/add',
-        icon: 'icon-cursor'
+        icon: 'cui-cursor'
       }
     ]
   },
   {
     name: 'Country',
     url: '/country',
-    icon: 'icon-drop'
+    icon: 'cui-globe'
   },
   {
     name: 'City',
     url: '/city',
-    icon: 'icon-drop'
+    icon: 'cui-globe'
   },
   {
     name: 'Dealers',
     url: '/dealers',
-    icon: 'icon-puzzle',
+    icon: 'cui-globe',
   },
   {
     name: 'Orders',
     url: '/orders',
-    icon: 'icon-puzzle',
+    icon: 'cui-globe',
   },
   {
     name: 'Color Trends',
     url: '/color-trends',
-    icon: 'icon-puzzle',
+    icon: 'cui-globe',
     children: [
       {
         name: 'List',
         url: '/color-trends/list',
-        icon: 'icon-cursor'
+        icon: 'cui-cursor'
       },
       {
         name: 'Add',
         url: '/color-trends/add',
-        icon: 'icon-cursor'
+        icon: 'cui-cursor'
       }
     ]
   },
   {
     name: 'Color Pallets',
     url: '/pallets/list',
-    icon: 'icon-puzzle'
+    icon: 'cui-globe'
   },
 ];
