@@ -92,8 +92,8 @@ export class EditProductComponent implements OnInit {
 
   submit() {
     let formData = new FormData();
-    formData.append('image', this.product.image, this.product.image.name);
-    formData.append('coverImage', this.product.coverImage, this.product.coverImage.name);
+    formData.append('image', this.product.image);
+    formData.append('coverImage', this.product.coverImage);
 
     formData.append('name',this.product.name);
     formData.append('ProjectTypeId', this.product.ProjectType.id.toString());
