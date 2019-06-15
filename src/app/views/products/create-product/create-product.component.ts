@@ -63,10 +63,14 @@ export class CreateProductComponent implements OnInit {
   myUploader(event) {
     this.product.image = event.files[0];
   }
+  coverImageUploader(event) {
+    this.product.coverImage = event.files[0];
+  }
 
   submit() {
     let formData = new FormData();
     formData.append('image', this.product.image, this.product.image.name);
+    formData.append('coverImage', this.product.coverImage, this.product.coverImage.name);
 
     this.product.Countries = this.selectedCountries;
 
