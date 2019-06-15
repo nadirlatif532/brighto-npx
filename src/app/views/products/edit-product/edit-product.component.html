@@ -83,6 +83,19 @@
                   ></p-fileUpload>
                 </div>
               </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="coverImage">Cover Image</label>
+                <div class="col-md-9">
+                  <p-fileUpload
+                    auto="true"
+                    name="coverImage"
+                    accept="image/*"
+                    maxFileSize="1000000"
+                    customUpload="true"
+                    (uploadHandler)="coverImageUploader($event)"
+                  ></p-fileUpload>
+                </div>
+              </div>
         </div>
         <div class="card-footer" style="text-align: right;">
           <button [disabled]="!addForm.form.valid" type="submit" pButton icon="fa fa-plus" label="Submit"></button>

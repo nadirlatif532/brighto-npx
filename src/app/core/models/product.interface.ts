@@ -11,6 +11,7 @@ export interface Product {
   spreading: number,
   is_active: boolean,
   image: any,
+  coverImage: any,
   ProjectType: Project,
   Category: Category,
   Surface: Surface,
