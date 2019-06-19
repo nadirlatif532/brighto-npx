@@ -1,17 +1,17 @@
-<p-table [columns]="cols" [value]="pallets" selectionMode="single" [(selection)]="selectedPallete" (onRowSelect)="onRowSelect($event)" >
+<p-table [value]="pallets" selectionMode="single" [(selection)]="selectedPallete" (onRowSelect)="onRowSelect($event)" >
     <ng-template pTemplate="caption">
         List of Pallets
     </ng-template>
-    <ng-template pTemplate="header" let-columns>
+    <ng-template pTemplate="header">
         <tr>
           <th>Sr. #</th>
           <th>Name</th>
           <th>Likes</th>
           <th>Pallete By</th>
-          <th>Color#1 </th>
-          <th>Color#2 </th>
-          <th>Color#3 </th>
-          <th>Color#4 </th>
+          <th>Shade 1 </th>
+          <th>Shade 2 </th>
+          <th>Shade 3 </th>
+          <th>Shade 4 </th>
         </tr>
       </ng-template>
     <ng-template pTemplate="body" let-pallete let-rowIndex="rowIndex">
@@ -20,10 +20,18 @@
         <td>{{pallete.name}}</td>
         <td>{{pallete.likes}}</td>
         <td>{{pallete.pallete_by}}</td>
-        <td><span *ngIf="pallete.color_1 && pallete.color_1.name">{{pallete.color_1.name}}</span></td>
-        <td><span *ngIf="pallete.color_2 && pallete.color_2.name">{{pallete.color_2.name}}</span></td>
-        <td><span *ngIf="pallete.color_3 && pallete.color_3.name">{{pallete.color_3.name}}</span></td>
-        <td><span *ngIf="pallete.color_4 && pallete.color_4.name">{{pallete.color_4.name}}</span></td>
+        <td style.background-color="rgb({{ pallete.color_1.color.r }}, {{pallete.color_1.color.g}}, {{pallete.color_1.color.b}})">
+          <span *ngIf="pallete.color_1 && pallete.color_1.name"><strong>({{pallete.color_1.color.r}}, {{pallete.color_1.color.g}}, {{pallete.color_1.color.b}})</strong></span>
+        </td>
+        <td style.background-color="rgb({{ pallete.color_2.color.r }}, {{pallete.color_2.color.g}}, {{pallete.color_2.color.b}})">
+          <span *ngIf="pallete.color_2 && pallete.color_2.name"><strong>({{pallete.color_2.color.r}}, {{pallete.color_2.color.g}}, {{pallete.color_2.color.b}})</strong></span>
+        </td>
+        <td style.background-color="rgb({{ pallete.color_3.color.r }}, {{pallete.color_3.color.g}}, {{pallete.color_3.color.b}})">
+          <span *ngIf="pallete.color_3 && pallete.color_3.name"><strong>({{pallete.color_3.color.r}}, {{pallete.color_3.color.g}}, {{pallete.color_3.color.b}})</strong></span>
+        </td>
+        <td style.background-color="rgb({{ pallete.color_4.color.r }}, {{pallete.color_4.color.g}}, {{pallete.color_4.color.b}})">
+          <span *ngIf="pallete.color_4 && pallete.color_4.name"><strong>({{pallete.color_4.color.r}}, {{pallete.color_4.color.g}}, {{pallete.color_4.color.b}})</strong></span>
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary" let-rowData>
@@ -76,7 +84,7 @@
             />
       </div> 
       <div class="form-group">
-            <label for="color1">Color #1</label>
+            <label for="color1">Shade 1</label>
              <p-dropdown [style]="{ width: '100%' }"
               [autoDisplayFirst]="false"
               name="color1"
@@ -84,7 +92,7 @@
               [options]="shades" [(ngModel)]="pallete.color_1" optionLabel="name"></p-dropdown>
       </div>
       <div class="form-group">
-        <label for="color1">Color #2</label>
+        <label for="color1">Shade 2</label>
          <p-dropdown [style]="{ width: '100%' }"
           [autoDisplayFirst]="false"
           name="color2"
@@ -92,7 +100,7 @@
           [options]="shades" [(ngModel)]="pallete.color_2" optionLabel="name"></p-dropdown>
       </div>
       <div class="form-group">
-        <label for="color1">Color #3</label>
+        <label for="color1">Shade 3</label>
         <p-dropdown [style]="{ width: '100%' }"
          [autoDisplayFirst]="false"
          name="color3"
@@ -100,7 +108,7 @@
          [options]="shades" [(ngModel)]="pallete.color_3" optionLabel="name"></p-dropdown>
       </div>
       <div class="form-group">
-        <label for="color1">Color #4</label>
+        <label for="color1">Shade 4</label>
         <p-dropdown [style]="{ width: '100%' }"
          [autoDisplayFirst]="false"
          name="color4"
