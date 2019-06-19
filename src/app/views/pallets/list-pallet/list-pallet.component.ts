@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Pallete } from '../../../core/models/pallet.interface';
-import {PalleteService} from '../../../core/services/pallete.service';
+import { PalleteService } from '../../../core/services/pallete.service';
 import { ShadeService } from '../../../core/services/shade.service';
 import { forkJoin } from 'rxjs';
 
@@ -12,14 +12,15 @@ import { forkJoin } from 'rxjs';
 export class ListPalletComponent implements OnInit {
 
   displayDialog: boolean;
-  cols: any[];
   pallets: Pallete[];
   pallete: Pallete;
   newPallete: boolean = false;
   selectedPallete: Pallete;
   shades: any[];
 
-  constructor(private palleteService: PalleteService,private shadesService: ShadeService) { }
+  constructor(
+    private palleteService: PalleteService,
+    private shadesService: ShadeService) { }
 
   ngOnInit() {
     forkJoin(
@@ -28,7 +29,14 @@ export class ListPalletComponent implements OnInit {
     ).subscribe(
       next => {
         this.pallets = next[0];
-        this.shades = next[1];
+        this.shades = next[1].map(
+          shade => {
+            delete shade["Countries"];
+            delete shade["Family"];
+            delete shade["Products"];
+            return shade;
+          }
+        );
       }
     );
   }
