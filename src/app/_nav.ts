@@ -127,7 +127,7 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Color Pallets',
+    name: 'Color Palettes',
     url: '/pallets/list',
     icon: 'cui-globe'
   },

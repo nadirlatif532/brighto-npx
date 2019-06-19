@@ -1,13 +1,13 @@
 <p-table [columns]="cols" [value]="pallets" selectionMode="single" [(selection)]="selectedPallete" (onRowSelect)="onRowSelect($event)" >
     <ng-template pTemplate="caption">
-        List of Pallets
+        List of Palettes
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
           <th>Sr. #</th>
           <th>Name</th>
           <th>Likes</th>
-          <th>Pallete By</th>
+          <th>Palette By</th>
           <th>Color#1 </th>
           <th>Color#2 </th>
           <th>Color#3 </th>
@@ -40,7 +40,7 @@
   </ng-template>
   </p-table>
   
-  <p-dialog header="Pallete Details" 
+  <p-dialog header="Palette Details" 
   [(visible)]="displayDialog" 
   [responsive]="true" 
   showEffect="fade" 
@@ -67,7 +67,7 @@
             />
       </div> 
      <div class="form-group">
-            <label for="pallete_by">Pallete By</label>
+            <label for="pallete_by">Palette By</label>
             <input
               type="text"
               class="form-control"
