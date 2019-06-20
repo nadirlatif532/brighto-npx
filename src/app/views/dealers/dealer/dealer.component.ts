@@ -108,7 +108,6 @@ export class DealerComponent implements OnInit {
   }
   filterCities(){
     let countryId = this.dealer.Country.id;
-    console.log(countryId)
     this.filteredCities =this.cities.filter(function(city){
       return city.Country.id === countryId;
     });
