@@ -102,6 +102,7 @@ showEffect="fade" [modal]="true"
         <p-dropdown 
           [style]="{ width: '100%' }"
           [autoDisplayFirst]="false"
+          (onChange)="filterCities()"
           name="country"
           appendTo="body"
           required
@@ -117,7 +118,7 @@ showEffect="fade" [modal]="true"
           name="city"
           required
           [filter]="true"
-          [options]="cities" [(ngModel)]="dealer.City" optionLabel="name"></p-dropdown>
+          [options]="filteredCities" [(ngModel)]="dealer.City" optionLabel="name"></p-dropdown>
       </div>
     </div>
     <div class="form-group">    
