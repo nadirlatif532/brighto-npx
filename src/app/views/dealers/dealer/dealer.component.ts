@@ -23,6 +23,7 @@ export class DealerComponent implements OnInit {
   selectedDealer: Dealer;
   countries: Country[];
   cities: City[];
+  filteredCities: City[];
   loading: boolean = true;
   selectedStatus: string = "";
 
@@ -104,5 +105,11 @@ export class DealerComponent implements OnInit {
     }
     let count: Dealer = {id: dealer.id,name: dealer.name,address:dealer.address,longitude:dealer.longitude,latitude: dealer.latitude, Country: dealer.Country,City:dealer.City,status:dealer.status};
     return count;
+  }
+  filterCities(){
+    let countryId = this.dealer.Country.id;
+    this.filteredCities =this.cities.filter(function(city){
+      return city.Country.id === countryId;
+    });
   }
 }
