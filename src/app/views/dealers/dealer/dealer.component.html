@@ -7,6 +7,7 @@
         <th>Sr. #</th>
         <th>Name</th>
         <th>Address</th>
+        <th>Email</th>
         <th>Longitude</th>
         <th>Latitude</th>
         <th>Status</th>
@@ -19,6 +20,7 @@
       <td>{{ rowIndex + 1 }}</td>
       <td>{{dealer.name}}</td>
       <td>{{dealer.address}}</td>
+      <td>{{dealer?.user?.email}}</td>
       <td>{{dealer.longitude}}</td>
       <td>{{dealer.latitude}}</td>
       <td>{{dealer.status}}</td>
