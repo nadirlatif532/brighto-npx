@@ -138,7 +138,11 @@ export const routes: Routes = [
       {
         path: 'orders',
         loadChildren: './views/orders/orders.module#OrdersModule'
-      }
+      },
+      {
+        path: 'luxury-finishing',
+        loadChildren: './views/luxury-finishing/luxury-finishing.module#LuxuryFinishingModule'
+      },
     ],
     canActivate: [AuthGuard]
   },

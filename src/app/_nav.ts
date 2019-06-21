@@ -131,4 +131,21 @@ export const navItems: NavData[] = [
     url: '/pallets/list',
     icon: 'cui-globe'
   },
+  {
+    name: 'Luxury finishing',
+    url: '/luxury-finishing',
+    icon: 'cui-globe',
+    children: [
+      {
+        name: 'List',
+        url: '/luxury-finishing/list',
+        icon: 'cui-cursor'
+      },
+      {
+        name: 'Add',
+        url: '/luxury-finishing/add',
+        icon: 'cui-cursor'
+      }
+    ]
+  }
 ];
