@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../core/services/user.service';
-import { User } from '../../../core/models/user.interface';
 
 @Component({
   selector: 'app-user-settings',
@@ -21,7 +20,6 @@ export class UserSettingsComponent implements OnInit {
     this.userService.getCurrentLoggedInUser().subscribe(
       next => {
         this.user = next;
-        console.log(this.user)
       });
   }
   onSubmit(){}
