@@ -16,4 +16,11 @@ export class UserService {
       })
     );
   }
+  getCurrentLoggedInUser(){
+    return this.api.get('admin/user/specific').pipe(
+      map((response: any) => {
+        return response.data;
+      })
+    );
+  }
 }

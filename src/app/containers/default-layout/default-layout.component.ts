@@ -31,6 +31,9 @@ export class DefaultLayoutComponent implements OnDestroy {
     localStorage.clear();
     this.router.navigate(['login']);
   }
+  settings(){
+    this.router.navigate(['user-settings']);
+  }
 
   ngOnDestroy(): void {
     this.changes.disconnect();
