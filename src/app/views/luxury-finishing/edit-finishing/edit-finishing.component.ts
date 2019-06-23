@@ -10,7 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class EditFinishingComponent implements OnInit {
 
-  luxuryFinishing : LuxuryFinishing = {} as LuxuryFinishing
+  luxuryFinishing : LuxuryFinishing = {} as LuxuryFinishing;
+  imageErr: boolean = false;
+
 
   constructor(
     private finishingService: LuxuryFinishingService,
@@ -31,6 +33,10 @@ export class EditFinishingComponent implements OnInit {
   }
   myUploader(event) {
     this.luxuryFinishing.image = event.files[0];
+    this.imageErr = false;
+  }
+  removeImageUploader(event) {
+    this.imageErr = true;
   }
   submit() {
     let formData = new FormData();

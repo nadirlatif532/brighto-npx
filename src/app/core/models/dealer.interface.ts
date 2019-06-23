@@ -1,5 +1,6 @@
 import { Country } from "./country.interface";
 import { City } from "./city.interface";
+import { User } from './user.interface';
 
 export interface Dealer {
   id: number;
@@ -10,4 +11,5 @@ export interface Dealer {
   status: string;
   Country: Country;
   City: City;
+  user: User;
 }
