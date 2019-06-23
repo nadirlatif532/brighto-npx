@@ -15,6 +15,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PanelModule } from 'primeng/panel';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [CreateUserComponent, EditUserComponent, ListUserComponent],
@@ -22,16 +25,19 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     CommonModule,
     FormsModule,
     UserRoutingModule,
-    DropdownModule,
-    KeyFilterModule,
     ListboxModule,
     CheckboxModule,
+    RadioButtonModule,
+    TableModule,
+    DialogModule,
+    ColorPickerModule,
+    KeyFilterModule,
+    DropdownModule,
     ButtonModule,
     DataViewModule,
     InputTextModule,
     ConfirmDialogModule,
     PanelModule,
-    RadioButtonModule
   ]
 })
 export class UserModule { }

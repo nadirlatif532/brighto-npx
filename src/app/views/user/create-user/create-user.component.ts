@@ -22,7 +22,6 @@ export class CreateUserComponent implements OnInit {
   roles:any[];
   registrationError:boolean = false;
   selectedRole:string
-  cols: any[];
   userId:number;
   DealerId:number
   status: [{name:'All Colors',value:'isAC'},{name:'Ready Mix',value:'isRM'}];
