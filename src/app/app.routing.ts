@@ -146,6 +146,10 @@ export const routes: Routes = [
       {
         path: 'user-settings',
         loadChildren: './views/user-settings/user-settings.module#UserSettingsModule'
+      },
+      {
+        path: 'user',
+        loadChildren: './views/user/user.module#UserModule'
       }
     ],
     canActivate: [AuthGuard]

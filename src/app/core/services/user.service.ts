@@ -23,4 +23,8 @@ export class UserService {
       })
     );
   }
+  updateUser(id: number,user:any){
+    return this.api.putStringified(`admin/user/${id}`,user);
+
+  }
 }
