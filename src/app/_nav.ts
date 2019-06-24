@@ -147,5 +147,22 @@ export const navItems: NavData[] = [
         icon: 'cui-cursor'
       }
     ]
+  },
+  {
+    name: 'User',
+    url: '/user',
+    icon: 'cui-globe',
+    children: [
+      {
+        name: 'List',
+        url: '/user/list',
+        icon: 'cui-cursor'
+      },
+      {
+        name: 'Add',
+        url: '/user/add',
+        icon: 'cui-cursor'
+      }
+    ]
   }
 ];

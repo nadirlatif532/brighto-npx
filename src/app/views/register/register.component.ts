@@ -26,7 +26,12 @@ export class RegisterComponent {
 
     this.api.post('u/signup', this.user).subscribe(
       () => this.router.navigate(['dashboard']),
-      error => this.registerErrors = this.sharedService.errorObjToMap(error.errors)
+      error => this.setErrors(error.errors.errors)
     );
+  }
+  setErrors(errors){
+    for(let error of errors){
+      this.registerErrors.set(error.path,error.message)
+    }
   }
 }

@@ -143,6 +143,14 @@ export const routes: Routes = [
         path: 'luxury-finishing',
         loadChildren: './views/luxury-finishing/luxury-finishing.module#LuxuryFinishingModule'
       },
+      {
+        path: 'user-settings',
+        loadChildren: './views/user-settings/user-settings.module#UserSettingsModule'
+      },
+      {
+        path: 'user',
+        loadChildren: './views/user/user.module#UserModule'
+      }
     ],
     canActivate: [AuthGuard]
   },
