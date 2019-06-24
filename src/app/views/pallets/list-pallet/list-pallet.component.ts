@@ -29,6 +29,7 @@ export class ListPalletComponent implements OnInit {
     ).subscribe(
       next => {
         this.pallets = next[0];
+        console.log(this.pallets);
         this.shades = next[1].map(
           shade => {
             delete shade["Countries"];
