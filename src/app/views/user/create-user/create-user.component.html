@@ -10,9 +10,10 @@
             <label class="col-md-3 col-form-label" for="role">Role</label>
               <div class="col-md-9">
                 <p-dropdown
-                  name="name"
+                  name="role"
                   [options]="roles"
                   [style]="{ width: '100%' }"
+                  (onChange)="onTypeChange()"
                   [(ngModel)]="selectedRole"
                 ></p-dropdown>
               </div>
