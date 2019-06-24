@@ -38,7 +38,14 @@ export class ListUserComponent implements OnInit {
     let count: any = { id: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, email: user.email};
     return count;
   }
-  delete(){}
+  delete() {
+    this.userService.delete(this.selectedUser).subscribe(
+      () => {
+        this.displayDialog = false;
+        this.ngOnInit();
+      }
+    )
+  }
   save(){
     this.userService.updateUser(this.user.id,this.user).subscribe(
       ()=>{
