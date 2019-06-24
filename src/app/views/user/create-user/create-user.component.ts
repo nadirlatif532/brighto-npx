@@ -42,9 +42,9 @@ export class CreateUserComponent implements OnInit {
     private sharedService: SharedService,
     private userService: UserService
   ) {
-    this.selectedRole = 'USER'
+    this.selectedRole = 'CUSTOMER'
     this.roles =[
-      {label: 'USER', value:'USER'},
+      {label: 'CUSTOMER', value:'CUSTOMER'},
       {label: 'DEALER', value:'DEALER'},
       {label: 'ADMIN', value:'ADMIN'},
       {label: 'DATA ENTRY', value:'DATAENTRY'},
