@@ -57,7 +57,7 @@ export class CrudComponent implements OnInit {
 
   save() {
     let formData = new FormData();
-    formData.append('image', this.category.image, this.category.image.name);
+    formData.append('image', this.category.image);
     formData.append('name', this.category.name);
     let projectarr = [];
     for (let project of this.category.ProjectTypes) {

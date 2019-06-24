@@ -50,7 +50,7 @@ export class SurfaceComponent implements OnInit {
 
   save() {
     let formData = new FormData();
-    formData.append('image', this.surface.image, this.surface.image.name);
+    formData.append('image', this.surface.image);
     formData.append('name', this.surface.name);
     let arr = [];
     for (let category of this.surface.Categories) arr.push(category.id);

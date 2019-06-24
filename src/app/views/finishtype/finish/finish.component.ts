@@ -57,7 +57,7 @@ export class FinishComponent implements OnInit {
 
   save() {
     let formData = new FormData();
-    formData.append('image', this.finish.image, this.finish.image.name);
+    formData.append('image', this.finish.image);
     formData.append('name', this.finish.name);
     let arr = [];
     for (let surface of this.finish.Surfaces) arr.push(surface.id);

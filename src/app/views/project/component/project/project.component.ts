@@ -41,7 +41,7 @@ export class ProjectComponent implements OnInit {
   
   save() {
     let formData = new FormData();
-    formData.append('image', this.project.image, this.project.image.name);
+    formData.append('image', this.project.image);
     formData.append('name', this.project.name);
 
     this.loading = true;
