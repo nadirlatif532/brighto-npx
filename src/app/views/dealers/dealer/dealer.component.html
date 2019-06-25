@@ -1,4 +1,15 @@
-<p-table [loading]="loading" [columns]="cols" [value]="dealers" selectionMode="single" [(selection)]="selectedDealer" (onRowSelect)="onRowSelect($event)" >
+<p-table
+  #dea
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
+  [loading]="loading"
+  [columns]="cols"
+  [value]="dealers"
+  selectionMode="single"
+  [(selection)]="selectedDealer"
+  (onRowSelect)="onRowSelect($event)" >
   <ng-template pTemplate="caption">
       List of Dealers
   </ng-template>
@@ -13,6 +24,33 @@
         <th>Status</th>
         <th>Country</th>
         <th>City</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            dea.filters['name']
+              ? dea.filters['name'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            dea.filter(
+              $event.target.value,
+              'name',
+              'contains'
+            )
+          "
+        /></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </ng-template>
   <ng-template pTemplate="body" let-dealer let-rowIndex="rowIndex">

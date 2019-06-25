@@ -1,0 +1,12 @@
+
+:host >>> .ui-table .ui-table-thead > tr:nth-child(3) > th {
+  padding: 0px;
+}
+
+:host >>> .ui-table .ui-table-thead > tr:nth-child(3) > th:last-child {
+  padding: 0 0.857em;
+}
+
+:host >>> .ui-table .ui-table-thead > tr:nth-child(3) > th input {
+  border-radius: 0px;
+}

@@ -1,4 +1,15 @@
-<p-table [loading]="loading" [columns]="cols" [value]="countries" selectionMode="single" [(selection)]="selectedCountry" (onRowSelect)="onRowSelect($event)" >
+<p-table 
+  #cou
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
+  [loading]="loading"
+  [columns]="cols"
+  [value]="countries"
+  selectionMode="single"
+  [(selection)]="selectedCountry"
+  (onRowSelect)="onRowSelect($event)" >
   <ng-template pTemplate="caption">
       List of Countries
   </ng-template>
@@ -6,6 +17,26 @@
       <tr>
         <th>Sr. #</th>
         <th>Name</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            cou.filters['name']
+              ? cou.filters['name'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            cou.filter(
+              $event.target.value,
+              'name',
+              'contains'
+            )
+          "
+        /></th>
       </tr>
     </ng-template>
   <ng-template pTemplate="body" let-country let-rowIndex="rowIndex">

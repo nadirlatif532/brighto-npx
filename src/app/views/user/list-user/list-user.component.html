@@ -1,4 +1,13 @@
-<p-table [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)" >
+<p-table
+  #use
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true" 
+  [value]="users"
+  selectionMode="single"
+  [(selection)]="selectedUser"
+  (onRowSelect)="onRowSelect($event)" >
   <ng-template pTemplate="caption">
       List of Users
   </ng-template>
@@ -9,6 +18,77 @@
         <th>Last Name</th>
         <th>Username</th>
         <th>Email</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            use.filters['firstname']
+              ? use.filters['firstname'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            use.filter(
+              $event.target.value,
+              'firstname',
+              'contains'
+            )
+          "
+        /></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            use.filters['lastname']
+              ? use.filters['lastname'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            use.filter(
+              $event.target.value,
+              'lastname',
+              'contains'
+            )
+          "
+        /></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            use.filters['username']
+              ? use.filters['username'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            use.filter(
+              $event.target.value,
+              'username',
+              'contains'
+            )
+          "
+        /></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            use.filters['email']
+              ? use.filters['email'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            use.filter(
+              $event.target.value,
+              'email',
+              'contains'
+            )
+          "
+        /></th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">

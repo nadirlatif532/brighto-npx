@@ -1,4 +1,9 @@
 <p-table
+  #sur
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
   [value]="surfaces"
   [loading]="loading"
   selectionMode="single"
@@ -13,6 +18,27 @@
       <th>Sr. #</th>
       <th>Image</th>
       <th>Name</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          sur.filters['name']
+            ? sur.filters['name'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          sur.filter(
+            $event.target.value,
+            'name',
+            'contains'
+          )
+        "
+      /></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-surface let-rowIndex="rowIndex">
