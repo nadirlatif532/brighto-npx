@@ -1,4 +1,9 @@
 <p-table
+  #fam
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
   [value]="families"
   [loading]="loading"
   selectionMode="single"
@@ -13,6 +18,26 @@
       <th>Sr. #</th>
       <th>Name</th>
       <th>RGB</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          fam.filters['name']
+            ? fam.filters['name'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          fam.filter(
+            $event.target.value,
+            'name',
+            'contains'
+          )
+        "
+      /></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-family let-rowIndex="rowIndex">

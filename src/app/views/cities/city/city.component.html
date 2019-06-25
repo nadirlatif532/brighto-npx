@@ -1,4 +1,15 @@
-<p-table [loading]="loading" [columns]="cols" [value]="cities" selectionMode="single" [(selection)]="selectedCity" (onRowSelect)="onRowSelect($event)" >
+<p-table
+  #cit
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
+  [loading]="loading"
+  [columns]="cols"
+  [value]="cities"
+  selectionMode="single"
+  [(selection)]="selectedCity"
+  (onRowSelect)="onRowSelect($event)" >
   <ng-template pTemplate="caption">
       List of Cities
   </ng-template>
@@ -7,6 +18,27 @@
         <th>Sr. #</th>
         <th>City</th>
         <th>Country</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            cit.filters['name']
+              ? cit.filters['name'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            cit.filter(
+              $event.target.value,
+              'name',
+              'contains'
+            )
+          "
+        /></th>
+        <th></th>
       </tr>
     </ng-template>
   <ng-template pTemplate="body" let-city let-rowIndex="rowIndex">
