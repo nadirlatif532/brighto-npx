@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../../../core/models/project.interface';
 import { ProjectService } from '../../../../core/services/project.service'
+import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-project',
@@ -16,12 +17,18 @@ export class ProjectComponent implements OnInit {
   newProject: boolean = false;
   selectedProject: Project;
   loading: boolean = true;
+  baseUrl: string;
   
-  constructor(private projectService: ProjectService) { }
+  constructor(
+    private projectService: ProjectService,
+    private sharedService: SharedService) { }
 
   ngOnInit() {
     this.projectService.getAll().subscribe(
-      next => this.projects = next,
+      next => {
+        this.projects = next,
+        this.baseUrl = this.sharedService.baseUrl;
+      },
       () => {},
       () => this.loading = false
     );
