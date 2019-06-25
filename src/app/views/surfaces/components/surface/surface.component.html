@@ -11,12 +11,17 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Sr. #</th>
+      <th>Image</th>
       <th>Name</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-surface let-rowIndex="rowIndex">
     <tr [pSelectableRow]="surface">
       <td>{{ rowIndex + 1 }}</td>
+      <td><img
+        src="{{baseUrl}}images/{{ surface?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="50"/></td>
       <td>{{ surface.name }}</td>
     </tr>
   </ng-template>
@@ -81,6 +86,12 @@
         customUpload="true"
         (uploadHandler)="myUploader($event)"
       ></p-fileUpload>
+    </div>
+    <div *ngIf="!newSurface" >
+      <img
+        src="{{baseUrl}}images/{{ surface?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="150"/>
     </div>
   </div>
   <p-footer>

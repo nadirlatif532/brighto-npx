@@ -4,6 +4,7 @@ import { FinishService } from '../../../core/services/finish.service';
 import { SurfaceService } from '../../../core/services/surface.service';
 import { forkJoin } from 'rxjs';
 import { Surface } from '../../../core/models/surface.interface';
+import { SharedService } from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-finish',
@@ -20,10 +21,12 @@ export class FinishComponent implements OnInit {
   newFinish: boolean = false;
   image: any;
   loading: boolean = true;
+  baseUrl: string;
 
   constructor(
     private finishService: FinishService,
-    private surfaceService: SurfaceService) { }
+    private surfaceService: SurfaceService,
+    private sharedService: SharedService) { }
 
   ngOnInit() {
     forkJoin(
@@ -33,6 +36,7 @@ export class FinishComponent implements OnInit {
       next => {
         this.finishes = next[0];
         this.surfaces = next[1];
+        this.baseUrl = this.sharedService.baseUrl;
       },
       () => {},
       () => this.loading = false

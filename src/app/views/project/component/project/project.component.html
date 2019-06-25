@@ -11,12 +11,17 @@
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Sr. #</th>
+      <th>Image</th>
       <th>Name</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
     <tr [pSelectableRow]="project">
       <td>{{ rowIndex + 1 }}</td>
+      <td><img
+        src="{{baseUrl}}images/{{ project?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="50"/></td>
       <td>{{ project.name }}</td>
     </tr>
   </ng-template>
@@ -68,6 +73,12 @@
         customUpload="true"
         (uploadHandler)="myUploader($event)"
       ></p-fileUpload>
+    </div>
+    <div *ngIf="!newProject" >
+      <img
+        src="{{baseUrl}}images/{{ project?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="150"/>
     </div>
   </div>
   <p-footer>
