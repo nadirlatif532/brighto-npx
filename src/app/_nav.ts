@@ -45,6 +45,28 @@ export const navItems: NavData[] = [
     icon: 'cui-brush'
   },
   {
+    name: 'Color Trends',
+    url: '/color-trends',
+    icon: 'cui-globe',
+    children: [
+      {
+        name: 'List',
+        url: '/color-trends/list',
+        icon: 'cui-cursor'
+      },
+      {
+        name: 'Add',
+        url: '/color-trends/add',
+        icon: 'cui-cursor'
+      }
+    ]
+  },
+  {
+    name: 'Color Palettes',
+    url: '/pallets/list',
+    icon: 'cui-globe'
+  },
+  {
     title: true,
     name: 'Filters'
   },
@@ -70,7 +92,7 @@ export const navItems: NavData[] = [
   },
   {
     title: true,
-    name: 'Master Data'
+    name: 'Products'
   },
   {
     name: 'Products',
@@ -90,48 +112,6 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Country',
-    url: '/country',
-    icon: 'cui-globe'
-  },
-  {
-    name: 'City',
-    url: '/city',
-    icon: 'cui-globe'
-  },
-  {
-    name: 'Dealers',
-    url: '/dealers',
-    icon: 'cui-globe',
-  },
-  {
-    name: 'Orders',
-    url: '/orders',
-    icon: 'cui-globe',
-  },
-  {
-    name: 'Color Trends',
-    url: '/color-trends',
-    icon: 'cui-globe',
-    children: [
-      {
-        name: 'List',
-        url: '/color-trends/list',
-        icon: 'cui-cursor'
-      },
-      {
-        name: 'Add',
-        url: '/color-trends/add',
-        icon: 'cui-cursor'
-      }
-    ]
-  },
-  {
-    name: 'Color Palettes',
-    url: '/pallets/list',
-    icon: 'cui-globe'
-  },
-  {
     name: 'Luxury finishing',
     url: '/luxury-finishing',
     icon: 'cui-globe',
@@ -147,6 +127,38 @@ export const navItems: NavData[] = [
         icon: 'cui-cursor'
       }
     ]
+  },
+  {
+    title: true,
+    name: 'Orders Data'
+  },
+  {
+    name: 'Orders',
+    url: '/orders',
+    icon: 'cui-globe',
+  },
+  {
+    title: true,
+    name: 'Area Data'
+  },
+  {
+    name: 'Country',
+    url: '/country',
+    icon: 'cui-globe'
+  },
+  {
+    name: 'City',
+    url: '/city',
+    icon: 'cui-globe'
+  },
+  {
+    title: true,
+    name: 'User Data'
+  },
+  {
+    name: 'Dealers',
+    url: '/dealers',
+    icon: 'cui-globe',
   },
   {
     name: 'User',
