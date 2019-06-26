@@ -167,13 +167,13 @@
         <div class="form-group">
           <div class="form-row" *ngIf="shade.color">
             <div class="col-4">
-              <input type="text" name="r" required pKeyFilter="pint" placeholder="R" class="form-control" [(ngModel)]="shade.color.r" />
+              <input  name="r" required type="number" placeholder="R" class="form-control" [(ngModel)]="shade.color.r" />
             </div>
             <div class="col-4">
-              <input type="text" name="g" required pKeyFilter="pint" placeholder="G" class="form-control" [(ngModel)]="shade.color.g" />
+              <input  name="g" required  type="number" placeholder="G" class="form-control" [(ngModel)]="shade.color.g" />
             </div>
             <div class="col-4">
-              <input type="text" name="b" required pKeyFilter="pint" placeholder="B" class="form-control" [(ngModel)]="shade.color.b" />
+              <input  name="b" required type="number" placeholder="B" class="form-control" [(ngModel)]="shade.color.b" />
             </div>
           </div>
         </div>
