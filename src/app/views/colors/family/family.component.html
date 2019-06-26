@@ -17,6 +17,7 @@
     <tr>
       <th>Sr. #</th>
       <th>Name</th>
+      <th>Shade Type</th>
       <th>RGB</th>
     </tr>
     <tr>
@@ -38,6 +39,24 @@
           )
         "
       /></th>
+      <th>
+        <p-dropdown
+                  #rr
+                  name="label"
+                  [style]="{ width: '100%', 'border-radius': '0px' }"
+                  [autoDisplayFirst]="false"
+                  [options]="dropdown"
+                  optionLabel="label"
+                  [filter]="true"
+                  [showClear]="true"
+                  appendTo="body"
+                  panelStyleClass="dropDownWidth500"
+                  (onChange)="
+                    fam.filter($event.value?.label, 'ShadeFilter.name', 'equals')
+                  "
+                >
+      </p-dropdown>
+      </th>
       <th></th>
     </tr>
   </ng-template>
@@ -45,6 +64,7 @@
     <tr [pSelectableRow]="family">
       <td>{{ rowIndex + 1 }}</td>
       <td>{{ family.name }}</td>
+      <td>{{  family.ShadeFilter?.name}}</td>
       <td style.background-color="rgb({{ family.color.r }}, {{family.color.g}}, {{family.color.b}})">
         <strong>({{ family.color.r }}, {{family.color.g}}, {{family.color.b}})</strong>
       </td>
@@ -91,6 +111,18 @@
           required
           [(ngModel)]="family.name"
         />
+      </div>
+      <div class="form-group">
+        <label for="family-dropdown">Select Shade</label>
+        <p-dropdown 
+          [options]="dropdown" 
+          [filter]="true"
+          name="family-dropdown"
+          appendTo="body"
+          [autoDisplayFirst]="false"
+          [style]="{ width: '100%' }"
+          [(ngModel)]="family.ShadeFilterId"
+        ></p-dropdown>
       </div>
       <div class="form-group">
         <div class="form-row">
