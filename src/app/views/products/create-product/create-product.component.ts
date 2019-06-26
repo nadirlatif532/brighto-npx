@@ -79,6 +79,7 @@ export class CreateProductComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.product)
     if(!this.product.image) {
       this.imageErr = true;
     }
@@ -95,10 +96,10 @@ export class CreateProductComponent implements OnInit {
     this.product.Countries = this.selectedCountries;
 
     formData.append('name',this.product.name);
-    formData.append('ProjectTypeId', this.product.ProjectType.id.toString());
-    formData.append('CategoryId',this.product.Category.id.toString());
-    formData.append('SurfaceId', this.product.Surface.id.toString());
-    formData.append('FinishTypeId', this.product.FinishType.id.toString());
+    formData.append('ProjectTypeId', JSON.stringify(this.product.ProjectTypes));
+    formData.append('CategoryId',JSON.stringify(this.product.Categories));
+    formData.append('SurfaceId', JSON.stringify(this.product.Surfaces));
+    formData.append('FinishTypeId', JSON.stringify(this.product.FinishTypes));
     formData.append('spreading',this.product.spreading.toString());
     formData.append('description',this.product.description.toString());
     formData.append('countries', JSON.stringify(this.product.Countries));

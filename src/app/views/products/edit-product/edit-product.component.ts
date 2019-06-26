@@ -66,16 +66,19 @@ export class EditProductComponent implements OnInit {
           this.productService.findById(id).subscribe(
             next => {
               this.product = next;
-              for (let finish of this.finishes) {
-                if (finish.id == this.product.FinishType.id) {
-                  this.product.FinishType = finish;
-                }
-              }
-              for (let surface of this.surfaces) {
-                if (surface.id == this.product.Surface.id) {
-                  this.product.Surface = surface;
-                }
-              }
+              console.log(this.product)
+              console.log(this.finishes)
+              // for (let finish of this.finishes) {
+              //   console.log(this.product)
+              //   if (finish.id == this.product.FinishType.id) {
+              //     this.product.FinishType = finish;
+              //   }
+              // }
+              // for (let surface of this.surfaces) {
+              //   if (surface.id == this.product.Surface.id) {
+              //     this.product.Surface = surface;
+              //   }
+              // }
             }
           );
         }
@@ -96,10 +99,10 @@ export class EditProductComponent implements OnInit {
     formData.append('coverImage', this.product.coverImage);
 
     formData.append('name',this.product.name);
-    formData.append('ProjectTypeId', this.product.ProjectType.id.toString());
-    formData.append('CategoryId',this.product.Category.id.toString());
-    formData.append('SurfaceId', this.product.Surface.id.toString());
-    formData.append('FinishTypeId', this.product.FinishType.id.toString());
+    formData.append('ProjectTypeId', JSON.stringify(this.product.ProjectTypes));
+    formData.append('CategoryId',JSON.stringify(this.product.Categories));
+    formData.append('SurfaceId', JSON.stringify(this.product.Surfaces));
+    formData.append('FinishTypeId', JSON.stringify(this.product.FinishTypes));
     formData.append('spreading',this.product.spreading.toString());
     formData.append('description',this.product.description.toString());
     formData.append('countries', JSON.stringify(this.product.Countries));
