@@ -12,9 +12,9 @@ export interface Product {
   is_active: boolean,
   image: any,
   coverImage: any,
-  ProjectType: Project,
-  Category: Category,
-  Surface: Surface,
-  FinishType: Finish,
+  ProjectTypes: Project,
+  Categories: Category,
+  Surfaces: Surface,
+  FinishTypes: Finish,
   Countries: Country[]
 }
