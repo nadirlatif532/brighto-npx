@@ -91,6 +91,11 @@ export const navItems: NavData[] = [
     icon: 'cui-settings'
   },
   {
+    name: 'Shades',
+    url: '/shades-filter',
+    icon: 'cui-settings'
+  },
+  {
     title: true,
     name: 'Products'
   },

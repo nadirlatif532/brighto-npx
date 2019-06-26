@@ -1,0 +1,98 @@
+<p-table 
+  #sha
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
+  [loading]="loading"
+  [columns]="cols"
+  [value]="shades"
+  selectionMode="single"
+  [(selection)]="selectedShade"
+  (onRowSelect)="onRowSelect($event)" >
+  <ng-template pTemplate="caption">
+      List of Shades
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Sr. #</th>
+        <th>Name</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            sha.filters['name']
+              ? sha.filters['name'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            sha.filter(
+              $event.target.value,
+              'name',
+              'contains'
+            )
+          "
+        /></th>
+      </tr>
+    </ng-template>
+  <ng-template pTemplate="body" let-shade let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="shade">
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{shade.name}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+      </div>
+  </ng-template>    
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="2">
+        No records found
+      </td>
+    </tr>
+</ng-template>
+</p-table>
+
+<p-dialog header="Shade Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+  <form #shadeForm="ngForm">
+    <div *ngIf="shade">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="shade.name"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <p-footer>
+        <button 
+          type="button" 
+          pButton 
+          icon="fa fa-close"
+          [disabled]="!shadeForm.form.valid || newShade"
+          (click)="delete()" 
+          label="Delete"
+        ></button>
+        <button 
+          type="button" 
+          pButton 
+          icon="fa fa-check" 
+          [disabled]="!shadeForm.form.valid"
+          (click)="save()" 
+          label="Save"
+        ></button>
+      </p-footer>
+    </div>
+  </form>
+</p-dialog>
