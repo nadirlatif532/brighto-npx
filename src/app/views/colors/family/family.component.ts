@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FamilyService } from '../../../core/services/family.service';
 import { Family } from '../../../core/models/family.interface';
+import { ShadesFilterService } from '../../../core/services/shades-filter.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-family',
@@ -16,13 +18,24 @@ export class FamilyComponent implements OnInit {
   color: any;
   displayDialog: boolean = false;
   newFamily: boolean = false;
+  dropdown:any = [];
 
-  constructor(private familyService: FamilyService) {}
+  constructor(
+    private familyService: FamilyService,
+    private shadesService: ShadesFilterService) {}
 
   ngOnInit() {
     this.loading = true;
-    this.familyService.getAll().subscribe(
-      next => this.families = next,
+    forkJoin(
+    this.familyService.getAll(),
+    this.shadesService.getAll()
+    ).subscribe(
+      next => {
+        this.families = next[0],
+        this.dropdown = next[1].map(item => { 
+          return { label: item.name, value: item.id }
+        }
+      )},
       () => {},
       () => this.loading = false
     );
@@ -66,7 +79,7 @@ export class FamilyComponent implements OnInit {
   }
 
   cloneFamily(family) {
-    let fam: Family = {id: family.id, name: family.name, r: family.color.r, g: family.color.g, b: family.color.b};
+    let fam: Family = {id: family.id, name: family.name, r: family.color.r, g: family.color.g, b: family.color.b, ShadeFilterId:family.ShadeFilter};
     return fam;
   }
 
