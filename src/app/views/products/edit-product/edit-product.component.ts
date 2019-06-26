@@ -29,6 +29,7 @@ export class EditProductComponent implements OnInit {
   finishes: Finish[];
   selectedCountries: Country[];
   product: Product = {} as Product;
+  loading:boolean = true;
 
   constructor(
     private categoryService: CategoryService,
@@ -66,20 +67,9 @@ export class EditProductComponent implements OnInit {
           this.productService.findById(id).subscribe(
             next => {
               this.product = next;
-              console.log(this.product)
-              console.log(this.finishes)
-              // for (let finish of this.finishes) {
-              //   console.log(this.product)
-              //   if (finish.id == this.product.FinishType.id) {
-              //     this.product.FinishType = finish;
-              //   }
-              // }
-              // for (let surface of this.surfaces) {
-              //   if (surface.id == this.product.Surface.id) {
-              //     this.product.Surface = surface;
-              //   }
-              // }
-            }
+            },
+            () => {},
+            () => {this.loading=false}
           );
         }
       }
