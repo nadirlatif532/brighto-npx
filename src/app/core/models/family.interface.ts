@@ -1,3 +1,4 @@
+import { ShadesFilter } from './shades-filter.interface';
 
 export interface Family {
   id: number;
@@ -5,5 +6,5 @@ export interface Family {
   r: number;
   g: number;
   b: number;
-  ShadeFilterId: number;
+  ShadesFilter: ShadesFilter
 }
