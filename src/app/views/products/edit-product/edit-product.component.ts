@@ -88,11 +88,16 @@ export class EditProductComponent implements OnInit {
     formData.append('image', this.product.image);
     formData.append('coverImage', this.product.coverImage);
 
+    let ProjectTypes = this.product.ProjectTypes.map((item)=>item.id);
+    let Categories =   this.product.Categories.map((item)=>item.id);
+    let Surfaces =     this.product.Surfaces.map((item) => item.id);
+    let FinishTypes =  this.product.FinishTypes.map((item) => item.id);
+
     formData.append('name',this.product.name);
-    formData.append('ProjectTypeId', JSON.stringify(this.product.ProjectTypes));
-    formData.append('CategoryId',JSON.stringify(this.product.Categories));
-    formData.append('SurfaceId', JSON.stringify(this.product.Surfaces));
-    formData.append('FinishTypeId', JSON.stringify(this.product.FinishTypes));
+    formData.append('ProjectTypeId', JSON.stringify(ProjectTypes));
+    formData.append('CategoryId',    JSON.stringify(Categories));
+    formData.append('SurfaceId',     JSON.stringify(Surfaces));
+    formData.append('FinishTypeId',  JSON.stringify(FinishTypes));
     formData.append('spreading',this.product.spreading.toString());
     formData.append('description',this.product.description.toString());
     formData.append('countries', JSON.stringify(this.product.Countries));
