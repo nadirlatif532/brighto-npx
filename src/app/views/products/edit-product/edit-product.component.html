@@ -24,6 +24,7 @@
                       <p-listbox [style]="{ width: '100%'}" [options]="categories" name="category" multiple="multiple" checkbox="checkbox" filter="filter" [(ngModel)]="product.Categories" optionLabel="name" required></p-listbox>
                   </div>
                 </div>
+                <p-progressSpinner *ngIf="loading" [style]="{width: '50px', height: '50px',margin:'0 0 0 400px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
                 <div class="form-group row">
                     <label for="surface" class="col-md-3 col-form-label">Surface</label>
                     <div class="col-md-9">
