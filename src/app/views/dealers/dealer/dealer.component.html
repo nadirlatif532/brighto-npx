@@ -50,7 +50,7 @@
         <th></th>
         <th></th>
         <th></th>
-        <th></th>
+        <th></th> 
       </tr>
     </ng-template>
   <ng-template pTemplate="body" let-dealer let-rowIndex="rowIndex">
@@ -73,7 +73,7 @@
   </ng-template>    
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="8">
+      <td [attr.colspan]="9">
         No records found
       </td>
     </tr>
@@ -123,10 +123,9 @@ showEffect="fade" [modal]="true"
       <div class="form-group">
         <label for="longitude">Longitude</label>
         <input
-          type="text"
+          type="number"
           name="longitude"
           required
-          pKeyFilter="num"
           class="form-control"
           id="longitude"
           [(ngModel)]="dealer.longitude"
@@ -135,9 +134,8 @@ showEffect="fade" [modal]="true"
       <div class="form-group">
         <label for="latitude">Latitude</label>
         <input
-          type="text"
+          type="number"
           required
-          pKeyFilter="num"
           name="latitude"
           class="form-control"
           id="latitude"
