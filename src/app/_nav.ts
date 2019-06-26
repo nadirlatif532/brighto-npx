@@ -112,7 +112,7 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Luxury finishing',
+    name: 'Luxury Finishing',
     url: '/luxury-finishing',
     icon: 'cui-globe',
     children: [
@@ -130,7 +130,7 @@ export const navItems: NavData[] = [
   },
   {
     title: true,
-    name: 'Orders Data'
+    name: 'Orders'
   },
   {
     name: 'Orders',
@@ -139,7 +139,7 @@ export const navItems: NavData[] = [
   },
   {
     title: true,
-    name: 'Area Data'
+    name: 'Areas'
   },
   {
     name: 'Country',
@@ -153,7 +153,7 @@ export const navItems: NavData[] = [
   },
   {
     title: true,
-    name: 'User Data'
+    name: 'Users'
   },
   {
     name: 'Dealers',
@@ -161,7 +161,7 @@ export const navItems: NavData[] = [
     icon: 'cui-globe',
   },
   {
-    name: 'User',
+    name: 'Users',
     url: '/user',
     icon: 'cui-globe',
     children: [
