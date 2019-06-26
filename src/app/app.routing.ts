@@ -116,6 +116,10 @@ export const routes: Routes = [
         loadChildren: './views/finishtype/finishtype.module#FinishtypeModule'
       },
       {
+        path: 'shades-filter',
+        loadChildren: './views/shades-filter/shades-filter.module#ShadesFilterModule'
+      },
+      {
         path: 'color-trends',
         loadChildren: './views/color-trends/color-trends.module#ColorTrendsModule'
       },
