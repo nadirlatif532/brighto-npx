@@ -1,4 +1,9 @@
 <p-table
+  #fin
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
   [value]="finishes"
   [loading]="loading"
   selectionMode="single"
@@ -11,12 +16,38 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Sr. #</th>
+      <th>Image</th>
       <th>Name</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          fin.filters['name']
+            ? fin.filters['name'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          fin.filter(
+            $event.target.value,
+            'name',
+            'contains'
+          )
+        "
+      /></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-finish let-rowIndex="rowIndex">
     <tr [pSelectableRow]="finish">
       <td>{{ rowIndex + 1 }}</td>
+      <td><img
+        src="{{baseUrl}}images/{{ finish?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="50"/></td>
       <td>{{ finish.name }}</td>
     </tr>
   </ng-template>
@@ -79,6 +110,12 @@
         customUpload="true"
         (uploadHandler)="myUploader($event)"
       ></p-fileUpload>
+    </div>
+    <div *ngIf="!newFinish" >
+      <img
+        src="{{baseUrl}}images/{{ finish?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="150"/>
     </div>
   </div>
   <p-footer>

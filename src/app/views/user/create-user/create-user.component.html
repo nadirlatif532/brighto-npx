@@ -1,0 +1,138 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-header">
+        <strong>Add</strong> User
+      </div>
+      <form #addForm="ngForm" (ngSubmit)="submit()" class="form-horizontal">
+        <div class="card-body">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="role">Role</label>
+              <div class="col-md-9">
+                <p-dropdown
+                  name="role"
+                  [options]="roles"
+                  [style]="{ width: '100%' }"
+                  [(ngModel)]="selectedRole"
+                ></p-dropdown>
+              </div>
+            </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="firstName">First Name</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="user.firstname"  name="firstname" class="form-control" required>
+              <small *ngIf="registerErrors.has('firstname')" class="form-text" style="color: red;">{{registerErrors.get('firstname')}}</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="lastName">Last Name</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="user.lastname"  name="lastName" class="form-control" required>
+              <small *ngIf="registerErrors.has('lastname')" class="form-text" style="color: red;">{{registerErrors.get('lastname')}}</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="userName">User Name</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="user.username"  name="userName" class="form-control" required>
+              <small *ngIf="registerErrors.has('username')" class="form-text" style="color: red;">{{registerErrors.get('username')}}</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="email">Email</label>
+            <div class="col-md-9">
+              <input type="email" [(ngModel)]="user.email"  name="email" class="form-control" required>
+              <small *ngIf="registerErrors.has('email')" class="form-text" style="color: red;">{{registerErrors.get('email')}}</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="password">Password</label>
+            <div class="col-md-9">
+              <input type="password" [(ngModel)]="user.password"  name="password" class="form-control" required>
+              <small *ngIf="registerErrors.has('password')" class="form-text" style="color: red;">{{registerErrors.get('password')}}</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="confirmPassword">Confirm Password</label>
+            <div class="col-md-9">
+              <input type="password" [(ngModel)]="user.confirmpassword"  name="confirmPassword" class="form-control" required>
+              <small *ngIf="registerErrors.has('confirmPassword')" class="form-text" style="color: red;">{{registerErrors.get('confirmPassword')}}</small>
+            </div>
+          </div>
+          <div *ngIf="selectedRole == 'DEALER'" class="form-group row">
+              <label class="col-md-3 col-form-label" for="name">Address</label>
+              <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                required
+                [(ngModel)]="dealer.address"
+              />
+            </div>
+          </div>
+          <div *ngIf="selectedRole == 'DEALER'" class="form-group row">
+            <label class="col-md-3 col-form-label" for="longitude">Longitude</label>
+            <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="longitude"
+              pKeyFilter="num"
+              required
+              [(ngModel)]="dealer.longitude"
+            />
+            </div>
+          </div>
+          <div *ngIf="selectedRole == 'DEALER'" class="form-group row">
+            <label class="col-md-3 col-form-label" for="latitude">Latitude</label>
+            <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="latitude"
+              pKeyFilter="num"
+              required
+              [(ngModel)]="dealer.latitude"
+            />
+            </div>
+          </div>
+          <div *ngIf="selectedRole == 'DEALER'" class="form-group">
+              <p-radioButton name="isAC" value="isAC" label="All Colors"[(ngModel)]="selectedStatus"></p-radioButton>
+              <p-radioButton name="isRM" [style]="{'margin-left': '5%'}" value="isRM" label="Ready Mix" [(ngModel)]="selectedStatus"></p-radioButton>
+          </div>
+          <div *ngIf="selectedRole == 'DEALER'" class="form-group row ">
+              <label class="col-md-3 col-form-label" for="country">Country</label>
+              <div class="col-md-9">
+              <p-dropdown 
+                [style]="{ width: '100%' }"
+                [autoDisplayFirst]="false"
+                (onChange)="filterCities()"
+                name="country"
+                appendTo="body"
+                required
+                [filter]="true"
+                [options]="countries" [(ngModel)]="dealer.Country" optionLabel="name"></p-dropdown>
+              </div>
+          </div>
+          <div *ngIf="selectedRole == 'DEALER'" class="form-group row">
+              <label class="col-md-3 col-form-label" for="city">City</label>
+              <div class="col-md-9">
+              <p-dropdown 
+                [style]="{ width: '100%' }"
+                appendTo="body"
+                [autoDisplayFirst]="false"
+                name="city"
+                required
+                [filter]="true"
+                [options]="filteredCities" [(ngModel)]="dealer.City" optionLabel="name"></p-dropdown></div>
+            </div>
+        </div>
+      <div class="card-footer" style="text-align: right;">
+        <button [disabled]="!addForm.form.valid" type="submit" pButton icon="fa fa-plus" label="Submit"></button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

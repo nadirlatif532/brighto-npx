@@ -74,13 +74,12 @@
         [style]="{ 'text-align': 'center' }"
       >
         <img
-          src=""
+          src="{{baseUrl}}images/{{ product.image }}"
           onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
           width="100%"
         />
         <div class="product-detail">
-          {{ product.Category.name }} -
-          {{ product.spreading }}
+          {{ product.description }}
         </div>
         <hr class="ui-widget-content" style="border-top:0" />
         <button

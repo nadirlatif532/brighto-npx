@@ -1,4 +1,9 @@
 <p-table
+  #sha
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
   [loading]="loading"
   [value]="shades"
   selectionMode="single"
@@ -14,6 +19,44 @@
       <th>Item Code</th>
       <th>Name</th>
       <th>RGB</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          sha.filters['itemCode']
+            ? sha.filters['itemCode'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          sha.filter(
+            $event.target.value,
+            'itemCode',
+            'contains'
+          )
+        "
+      /></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          sha.filters['name']
+            ? sha.filters['name'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          sha.filter(
+            $event.target.value,
+            'name',
+            'contains'
+          )
+        "
+      /></th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-shade let-rowIndex="rowIndex">

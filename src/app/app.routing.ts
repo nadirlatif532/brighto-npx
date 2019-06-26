@@ -116,6 +116,10 @@ export const routes: Routes = [
         loadChildren: './views/finishtype/finishtype.module#FinishtypeModule'
       },
       {
+        path: 'shades-filter',
+        loadChildren: './views/shades-filter/shades-filter.module#ShadesFilterModule'
+      },
+      {
         path: 'color-trends',
         loadChildren: './views/color-trends/color-trends.module#ColorTrendsModule'
       },
@@ -138,6 +142,18 @@ export const routes: Routes = [
       {
         path: 'orders',
         loadChildren: './views/orders/orders.module#OrdersModule'
+      },
+      {
+        path: 'luxury-finishing',
+        loadChildren: './views/luxury-finishing/luxury-finishing.module#LuxuryFinishingModule'
+      },
+      {
+        path: 'user-settings',
+        loadChildren: './views/user-settings/user-settings.module#UserSettingsModule'
+      },
+      {
+        path: 'user',
+        loadChildren: './views/user/user.module#UserModule'
       }
     ],
     canActivate: [AuthGuard]
@@ -146,7 +162,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}) ],
+  imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

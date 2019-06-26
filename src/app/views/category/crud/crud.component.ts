@@ -4,6 +4,7 @@ import { CategoryService } from '../../../core/services/category.service';
 import { ProjectService } from '../../../core/services/project.service';
 import { Project } from '../../../core/models/project.interface';
 import { forkJoin } from 'rxjs';
+import { SharedService } from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-crud',
@@ -20,10 +21,12 @@ export class CrudComponent implements OnInit {
   newCategory: boolean = false;
   image: any;
   loading: boolean = true;
+  baseUrl: string;
 
   constructor(
     private categoryService: CategoryService,
-    private projectService: ProjectService) { }
+    private projectService: ProjectService,
+    private sharedService: SharedService) { }
 
   ngOnInit() {
     forkJoin(
@@ -33,6 +36,7 @@ export class CrudComponent implements OnInit {
       next => {
         this.categories = next[0];
         this.projectTypes = next[1];
+        this.baseUrl = this.sharedService.baseUrl;
       },
       () => {},
       () => this.loading = false
@@ -57,7 +61,7 @@ export class CrudComponent implements OnInit {
 
   save() {
     let formData = new FormData();
-    formData.append('image', this.category.image, this.category.image.name);
+    formData.append('image', this.category.image);
     formData.append('name', this.category.name);
     let projectarr = [];
     for (let project of this.category.ProjectTypes) {

@@ -4,6 +4,7 @@ import { SurfaceService } from '../../../../core/services/surface.service';
 import { CategoryService } from '../../../../core/services/category.service';
 import { forkJoin } from 'rxjs';
 import { Category } from '../../../../core/models/category.interface';
+import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-surface',
@@ -19,10 +20,12 @@ export class SurfaceComponent implements OnInit {
   newSurface: boolean = false;
   selectedSurface: Surface;
   loading: boolean = true;
+  baseUrl: string;
 
   constructor(
     private surfaceService: SurfaceService,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService,
+    private sharedService: SharedService) { }
 
   ngOnInit() {
     forkJoin(
@@ -32,6 +35,7 @@ export class SurfaceComponent implements OnInit {
       next => {
         this.surfaces = next[0];
         this.categories = next[1];
+        this.baseUrl = this.sharedService.baseUrl;
       },
       () => {},
       () => this.loading = false
@@ -50,7 +54,7 @@ export class SurfaceComponent implements OnInit {
 
   save() {
     let formData = new FormData();
-    formData.append('image', this.surface.image, this.surface.image.name);
+    formData.append('image', this.surface.image);
     formData.append('name', this.surface.name);
     let arr = [];
     for (let category of this.surface.Categories) arr.push(category.id);

@@ -30,6 +30,9 @@ export class CreateProductComponent implements OnInit {
   selectedCountries: Country[];
   product: Product = {} as Product;
 
+  imageErr: boolean = false;
+  coverImageErr: boolean = false;
+
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
@@ -62,13 +65,30 @@ export class CreateProductComponent implements OnInit {
 
   myUploader(event) {
     this.product.image = event.files[0];
+    this.imageErr = false;
   }
   coverImageUploader(event) {
     this.product.coverImage = event.files[0];
+    this.coverImageErr = false;
+  }
+  removeImageUploader(event) {
+    this.imageErr = true;
+  }
+  removeCoverImageUploader(event) {
+    this.coverImageErr = true;
   }
 
   submit() {
     console.log(this.product)
+    if(!this.product.image) {
+      this.imageErr = true;
+    }
+    if(!this.product.coverImage) {
+      this.coverImageErr = true;
+    }
+    if(this.imageErr || this.coverImageErr) {
+      return;
+    }
     let formData = new FormData();
     formData.append('image', this.product.image, this.product.image.name);
     formData.append('coverImage', this.product.coverImage, this.product.coverImage.name);

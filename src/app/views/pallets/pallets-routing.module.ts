@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListPalletComponent } from './list-pallet/list-pallet.component';
-import { CreatePalletComponent } from './create-pallet/create-pallet.component';
-import { EditPalletComponent } from './edit-pallet/edit-pallet.component';
 
 const routes: Routes = [
   {
@@ -21,14 +19,6 @@ const routes: Routes = [
         data: {
           title: 'List'
         }
-      },
-      {
-        path: 'add',
-        component: CreatePalletComponent,
-      },
-      {
-        path: 'edit/:id',
-        component: EditPalletComponent
       }
     ]
   }

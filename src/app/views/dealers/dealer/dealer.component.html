@@ -1,4 +1,15 @@
-<p-table [loading]="loading" [columns]="cols" [value]="dealers" selectionMode="single" [(selection)]="selectedDealer" (onRowSelect)="onRowSelect($event)" >
+<p-table
+  #dea
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
+  [loading]="loading"
+  [columns]="cols"
+  [value]="dealers"
+  selectionMode="single"
+  [(selection)]="selectedDealer"
+  (onRowSelect)="onRowSelect($event)" >
   <ng-template pTemplate="caption">
       List of Dealers
   </ng-template>
@@ -7,11 +18,39 @@
         <th>Sr. #</th>
         <th>Name</th>
         <th>Address</th>
+        <th>Email</th>
         <th>Longitude</th>
         <th>Latitude</th>
         <th>Status</th>
         <th>Country</th>
         <th>City</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            dea.filters['name']
+              ? dea.filters['name'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            dea.filter(
+              $event.target.value,
+              'name',
+              'contains'
+            )
+          "
+        /></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </ng-template>
   <ng-template pTemplate="body" let-dealer let-rowIndex="rowIndex">
@@ -19,6 +58,7 @@
       <td>{{ rowIndex + 1 }}</td>
       <td>{{dealer.name}}</td>
       <td>{{dealer.address}}</td>
+      <td>{{dealer?.user?.email}}</td>
       <td>{{dealer.longitude}}</td>
       <td>{{dealer.latitude}}</td>
       <td>{{dealer.status}}</td>
@@ -70,6 +110,17 @@ showEffect="fade" [modal]="true"
         />
       </div>
       <div class="form-group">
+        <label for="email">Email</label>
+        <p-dropdown 
+          [style]="{ width: '100%' }"
+          [autoDisplayFirst]="false"
+          name="email"
+          appendTo="body"
+          required
+          [filter]="true"
+          [options]="users" [(ngModel)]="dealer.user" optionLabel="email"></p-dropdown>
+      </div>
+      <div class="form-group">
         <label for="longitude">Longitude</label>
         <input
           type="text"
@@ -102,6 +153,7 @@ showEffect="fade" [modal]="true"
         <p-dropdown 
           [style]="{ width: '100%' }"
           [autoDisplayFirst]="false"
+          (onChange)="filterCities()"
           name="country"
           appendTo="body"
           required
@@ -117,7 +169,7 @@ showEffect="fade" [modal]="true"
           name="city"
           required
           [filter]="true"
-          [options]="cities" [(ngModel)]="dealer.City" optionLabel="name"></p-dropdown>
+          [options]="filteredCities" [(ngModel)]="dealer.City" optionLabel="name"></p-dropdown>
       </div>
     </div>
     <div class="form-group">    

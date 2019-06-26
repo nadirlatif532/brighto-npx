@@ -6,6 +6,8 @@ import { Country } from '../../../core/models/country.interface';
 import { City } from '../../../core/models/city.interface';
 import { CityService } from '../../../core/services/city.service';
 import { forkJoin } from 'rxjs';
+import { UserService } from '../../../core/services/user.service';
+import { User } from '../../../core/models/user.interface';
 
 @Component({
   selector: 'app-dealer',
@@ -17,25 +19,29 @@ export class DealerComponent implements OnInit {
   displayDialog: boolean;
   cols: any[];
   status: [{name:'All Colors',value:'isAC'},{name:'Ready Mix',value:'isRM'}];
+  users: User[];
   dealers: Dealer[];
   dealer: Dealer;
   newDealer: boolean = false;
   selectedDealer: Dealer;
   countries: Country[];
   cities: City[];
+  filteredCities: City[];
   loading: boolean = true;
   selectedStatus: string = "";
 
   constructor(
     private dealerService: DealerService,
     private countryService: CountryService,
-    private cityService: CityService) { }
+    private cityService: CityService,
+    private userService: UserService) { }
 
   ngOnInit() {
     forkJoin(
       this.dealerService.getAll(),
       this.countryService.getAll(),
-      this.cityService.getAll()
+      this.cityService.getAll(),
+      this.userService.getAll()
     ).subscribe(
       next => {
         this.dealers = next[0];
@@ -45,6 +51,7 @@ export class DealerComponent implements OnInit {
         });
         this.countries = next[1];
         this.cities = next[2];
+        this.users = next[3]
       },
       () => {},
       () => this.loading = false
@@ -102,7 +109,13 @@ export class DealerComponent implements OnInit {
     } else {
       this.selectedStatus = "isRM";
     }
-    let count: Dealer = {id: dealer.id,name: dealer.name,address:dealer.address,longitude:dealer.longitude,latitude: dealer.latitude, Country: dealer.Country,City:dealer.City,status:dealer.status};
+    let count: Dealer = {id: dealer.id,name: dealer.name,address:dealer.address,longitude:dealer.longitude,latitude: dealer.latitude, Country: dealer.Country,City:dealer.City,status:dealer.status,user:dealer.user};
     return count;
+  }
+  filterCities(){
+    let countryId = this.dealer.Country.id;
+    this.filteredCities =this.cities.filter(function(city){
+      return city.Country.id === countryId;
+    });
   }
 }

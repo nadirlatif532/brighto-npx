@@ -1,4 +1,9 @@
 <p-table
+  #cat
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
   [value]="categories"
   [loading]="loading"
   selectionMode="single"
@@ -11,12 +16,40 @@
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Sr. #</th>
+      <th>Image</th>
       <th>Name</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          cat.filters['name']
+            ? cat.filters['name'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          cat.filter(
+            $event.target.value,
+            'name',
+            'contains'
+          )
+        "
+      /></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-category let-rowIndex="rowIndex">
     <tr [pSelectableRow]="category">
       <td>{{ rowIndex + 1 }}</td>
+      <td>
+        <img
+          src="{{baseUrl}}images/{{ category?.image }}"
+          onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+          height="50"/>
+      </td>
       <td>{{ category.name }}</td>
     </tr>
   </ng-template>
@@ -80,6 +113,12 @@
         customUpload="true"
         (uploadHandler)="myUploader($event)"
       ></p-fileUpload>
+    </div>
+    <div *ngIf="!newCategory" >
+      <img
+        src="{{baseUrl}}images/{{ category?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="150"/>
     </div>
   </div>
   <p-footer>
