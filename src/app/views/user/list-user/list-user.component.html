@@ -119,11 +119,12 @@ showEffect="fade"
   <div *ngIf="user">
     <div class="form-group">
       <label for="role">Role</label>
-      <p-dropdown [style]="{ width: '100%' }"
+      <p-dropdown 
+        [style]="{ width: '100%' }"
         [autoDisplayFirst]="false"
-        name="role"
+        name="value"
         [filter]="true"
-        [options]="roles" [(ngModel)]="user.role" optionLabel="label"></p-dropdown>
+        [options]="roles" [(ngModel)]="selectedRole" optionLabel="value"></p-dropdown>
     </div>
     <div class="form-group">
       <label for="name">First Name</label>
