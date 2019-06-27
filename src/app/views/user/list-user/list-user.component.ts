@@ -12,14 +12,15 @@ export class ListUserComponent implements OnInit {
   user:any = {}
   roles:any[];
   selectedUser:any = {}
+  selectedRole:any = {}
   displayDialog = false
   constructor(
     private userService: UserService) {
     this.roles =[
-    {label: 'USER', value:'USER'},
+    {label: 'CUSTOMER', value:'CUSTOMER'},
     {label: 'DEALER', value:'DEALER'},
     {label: 'ADMIN', value:'ADMIN'},
-    {label: 'DATA ENTRY', value:'DATAENTRY'},
+    {label: 'DATAENTRY', value:'DATAENTRY'},
   ]; }
 
   ngOnInit() {
@@ -32,10 +33,11 @@ export class ListUserComponent implements OnInit {
   }
   onRowSelect(event) {
     this.user = this.cloneUser(event.data);
+    this.selectedRole = {label: this.user.role, value:this.user.role}
     this.displayDialog = true;
   }
   cloneUser(user) {
-    let count: any = { id: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, email: user.email};
+    let count: any = { id: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, email: user.email, role:user.role};
     return count;
   }
   delete() {
@@ -47,6 +49,7 @@ export class ListUserComponent implements OnInit {
     )
   }
   save(){
+    this.user.role = this.selectedRole.value;
     this.userService.updateUser(this.user.id,this.user).subscribe(
       ()=>{
         this.ngOnInit()
