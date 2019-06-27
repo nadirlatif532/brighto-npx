@@ -33,7 +33,7 @@ export class FamilyComponent implements OnInit {
       next => {
         this.families = next[0],
         this.dropdown = next[1].map(item => { 
-          return { label: item.name, value: item.id }
+          return { label: item.name, value:{id: item.id, name: item.name}}
         }
       )},
       () => {},
@@ -79,7 +79,7 @@ export class FamilyComponent implements OnInit {
   }
 
   cloneFamily(family) {
-    let fam: Family = {id: family.id, name: family.name, r: family.color.r, g: family.color.g, b: family.color.b, ShadesFilter:family.ShadeFilter};
+    let fam: Family = {id: family.id, name: family.name, r: family.color.r, g: family.color.g, b: family.color.b, ShadeFilter:family.ShadeFilter};
     return fam;
   }
 

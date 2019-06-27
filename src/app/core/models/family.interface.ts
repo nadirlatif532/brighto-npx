@@ -6,5 +6,5 @@ export interface Family {
   r: number;
   g: number;
   b: number;
-  ShadesFilter: ShadesFilter
+  ShadeFilter: ShadesFilter
 }
