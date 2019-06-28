@@ -120,6 +120,10 @@ export const routes: Routes = [
         loadChildren: './views/shades-filter/shades-filter.module#ShadesFilterModule'
       },
       {
+        path: 'packaging',
+        loadChildren: './views/packaging/packaging.module#PackagingModule'
+      },
+      {
         path: 'color-trends',
         loadChildren: './views/color-trends/color-trends.module#ColorTrendsModule'
       },

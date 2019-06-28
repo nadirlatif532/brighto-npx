@@ -1,0 +1,128 @@
+<p-table
+  #pac
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
+  [value]="packagings"
+  [loading]="loading"
+  selectionMode="single"
+  [(selection)]="selectedPackaging"
+  (onRowSelect)="onRowSelect($event)"
+>
+  <ng-template pTemplate="caption">
+    List of Packaging
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Sr. #</th>
+      <th>Image</th>
+      <th>Name</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          pac.filters['name']
+            ? pac.filters['name'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          pac.filter(
+            $event.target.value,
+            'name',
+            'contains'
+          )
+        "
+      /></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-packaging let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="packaging">
+      <td>{{ rowIndex + 1 }}</td>
+      <td><img
+        src="{{baseUrl}}images/{{ packaging?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="50"/></td>
+      <td>{{ packaging.name }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+    <div style="text-align:left">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-plus"
+        (click)="showDialogToAdd()"
+        label="Add"
+      ></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="3">
+        No records found
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  header="Packaging Details"
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{ width: '400px' }"
+>
+  <div *ngIf="packaging">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="packaging.name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="name">Image</label>
+      <p-fileUpload
+        auto="true"
+        name="myfile"
+        accept="image/*"
+        maxFileSize="1000000"
+        customUpload="true"
+        (uploadHandler)="myUploader($event)"
+      ></p-fileUpload>
+    </div>
+    <div *ngIf="!newPackaging" >
+      <img
+        src="{{baseUrl}}images/{{ packaging?.image }}"
+        onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+        height="150"/>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button
+        type="button"
+        pButton
+        icon="fa fa-close"
+        (click)="delete()"
+        label="Delete"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="fa fa-check"
+        (click)="save()"
+        label="Save"
+      ></button>
+    </div>
+  </p-footer>
+</p-dialog>
