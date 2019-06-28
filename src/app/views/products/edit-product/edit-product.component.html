@@ -46,7 +46,8 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label" for="description">Description</label>
               <div class="col-md-9">
-                <textarea id="textarea-input" name="description" [(ngModel)]="product.description" rows="9" class="form-control" required></textarea>
+                <p-editor [(ngModel)]="product.description"  name="description"  [style]="{'height':'320px'}"></p-editor>
+
               </div>
             </div>
             <div class="form-group row">

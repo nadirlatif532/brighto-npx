@@ -17,6 +17,7 @@ import { PanelModule } from 'primeng/panel';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ConfirmationService } from 'primeng/api';
 import { LuxuryFinishingService } from '../../core/services/luxury-finishing.service';
+import {EditorModule} from 'primeng/editor';
 
 @NgModule({
   declarations: [CreateFinishingComponent, EditFinishingComponent, ListFinishingComponent],
@@ -33,7 +34,8 @@ import { LuxuryFinishingService } from '../../core/services/luxury-finishing.ser
     InputTextModule,
     ConfirmDialogModule,
     PanelModule,
-    FileUploadModule
+    FileUploadModule,
+    EditorModule
   ],
   providers: [
     ConfirmationService,
