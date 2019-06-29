@@ -13,7 +13,7 @@ import { Finish } from '../../../core/models/finish.interface';
 import { ProjectService } from '../../../core/services/project.service';
 import { SurfaceService } from '../../../core/services/surface.service';
 import { FinishService } from '../../../core/services/finish.service';
-import { Packaging } from '../../../core/models/packaging.interface';
+import { Packagings } from '../../../core/models/packaging.interface';
 import { PackagingService } from '../../../core/services/packaging.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class EditProductComponent implements OnInit {
   finishes: Finish[];
   selectedCountries: Country[];
   product: Product = {} as Product;
-  packagings: Packaging[];
+  packagings: Packagings[];
   loading:boolean = true;
 
   constructor(
@@ -98,7 +98,7 @@ export class EditProductComponent implements OnInit {
     let Categories =   this.product.Categories.map((item)=>item.id);
     let Surfaces =     this.product.Surfaces.map((item) => item.id);
     let FinishTypes =  this.product.FinishTypes.map((item) => item.id);
-    let packagings =  this.product.packaging.map((item) => item.id);
+    let packagings =  this.product.Packagings.map((item) => item.id);
 
     formData.append('name',this.product.name);
     formData.append('ProjectTypeId', JSON.stringify(ProjectTypes));

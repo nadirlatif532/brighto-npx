@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Packaging } from '../../../core/models/packaging.interface';
+import { Packagings } from '../../../core/models/packaging.interface';
 import { PackagingService } from '../../../core/services/packaging.service';
 import { SharedService } from '../../../shared/services/shared.service';
 
@@ -11,10 +11,10 @@ import { SharedService } from '../../../shared/services/shared.service';
 export class PackagingComponent implements OnInit {
 
   displayDialog: boolean;
-  packaging:Packaging;
-  packagings:Packaging[];
+  packaging:Packagings;
+  packagings:Packagings[];
   newPackaging: boolean = false;
-  selectedPackaging: Packaging;
+  selectedPackaging: Packagings;
   loading: boolean = true;
   baseUrl: string;
 
@@ -32,24 +32,24 @@ export class PackagingComponent implements OnInit {
         () => this.loading = false
       );
     }
-  
+
     onRowSelect(event) {
       this.newPackaging= false;
       this.packaging = this.clonePackaging(event.data);
       this.displayDialog = true;
     }
-    
+
     showDialogToAdd() {
       this.newPackaging = true;
-      this.packaging = {} as Packaging;
+      this.packaging = {} as Packagings;
       this.displayDialog = true;
     }
-    
+
     save() {
       let formData = new FormData();
       formData.append('image', this.packaging.image);
       formData.append('name', this.packaging.name);
-  
+
       this.loading = true;
       if (this.newPackaging) {
         this.packagingService.save(formData).subscribe(
@@ -63,11 +63,11 @@ export class PackagingComponent implements OnInit {
       this.packaging = null;
       this.displayDialog = false;
     }
-  
+
     myUploader(event) {
       this.packaging.image = event.files[0];
     }
-    
+
     delete() {
       this.loading = true;
       this.packagingService.delete(this.selectedPackaging).subscribe(
@@ -77,9 +77,9 @@ export class PackagingComponent implements OnInit {
         }
       )
     }
-    
+
     clonePackaging(packaging) {
-      let count: Packaging = {id: packaging.id, name: packaging.name, image: packaging.image};
+      let count: Packagings = {id: packaging.id, name: packaging.name, image: packaging.image};
       return count;
     }
 

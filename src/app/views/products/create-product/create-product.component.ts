@@ -14,7 +14,7 @@ import { SurfaceService } from '../../../core/services/surface.service';
 import { Finish } from '../../../core/models/finish.interface';
 import { FinishService } from '../../../core/services/finish.service';
 import { PackagingService } from '../../../core/services/packaging.service';
-import { Packaging } from '../../../core/models/packaging.interface';
+import { Packagings } from '../../../core/models/packaging.interface';
 
 @Component({
   selector: 'app-create-product',
@@ -31,7 +31,7 @@ export class CreateProductComponent implements OnInit {
   finishes: Finish[];
   selectedCountries: Country[];
   product: Product = {} as Product;
-  packagings: Packaging[];
+  packagings: Packagings[];
 
   imageErr: boolean = false;
   coverImageErr: boolean = false;
@@ -106,7 +106,7 @@ export class CreateProductComponent implements OnInit {
     let Categories =   this.product.Categories.map((item)=>item.id);
     let Surfaces =     this.product.Surfaces.map((item) => item.id);
     let FinishTypes =  this.product.FinishTypes.map((item) => item.id);
-    let packagings =  this.product.packaging.map((item) => item.id);
+    let packagings =  this.product.Packagings.map((item) => item.id);
 
 
     formData.append('name',this.product.name);
