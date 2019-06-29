@@ -26,7 +26,6 @@ export class ShadeComponent implements OnInit {
   newShade: boolean = false;
   displayDialog: boolean = false;
   radioVal: string = 'RM';
-  limit: number = 1;
   loading: boolean = true;
 
   constructor(
@@ -52,12 +51,6 @@ export class ShadeComponent implements OnInit {
       () => this.loading = false
     );
   }
-
-  swapDropdown() {
-    this.limit = this.radioVal == 'RM' ? 1 : null;
-    this.selectedProducts = [];
-  }
-
   showDialogToAdd() {
     this.newShade = true;
     this.shade = {} as Shade;
@@ -69,7 +62,6 @@ export class ShadeComponent implements OnInit {
     this.newShade = false;
     this.shade = this.cloneShade(event.data);
     this.radioVal = event.data.isAC ? 'AC' : 'RM';
-    this.limit = this.radioVal == 'RM' ? 1 : null;
     this.displayDialog = true;
   }
 
@@ -104,7 +96,6 @@ export class ShadeComponent implements OnInit {
     this.displayDialog = false;
     this.selectedProducts = [];
     this.radioVal = 'RM';
-    this.limit = 1;
   }
 
   delete() {
@@ -115,6 +106,5 @@ export class ShadeComponent implements OnInit {
     this.displayDialog = false;
     this.selectedProducts = [];
     this.radioVal = 'RM';
-    this.limit = 1;
   }
 }
