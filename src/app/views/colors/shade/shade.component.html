@@ -18,6 +18,8 @@
       <th>Sr. #</th>
       <th>Item Code</th>
       <th>Name</th>
+      <th>Shade Type</th>
+      <th>Name ofProducts</th>
       <th>RGB</th>
     </tr>
     <tr>
@@ -56,6 +58,21 @@
           )
         "
       /></th>
+      <th>
+        <p-dropdown
+          #uu
+          name="unit"
+          [style]="{ width: '100%', 'border-radius': '0px' }"
+          [autoDisplayFirst]="false"
+          [options]="types"
+          optionLabel="name"
+          [showClear]="true"
+          appendTo="body"
+          (onChange)="sha.filter($event.value?.value, 'isRM', 'equals')"
+          >
+          </p-dropdown>
+      </th>
+      <th></th>
       <th></th>
     </tr>
   </ng-template>
@@ -64,6 +81,18 @@
       <td>{{ rowIndex + 1 }}</td>
       <td>{{ shade.itemCode }}</td>
       <td>{{ shade.name }}</td>
+      <td><div *ngIf="shade.isAC">
+        <span>ALL COLORS</span>
+      </div>
+      <div *ngIf="shade.isRM">
+        <span>READY MIX</span>
+      </div>
+      </td>
+      <td>
+        <span style="display: inline" *ngFor="let product of shade.Products;let i = index;">
+          {{product.name}}{{i  == shade.Products.length - 1 ? '' : '| '}}
+        </span>
+      </td>
       <td style.background-color="rgb({{ shade.color.r }}, {{shade.color.g}}, {{shade.color.b}})">
         <strong>({{ shade.color.r }}, {{shade.color.g}}, {{shade.color.b}})</strong>
       </td>
@@ -71,7 +100,7 @@
   </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="4">
+      <td [attr.colspan]="6">
         No records found
       </td>
     </tr>

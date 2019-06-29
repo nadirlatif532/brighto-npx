@@ -27,12 +27,18 @@ export class ShadeComponent implements OnInit {
   displayDialog: boolean = false;
   radioVal: string = 'RM';
   loading: boolean = true;
+  types:any[] = []
 
   constructor(
     private shadeService: ShadeService,
     private productService: ProductService,
     private countryService: CountryService,
-    private familyService: FamilyService) { }
+    private familyService: FamilyService) { 
+      this.types =[
+        {name: 'ALL COLORS', value:false},
+        {name: 'READY MIX', value:true}
+      ];
+    }
 
   ngOnInit() {
     forkJoin(
