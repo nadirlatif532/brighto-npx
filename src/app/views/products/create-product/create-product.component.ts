@@ -85,6 +85,8 @@ export class CreateProductComponent implements OnInit {
   }
 
   submit() {
+    var tags = String(this.product.description)
+    var description = tags.replace(/<[^>]*>/g, '')
     if(!this.product.image) {
       this.imageErr = true;
     }
@@ -113,7 +115,7 @@ export class CreateProductComponent implements OnInit {
     formData.append('SurfaceId',     JSON.stringify(Surfaces));
     formData.append('FinishTypeId',  JSON.stringify(FinishTypes));
     formData.append('spreading',this.product.spreading.toString());
-    formData.append('description',this.product.description.toString());
+    formData.append('description',description);
     formData.append('countries', JSON.stringify(this.product.Countries));
     formData.append('PackagingId', JSON.stringify(packagings));
 

@@ -23,7 +23,7 @@ export class ProductService {
     formData.append('product_id', id.toString());
     return this.api.postStringified('u/product/id', formData).pipe(
       map((response: any) => {
-        return response.data[0];
+        return response.data;
       })
     );
   }

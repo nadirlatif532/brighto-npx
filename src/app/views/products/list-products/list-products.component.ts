@@ -17,7 +17,8 @@ export class ListProductsComponent implements OnInit {
   products: Product[];
   loading: boolean = true;
   baseUrl: string;
-  shades:Shade[];
+  shades:any[];
+  displayDetails:boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -39,8 +40,11 @@ export class ListProductsComponent implements OnInit {
     this.router.navigate(['products', 'edit', product.id]);
   }
   viewShades(product: Product){
+    this.displayDetails = true;
     this.shadeService.getShadesByProductId(product.id).subscribe(
-      (next)=>{this.shades = next.data},
+      (next:any)=>{
+        this.shades = next
+        console.log(this.shades)},
       ()=>{},
       ()=>{}
     );
