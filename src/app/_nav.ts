@@ -96,6 +96,11 @@ export const navItems: NavData[] = [
     icon: 'cui-settings'
   },
   {
+    name: 'Packaging',
+    url: '/packaging',
+    icon: 'cui-settings'
+  },
+  {
     title: true,
     name: 'Products'
   },

@@ -24,7 +24,7 @@ export class UserService {
     );
   }
   updateUser(id: number,user:any){
-    return this.api.putStringified(`admin/user/${id}`,user);
+    return this.api.putStringified(`a/user/${id}`,user);
   }
   public delete(user: any) {
     return this.api.delete(`admin/user/${user.id}`);

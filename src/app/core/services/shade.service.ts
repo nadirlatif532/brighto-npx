@@ -29,4 +29,13 @@ export class ShadeService {
   public delete(shade: Shade) {
     return this.api.delete(`admin/shades/${shade.id}`);
   }
+  public getShadesByProductId(id:number){
+    let formData = new FormData();
+    formData.append('product_id', id.toString());
+    return this.api.postStringified('u/shades/product/', formData).pipe(
+      map((response: any) => {
+        return response.data[0];
+      })
+    );
+  }
 }
