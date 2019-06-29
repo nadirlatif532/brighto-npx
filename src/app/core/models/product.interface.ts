@@ -3,6 +3,7 @@ import { Country } from './country.interface';
 import { Project } from './project.interface';
 import { Surface } from './surface.interface';
 import { Finish } from './finish.interface';
+import { Packaging } from './packaging.interface';
 
 export interface Product {
   id: number;
@@ -16,5 +17,6 @@ export interface Product {
   Categories: [Category],
   Surfaces: [Surface],
   FinishTypes:[ Finish],
-  Countries: Country[]
+  Countries: Country[],
+  packaging: [Packaging]
 }

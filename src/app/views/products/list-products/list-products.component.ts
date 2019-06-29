@@ -4,6 +4,8 @@ import { Product } from '../../../core/models/product.interface';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../shared/services/shared.service';
+import { ShadeService } from '../../../core/services/shade.service';
+import { Shade } from '../../../core/models/shade.interface';
 
 @Component({
   selector: 'app-list-products',
@@ -15,11 +17,13 @@ export class ListProductsComponent implements OnInit {
   products: Product[];
   loading: boolean = true;
   baseUrl: string;
+  shades:Shade[];
 
   constructor(
     private productService: ProductService,
     private sharedService: SharedService,
     private confirmationService: ConfirmationService,
+    private shadeService:ShadeService,
     private router: Router) { }
   
   ngOnInit() {
@@ -33,6 +37,13 @@ export class ListProductsComponent implements OnInit {
 
   editProduct(product: Product) {
     this.router.navigate(['products', 'edit', product.id]);
+  }
+  viewShades(product: Product){
+    this.shadeService.getShadesByProductId(product.id).subscribe(
+      (next)=>{this.shades = next.data},
+      ()=>{},
+      ()=>{}
+    );
   }
 
   deleteProduct(product: Product) {

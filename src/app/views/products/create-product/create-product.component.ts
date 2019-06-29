@@ -13,6 +13,8 @@ import { Surface } from '../../../core/models/surface.interface';
 import { SurfaceService } from '../../../core/services/surface.service';
 import { Finish } from '../../../core/models/finish.interface';
 import { FinishService } from '../../../core/services/finish.service';
+import { PackagingService } from '../../../core/services/packaging.service';
+import { Packaging } from '../../../core/models/packaging.interface';
 
 @Component({
   selector: 'app-create-product',
@@ -29,6 +31,7 @@ export class CreateProductComponent implements OnInit {
   finishes: Finish[];
   selectedCountries: Country[];
   product: Product = {} as Product;
+  packagings: Packaging[];
 
   imageErr: boolean = false;
   coverImageErr: boolean = false;
@@ -40,6 +43,7 @@ export class CreateProductComponent implements OnInit {
     private projectService: ProjectService,
     private surfaceService: SurfaceService,
     private finishService: FinishService,
+    private packagingService: PackagingService,
     private router: Router
     ) {
     this.product.is_active = true;
@@ -51,7 +55,8 @@ export class CreateProductComponent implements OnInit {
       this.countryService.getAll(),
       this.projectService.getAll(),
       this.surfaceService.getAll(),
-      this.finishService.getAll()
+      this.finishService.getAll(),
+      this.packagingService.getAll()
     ).subscribe(
       next => {
         this.categories = next[0];
@@ -59,6 +64,7 @@ export class CreateProductComponent implements OnInit {
         this.projectTypes = next[2];
         this.surfaces = next[3];
         this.finishes = next[4];
+        this.packagings = next[5];
       }
     );
   }
@@ -79,7 +85,6 @@ export class CreateProductComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.product)
     if(!this.product.image) {
       this.imageErr = true;
     }
@@ -99,6 +104,8 @@ export class CreateProductComponent implements OnInit {
     let Categories =   this.product.Categories.map((item)=>item.id);
     let Surfaces =     this.product.Surfaces.map((item) => item.id);
     let FinishTypes =  this.product.FinishTypes.map((item) => item.id);
+    let packagings =  this.product.packaging.map((item) => item.id);
+
 
     formData.append('name',this.product.name);
     formData.append('ProjectTypeId', JSON.stringify(ProjectTypes));
@@ -108,6 +115,8 @@ export class CreateProductComponent implements OnInit {
     formData.append('spreading',this.product.spreading.toString());
     formData.append('description',this.product.description.toString());
     formData.append('countries', JSON.stringify(this.product.Countries));
+    formData.append('PackagingId', JSON.stringify(packagings));
+
     this.productService.save(formData).subscribe(
       () => this.router.navigate(['products', 'list'])
     );
