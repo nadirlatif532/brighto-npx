@@ -18,6 +18,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {EditorModule} from 'primeng/editor';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [ListProductsComponent, CreateProductComponent, EditProductComponent],
@@ -36,7 +38,9 @@ import {EditorModule} from 'primeng/editor';
     PanelModule,
     FileUploadModule,
     ProgressSpinnerModule,
-    EditorModule
+    EditorModule,
+    DialogModule,
+    TableModule,
   ],
   providers: [
     ConfirmationService

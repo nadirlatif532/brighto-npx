@@ -34,7 +34,7 @@ export class ShadeService {
     formData.append('product_id', id.toString());
     return this.api.postStringified('u/shades/product/', formData).pipe(
       map((response: any) => {
-        return response.data[0];
+        return response.data;
       })
     );
   }

@@ -101,8 +101,100 @@
         icon="pi pi-pencil"
         (click)="editProduct(product)"
       ></button>
+      <button
+          pButton
+          type="button"
+          icon="pi pi-eye"
+          (click)="viewShades(product)"
+      ></button>
       </p-panel>
     </div>
   </ng-template>
 </p-dataView>
+<p-dialog
+  header="Shades Details"
+  [(visible)]="displayDetails"
+  showEffect="fade"
+  [modal]="true"
+  [contentStyle]="{'overflow':'auto','max-height':'1000px'}"
+  [style]="{width: '1500px', 'position':'absolute'}"
+  [focusOnShow]="false"
+>
+<p-table
+  #sha
+  [paginator]="true"
+  [rows]="20"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  rowHover="true"
+  [loading]="loading"
+  [value]="shades"
+  >
+  <ng-template pTemplate="caption">
+    List of Shades
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Sr. #</th>
+      <th>Item Code</th>
+      <th>Name</th>
+      <th>RGB</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          sha.filters['itemCode']
+            ? sha.filters['itemCode'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          sha.filter(
+            $event.target.value,
+            'itemCode',
+            'contains'
+          )
+        "
+      /></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          sha.filters['name']
+            ? sha.filters['name'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          sha.filter(
+            $event.target.value,
+            'name',
+            'contains'
+          )
+        "
+      /></th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-shade let-rowIndex="rowIndex">
+    <tr>
+      <td>{{ rowIndex + 1 }}</td>
+      <td>{{ shade?.itemCode }}</td>
+      <td>{{ shade?.name }}</td>
+      <td style.background-color="rgb({{ shade?.color?.r }}, {{shade?.color?.g}}, {{shade?.color?.b}})">
+        <strong>({{ shade?.color?.r }}, {{shade?.color?.g}}, {{shade?.color?.b}})</strong>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="4">
+        No records found
+      </td>
+    </tr>
+</ng-template>
+</p-table>
+</p-dialog>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
