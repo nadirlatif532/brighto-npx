@@ -45,7 +45,10 @@ export class ShadeComponent implements OnInit {
         this.shades = next[0];
         this.products = next[1];
         this.countries = next[2];
-        this.families = next[3];
+        this.families = next[3].map(family => {
+          delete family["ShadeFilter"]
+          return family;
+        });
       },
       () => {},
       () => this.loading = false
