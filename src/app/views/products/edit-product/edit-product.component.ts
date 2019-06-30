@@ -72,7 +72,7 @@ export class EditProductComponent implements OnInit {
         if (id) {
           this.productService.findById(id).subscribe(
             next => {
-              this.product = next;
+              this.product = next[0];
             },
             () => {},
             () => {this.loading=false}
