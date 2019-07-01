@@ -18,8 +18,7 @@ images: any[] = [];
     private finishingService: LuxuryFinishingService,
     private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   myUploader(event) {
     this.images.push(event.files[0]);

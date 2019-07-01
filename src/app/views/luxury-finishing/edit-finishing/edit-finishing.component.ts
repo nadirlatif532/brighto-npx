@@ -48,9 +48,11 @@ export class EditFinishingComponent implements OnInit {
     this.imageErr = true;
   }
   submit() {
+    var tags = String(this.luxuryFinishing.description)
+    var description = tags.replace(/<[^>]*>/g, '')
     let formData = new FormData();
     formData.append('name',this.luxuryFinishing.name);
-    formData.append('description',this.luxuryFinishing.description);
+    formData.append('description',description);
     formData.append('video',this.luxuryFinishing.video);
   
     let i ;
