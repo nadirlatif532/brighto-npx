@@ -44,11 +44,14 @@ images: any[] = [];
     formData.append('name',this.luxuryFinishing.name);
     formData.append('description',description);
     formData.append('video',this.luxuryFinishing.video);
+    formData.append('image1',this.images[0]);
+    formData.append('coverImage',this.images[1]);
+
   
     let i ;
-    for( i = 0 ; i < this.images.length; i++){
+    for( i = 2 ; i < this.images.length; i++){
       let imageKey = 'image';
-      imageKey = imageKey + (i+1);
+      imageKey = imageKey + (i);
       formData.append(imageKey,this.images[i]);
 
     }
