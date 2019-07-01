@@ -42,9 +42,7 @@ export class ListProductsComponent implements OnInit {
   viewShades(product: Product){
     this.displayDetails = true;
     this.shadeService.getShadesByProductId(product.id).subscribe(
-      (next:any)=>{
-        this.shades = next
-        console.log(this.shades)},
+      (next:any)=>{this.shades = next},
       ()=>{},
       ()=>{}
     );

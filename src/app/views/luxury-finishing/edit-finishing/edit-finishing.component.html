@@ -19,20 +19,57 @@
             </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 col-form-label" for="image">Product Image</label>
-              <div class="col-md-9">
-                <p-fileUpload
-                  auto="true"
-                  name="myfile"
-                  accept="image/*"
-                  maxFileSize="1000000"
-                  customUpload="true"
-                  (uploadHandler)="myUploader($event)"
-                  (onRemove)="removeImageUploader($event)"
-                ></p-fileUpload>
-                <span *ngIf="imageErr" class='error'>Image should be provided.</span>
-              </div>
+            <label class="col-md-3 col-form-label" for="name">VideoUrl</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="luxuryFinishing.video" id="text-input" name="video" class="form-control" required>
+            </div>
           </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="image">Product Image</label>
+            <div class="col-md-9">
+              <p-fileUpload
+                auto="true"
+                name="myfile"
+                accept="image/*"
+                maxFileSize="1000000"
+                customUpload="true"
+                (uploadHandler)="myUploader($event)"
+                (onRemove)="removeImageUploader($event)"
+              ></p-fileUpload>
+              <span *ngIf="imageErr" class='error'>Image should be provided.</span>
+            </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="image">Cover Image</label>
+          <div class="col-md-9">
+            <p-fileUpload
+              auto="true"
+              name="myfile"
+              accept="image/*"
+              maxFileSize="1000000"
+              customUpload="true"
+              (uploadHandler)="CoverUploader($event)"
+              (onRemove)="removeImageUploader($event)"
+            ></p-fileUpload>
+            <span *ngIf="imageErr" class='error'>Image should be provided.</span>
+          </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="image">Images(Select Max 3)</label>
+        <div class="col-md-9">
+          <p-fileUpload
+            auto="true"
+            name="myfile"
+            accept="image/*"
+            maxFileSize="1000000"
+            customUpload="true"
+            (uploadHandler)="ImagesUploader($event)"
+            (onRemove)="removeImageUploader($event)"
+            multiple="multiple"
+          ></p-fileUpload>
+          <span *ngIf="imageErr" class='error'>Image should be provided.</span>
+        </div>
+    </div>
       </div>
       <div class="card-footer" style="text-align: right;">
         <button [disabled]="!addForm.form.valid" type="submit" pButton icon="fa fa-plus" label="Update"></button>
