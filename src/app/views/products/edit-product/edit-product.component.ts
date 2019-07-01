@@ -33,6 +33,10 @@ export class EditProductComponent implements OnInit {
   product: Product = {} as Product;
   packagings: Packagings[];
   loading:boolean = true;
+  productCategories: Category[] = [];
+  productSurfaces: Surface[] = [];
+  productFinishes: Finish[] = [];
+
 
   constructor(
     private categoryService: CategoryService,
@@ -73,6 +77,9 @@ export class EditProductComponent implements OnInit {
           this.productService.findById(id).subscribe(
             next => {
               this.product = next[0];
+              this.setCategories();
+              this.setSurfaces();
+              this.setFinishes();
             },
             () => {},
             () => {this.loading=false}
@@ -80,6 +87,36 @@ export class EditProductComponent implements OnInit {
         }
       }
     );
+  }
+  setCategories(){
+    for (let productCategory of this.product.Categories){
+      for(let category of this.categories){
+        if(productCategory.id == category.id){
+          this.productCategories.push(category)
+        }
+      }
+    }
+    this.product.Categories = this.productCategories;
+  }
+  setSurfaces(){
+    for (let productSurface of this.product.Surfaces){
+      for(let surface of this.surfaces){
+        if(productSurface.id == surface.id){
+          this.productSurfaces.push(surface)
+        }
+      }
+    }
+    this.product.Surfaces = this.productSurfaces;
+  }
+  setFinishes(){
+    for (let productFinish of this.product.FinishTypes){
+      for(let finish of this.finishes){
+        if(productFinish.id == finish.id){
+          this.productFinishes.push(finish)
+        }
+      }
+    }
+    this.product.FinishTypes = this.productFinishes;
   }
 
   myUploader(event) {

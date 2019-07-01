@@ -13,10 +13,10 @@ export interface Product {
   is_active: boolean,
   image: any,
   coverImage: any,
-  ProjectTypes: [Project],
-  Categories: [Category],
-  Surfaces: [Surface],
-  FinishTypes:[ Finish],
+  ProjectTypes: Project[],
+  Categories: Category[],
+  Surfaces: Surface[],
+  FinishTypes:Finish[],
   Countries: Country[],
-  Packagings: [Packagings]
+  Packagings: Packagings[]
 }
