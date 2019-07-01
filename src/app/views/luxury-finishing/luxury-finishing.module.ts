@@ -18,6 +18,10 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ConfirmationService } from 'primeng/api';
 import { LuxuryFinishingService } from '../../core/services/luxury-finishing.service';
 import {EditorModule} from 'primeng/editor';
+import {CarouselModule} from 'primeng/carousel';
+import {DialogModule} from 'primeng/dialog';
+
+
 
 @NgModule({
   declarations: [CreateFinishingComponent, EditFinishingComponent, ListFinishingComponent],
@@ -35,7 +39,9 @@ import {EditorModule} from 'primeng/editor';
     ConfirmDialogModule,
     PanelModule,
     FileUploadModule,
-    EditorModule
+    EditorModule,
+    CarouselModule,
+    DialogModule
   ],
   providers: [
     ConfirmationService,
