@@ -12,7 +12,7 @@ export class EditFinishingComponent implements OnInit {
 
   luxuryFinishing : LuxuryFinishing = {} as LuxuryFinishing;
   imageErr: boolean = false;
-
+  images: any[] = [];
 
   constructor(
     private finishingService: LuxuryFinishingService,
@@ -32,8 +32,17 @@ export class EditFinishingComponent implements OnInit {
 
   }
   myUploader(event) {
-    this.luxuryFinishing.image = event.files[0];
+    this.images.push(event.files[0]);
     this.imageErr = false;
+  }
+  CoverUploader(event){
+    this.images.push(event.files[0]);
+    this.imageErr = false;
+  }
+  ImagesUploader(event){
+    for (let file of event.files) {
+      this.images.push(file);
+    }
   }
   removeImageUploader(event) {
     this.imageErr = true;
@@ -42,7 +51,15 @@ export class EditFinishingComponent implements OnInit {
     let formData = new FormData();
     formData.append('name',this.luxuryFinishing.name);
     formData.append('description',this.luxuryFinishing.description);
-    formData.append('image', this.luxuryFinishing.image, this.luxuryFinishing.image.name);
+    formData.append('video',this.luxuryFinishing.video);
+  
+    let i ;
+    for( i = 1 ; i <= this.images.length; i++){
+      let imageKey = 'image';
+      imageKey = imageKey + i;
+      formData.append(imageKey,this.images[--i].name);
+
+    }
     this.finishingService.update(formData,this.luxuryFinishing.id).subscribe(
       () => this.router.navigate(['luxury-finishing', 'list']),
       () =>{},
