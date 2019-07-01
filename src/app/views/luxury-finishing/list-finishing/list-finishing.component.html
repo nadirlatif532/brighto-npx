@@ -23,7 +23,7 @@
     <div class="ui-g-6" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
       <div class="ui-g-12 ui-md-3" style="text-align:center">
         <img
-        src="{{baseUrl}}images/{{ luxuryFinishing.image }}"
+        src="{{baseUrl}}images/{{luxuryFinishing.images[0]}}"
         onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
         width="100%"
         />
@@ -54,6 +54,12 @@
           icon="pi pi-pencil"
           (click)="editLuxuryFinishing(luxuryFinishing)"
         ></button>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-eye"
+          (click)="showImages($event, luxuryFinishing)"
+        ></button>
       </div>
     </div>
   </ng-template>
@@ -64,7 +70,7 @@
         [style]="{ 'text-align': 'center' }"
       >
         <img
-          src="{{baseUrl}}images/{{ luxuryFinishing.image }}"
+          src="{{baseUrl}}images/{{luxuryFinishing.images[0]}}"
           onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
           width="100%"
         />
@@ -85,8 +91,43 @@
         icon="pi pi-pencil"
         (click)="editLuxuryFinishing(luxuryFinishing)"
       ></button>
+      <button
+          pButton
+          type="button"
+          icon="pi pi-eye"
+          (click)="showImages($event, luxuryFinishing)"
+      ></button>
       </p-panel>
     </div>
   </ng-template>
 </p-dataView>
+<p-dialog
+  header="Finishings"
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{width: '700px', top: '0px'}"
+  (onAfterHide)="onDialogHide()"
+>
+<div class="ui-g" *ngIf="selectedFinishing">
+  <div class="ui-g-12">
+    <div *ngIf="selectedFinishing.images[0]">
+      <p-carousel responsive="true" numVisible="1" circular="circular" autoplayInterval="3000" [value]="selectedFinishing.images">
+        <ng-template let-image  pTemplate="item">
+          <div style="text-align: center;">
+            <img
+              src="{{baseUrl}}/images/{{image}}"
+              onError="this.src='/assets/dist/img/thumbnail_cropped.jpg';"
+              width="500 px"
+              height="400 px"
+            />
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</div>
+</p-dialog>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

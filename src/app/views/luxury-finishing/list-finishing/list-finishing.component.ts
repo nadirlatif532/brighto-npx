@@ -4,6 +4,7 @@ import { SharedService } from '../../../shared/services/shared.service';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { LuxuryFinishingService } from '../../../core/services/luxury-finishing.service';
+import { Finish } from '../../../core/models/finish.interface';
 
 @Component({
   selector: 'app-list-finishing',
@@ -15,6 +16,9 @@ export class ListFinishingComponent implements OnInit {
   luxuryFinishings: LuxuryFinishing[];
   loading: boolean = true;
   baseUrl: string;
+  selectedFinishing: Finish;
+  displayDialog: boolean  =false;
+  images:any[] = []
 
   constructor(
     private finishingService: LuxuryFinishingService,
@@ -24,9 +28,7 @@ export class ListFinishingComponent implements OnInit {
 
   ngOnInit() {
     this.finishingService.getAll().subscribe(
-      (next) => {
-        this.luxuryFinishings = next
-        console.log(this.luxuryFinishings)},
+      (next) => {this.luxuryFinishings = next},
       () => {},
       () => this.loading = false
     );
@@ -45,6 +47,15 @@ export class ListFinishingComponent implements OnInit {
   }
   editLuxuryFinishing(luxuryFinishing: LuxuryFinishing){
     this.router.navigate(['luxury-finishing', 'edit', luxuryFinishing.id]);
+  }
+  showImages(event: Event, finishing: Finish) {
+    this.selectedFinishing = finishing;
+    this.displayDialog = true;
+    event.preventDefault();
+  }
+
+  onDialogHide() {
+    this.selectedFinishing = null;
   }
   }
 
