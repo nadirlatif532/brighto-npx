@@ -80,7 +80,7 @@
             maxFileSize="1000000"
             customUpload="true"
             (uploadHandler)="ImagesUploader($event)"
-            (onRemove)="removeImageUploader($event)"
+            (onRemove)="removeMultiImageUploads($event)"
             multiple="multiple"
           ></p-fileUpload>
           <span *ngIf="imageErr" class='error'>Image should be provided.</span>
