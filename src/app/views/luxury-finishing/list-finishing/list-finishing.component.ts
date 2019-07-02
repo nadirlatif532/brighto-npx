@@ -35,7 +35,7 @@ export class ListFinishingComponent implements OnInit {
     this.baseUrl = this.sharedService.baseUrl;
   }
   deleteLuxuryFinishing(luxuryFinishing: LuxuryFinishing) {
-    this.confirmationService.confirm({ message: 'Are you sure?' , 
+    this.confirmationService.confirm({ message: 'Are you sure?' ,
     accept: () => {
       this.loading = true;
       this.finishingService.delete(luxuryFinishing).subscribe(
@@ -43,7 +43,7 @@ export class ListFinishingComponent implements OnInit {
         () => {},
         () => this.loading = false
       );
-    }}); 
+    }});
   }
   editLuxuryFinishing(luxuryFinishing: LuxuryFinishing){
     this.router.navigate(['luxury-finishing', 'edit', luxuryFinishing.id]);
