@@ -158,6 +158,10 @@ export const routes: Routes = [
       {
         path: 'user',
         loadChildren: './views/user/user.module#UserModule'
+      },
+      {
+        path: 'luxury-shades',
+        loadChildren: './views/luxury-shades/luxury-shades.module#LuxuryShadesModule'
       }
     ],
     canActivate: [AuthGuard]
