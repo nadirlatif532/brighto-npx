@@ -54,6 +54,7 @@ export class EditFinishingComponent implements OnInit {
         }
       }
     }
+    this.luxuryFinishing.Countries = this.luxuryfinishingCountries;
   }
   myUploader(event) {
 

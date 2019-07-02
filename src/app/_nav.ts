@@ -67,6 +67,23 @@ export const navItems: NavData[] = [
     icon: 'cui-globe'
   },
   {
+    name: 'Luxury Shades',
+    url: '/luxury-shades',
+    icon: 'cui-globe',
+    children: [
+      {
+        name: 'List',
+        url: '/luxury-shades/list',
+        icon: 'cui-cursor'
+      },
+      {
+        name: 'Add',
+        url: '/luxury-shades/add',
+        icon: 'cui-cursor'
+      }
+    ]
+  },
+  {
     title: true,
     name: 'Filters'
   },

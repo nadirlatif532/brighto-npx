@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-header">
+        <strong>Add</strong> Luxury Shade
+      </div>
+      <form #addForm="ngForm" (ngSubmit)="submit()" class="form-horizontal">
+        <div class="card-body">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="name">Name</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="luxuryShade.name" id="text-input" name="name" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="description">Description</label>
+            <div class="col-md-9">
+              <p-editor name="description" [(ngModel)]="luxuryShade.description" required  [style]="{'height':'320px'}"></p-editor>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="name">Item Code</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="luxuryShade.itemCode" id="text-input" name="video" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="country">Luxury Products</label>
+            <div class="col-md-9">
+            <p-listbox 
+              [options]="luxuryProducts" 
+              name="products" 
+              multiple="multiple" 
+              checkbox="checkbox" 
+              filter="filter" 
+              [(ngModel)]="luxuryShade.LuxuryFinishes" 
+              optionLabel="name" 
+              required
+              [style]="{width: '100%'}"
+            ></p-listbox>
+          </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="image">Shade Image</label>
+              <div class="col-md-9">
+                <p-fileUpload
+                  auto="true"
+                  name="myfile"
+                  accept="image/*"
+                  maxFileSize="1000000"
+                  customUpload="true"
+                  (uploadHandler)="myUploader($event)"
+                  (onRemove)="removeImageUploader($event)"
+                ></p-fileUpload>
+                <span *ngIf="imageErr" class='error'>Image should be provided.</span>
+              </div>
+          </div>
+      </div>
+      <div class="card-footer" style="text-align: right;">
+        <button [disabled]="!addForm.form.valid" type="submit" pButton icon="fa fa-plus" label="Submit"></button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
