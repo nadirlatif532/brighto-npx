@@ -9,7 +9,7 @@ import { LuxuryFinishing } from '../models/luxury-finishing.interface';
 export class LuxuryFinishingService {
 
   constructor(private api: ApiService) { }
-  
+
   public save(luxuryFinishing: any) {
     return this.api.postStringified('admin/luxury-finish/create', luxuryFinishing );
   }
