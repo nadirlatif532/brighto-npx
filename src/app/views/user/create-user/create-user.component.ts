@@ -20,6 +20,7 @@ export class CreateUserComponent implements OnInit {
   user: any = {}
   dealer: any = {} 
   roles:any[];
+  professions:any[];
   registrationError:boolean = false;
   selectedRole:string
   userId:number;
@@ -31,6 +32,7 @@ export class CreateUserComponent implements OnInit {
   filteredCities: City[];
   loading: boolean = true;
   selectedStatus: string = "";
+  selectedProfession: any;
   registerErrors: Map<string, string> = new Map<string, string>();
 
   constructor(
@@ -43,11 +45,20 @@ export class CreateUserComponent implements OnInit {
     private userService: UserService
   ) {
     this.selectedRole = 'CUSTOMER'
+    this.selectedProfession = 'HOMEOWNER';
     this.roles =[
       {label: 'CUSTOMER', value:'CUSTOMER'},
       {label: 'DEALER', value:'DEALER'},
       {label: 'ADMIN', value:'ADMIN'},
       {label: 'DATA ENTRY', value:'DATAENTRY'},
+    ];
+    this.professions =[
+      {label: 'HOMEOWNER', value:'HOMEOWNER'},
+      {label: 'ARCHITECT', value:'ARCHITECT'},
+      {label: 'INTERIORDESIGNER', value:'INTERIORDESIGNER'},
+      {label: 'BUILDER', value:'BUILDER'},
+      {label: 'DEVELOPER', value:'DEVELOPER'},
+      {label: 'OTHER', value:'OTHER'},
     ];
    }
    ngOnInit() {
@@ -71,14 +82,16 @@ export class CreateUserComponent implements OnInit {
     }
     delete this.user.confirmpassword;
     this.user.role = this.selectedRole
-    this.api.post('u/signup', this.user).subscribe(
+    this.user.profession = this.selectedProfession;
+    console.log(this.selectedProfession)
+    this.api.post('admin/user/create', this.user).subscribe(
       (data) => {
         this.userId = data.data.id
       if(this.selectedRole != 'DEALER'){
         this.router.navigate(['user/list'])
       }},
       (error) => {
-        this.registerErrors = this.sharedService.errorObjToMap(error.errors);
+        //this.registerErrors = this.sharedService.errorObjToMap(error.errors);
         this.registrationError = true;
       },
       ()=>{
