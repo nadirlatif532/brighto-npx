@@ -8,6 +8,7 @@ import { CountryService } from '../../../core/services/country.service';
 import { Country } from '../../../core/models/country.interface';
 import { Family } from '../../../core/models/family.interface';
 import { FamilyService } from '../../../core/services/family.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shade',
@@ -33,7 +34,8 @@ export class ShadeComponent implements OnInit {
     private shadeService: ShadeService,
     private productService: ProductService,
     private countryService: CountryService,
-    private familyService: FamilyService) { 
+    private familyService: FamilyService,
+    private activatedRoute: ActivatedRoute,) { 
       this.types =[
         {name: 'ALL COLORS', value:false},
         {name: 'READY MIX', value:true}
@@ -41,6 +43,7 @@ export class ShadeComponent implements OnInit {
     }
 
   ngOnInit() {
+    const id = this.activatedRoute.snapshot.params['id'];
     forkJoin(
       this.shadeService.getAll(),
       this.productService.getAll(),
@@ -57,7 +60,15 @@ export class ShadeComponent implements OnInit {
         });
       },
       () => {},
-      () => this.loading = false
+      () => {
+        if(id){
+          this.shadeService.getShadesByProductId(id).subscribe(
+            (next) => {this.shades = next},
+            () => {},
+            () => {})
+        }
+        this.loading = false
+      }
     );
   }
   showDialogToAdd() {

@@ -25,6 +25,10 @@ const routes: Routes = [
       {
         path: 'shades',
         component: ShadeComponent
+      },
+      {
+        path: 'product-shades/:id',
+        component: ShadeComponent
       }
     ]
   }
