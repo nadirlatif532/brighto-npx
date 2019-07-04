@@ -16,6 +16,7 @@ export class ListProductsComponent implements OnInit {
   loading: boolean = true;
   baseUrl: string;
   shades:any[];
+  shadesArray:any[] = [];
 
   constructor(
     private productService: ProductService,
@@ -37,6 +38,12 @@ export class ListProductsComponent implements OnInit {
   }
   viewShades(product: Product){
     this.router.navigate(['colors', 'product-shades',product.id])
+  }
+
+  getShadesCount(product){
+    this.shadesArray = product.Shades;
+    return this.shadesArray.length;
+  
   }
 
   deleteProduct(product: Product) {
