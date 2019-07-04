@@ -16,7 +16,9 @@
         <th>Sr. #</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Username</th>
+        <th>Role</th>
+        <th>Country</th>
+        <th>City</th>
         <th>Email</th>
       </tr>
       <tr>
@@ -58,8 +60,8 @@
         <th><input
           style="width: 100%"
           [value]="
-            use.filters['username']
-              ? use.filters['username'].value
+            use.filters['role']
+              ? use.filters['role'].value
               : ''
           "
           pInputText
@@ -67,7 +69,41 @@
           (input)="
             use.filter(
               $event.target.value,
-              'username',
+              'role',
+              'contains'
+            )
+          "
+        /></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            use.filters['country']
+              ? use.filters['country'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            use.filter(
+              $event.target.value,
+              'country',
+              'contains'
+            )
+          "
+        /></th>
+        <th><input
+          style="width: 100%"
+          [value]="
+            use.filters['city']
+              ? use.filters['city'].value
+              : ''
+          "
+          pInputText
+          type="text"
+          (input)="
+            use.filter(
+              $event.target.value,
+              'city',
               'contains'
             )
           "
@@ -96,7 +132,9 @@
       <td>{{ rowIndex + 1 }}</td>
       <td>{{user.firstname}}</td>
       <td>{{user.lastname}}</td>
-      <td>{{user.username}}</td>
+      <td>{{user.role}}</td>
+      <td>{{user.country}}</td>
+      <td>{{user.city}}</td>
       <td>{{user.email}}</td>
     </tr>
   </ng-template>  
@@ -126,6 +164,16 @@ showEffect="fade"
         [filter]="true"
         [options]="roles" [(ngModel)]="selectedRole" optionLabel="value"></p-dropdown>
     </div>
+    <div class="form-group ">
+      <label for="profession">Profession</label>
+          <p-dropdown
+            name="role"
+            [options]="professions"
+            [style]="{ width: '100%' }"
+            [(ngModel)]="selectedProfession"
+            optionLabel="value"
+          ></p-dropdown>
+      </div>
     <div class="form-group">
       <label for="name">First Name</label>
       <input
@@ -144,19 +192,35 @@ showEffect="fade"
       />
     </div>
     <div class="form-group">
-      <label for="name">User Name</label>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="user.username"
-      />
-    </div>
-    <div class="form-group">
       <label for="name">Email</label>
       <input
         type="email"
         class="form-control"
         [(ngModel)]="user.email"
+        />
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="user.phone"
+        />
+    </div>
+    <div class="form-group">
+      <label for="country">Country</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="user.country"
+        />
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="user.city"
         />
     </div>
 </div>

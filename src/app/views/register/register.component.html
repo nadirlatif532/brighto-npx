@@ -8,18 +8,18 @@
               <form #registerForm="ngForm" (ngSubmit)="submit()">
                 <h1>Register</h1>
                 <p class="text-muted">Create your account</p>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <input type="text" [(ngModel)]="user.username" class="form-control" placeholder="Username" autocomplete="username" name="username" required>
                   <small *ngIf="registerErrors.has('username')" class="form-text" style="color: red;">{{registerErrors.get('username')}}</small>                  
-                </div>
-                <div class="form-group">
+                </div> -->
+                <!-- <div class="form-group">
                   <input type="text" [(ngModel)]="user.firstname" class="form-control" placeholder="First Name" autocomplete="firstname" name="firstname" required>
                   <small *ngIf="registerErrors.has('firstname')" class="form-text" style="color: red;">{{registerErrors.get('firstname')}}</small>                  
                 </div>
                 <div class="form-group">
                   <input type="text" [(ngModel)]="user.lastname" class="form-control" placeholder="Last Name" autocomplete="lastname" name="lastname" required>
                   <small *ngIf="registerErrors.has('lastname')" class="form-text" style="color: red;">{{registerErrors.get('lastname')}}</small>                  
-                </div>
+                </div> -->
                 <div class="form-group">
                   <input type="text" [(ngModel)]="user.email" class="form-control" placeholder="Email" autocomplete="email" name="email" required>
                   <small *ngIf="registerErrors.has('email')" class="form-text" style="color: red;">{{registerErrors.get('email')}}</small>

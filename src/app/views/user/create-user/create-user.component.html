@@ -17,6 +17,17 @@
                 ></p-dropdown>
               </div>
             </div>
+            <div *ngIf="selectedRole != 'DEALER'" class="form-group row">
+              <label class="col-md-3 col-form-label" for="profession">Profession</label>
+                <div class="col-md-9">
+                  <p-dropdown
+                    name="role"
+                    [options]="professions"
+                    [style]="{ width: '100%' }"
+                    [(ngModel)]="selectedProfession"
+                  ></p-dropdown>
+                </div>
+              </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="firstName">First Name</label>
             <div class="col-md-9">
@@ -31,18 +42,39 @@
               <small *ngIf="registerErrors.has('lastname')" class="form-text" style="color: red;">{{registerErrors.get('lastname')}}</small>
             </div>
           </div>
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label class="col-md-3 col-form-label" for="userName">User Name</label>
             <div class="col-md-9">
               <input type="text" [(ngModel)]="user.username"  name="userName" class="form-control" required>
               <small *ngIf="registerErrors.has('username')" class="form-text" style="color: red;">{{registerErrors.get('username')}}</small>
             </div>
-          </div>
+          </div> -->
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="email">Email</label>
             <div class="col-md-9">
               <input type="email" [(ngModel)]="user.email"  name="email" class="form-control" required>
               <small *ngIf="registerErrors.has('email')" class="form-text" style="color: red;">{{registerErrors.get('email')}}</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="phone">Phone</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="user.phone"  name="phone" class="form-control" required>
+              <small *ngIf="registerErrors.has('phone')" class="form-text" style="color: red;">{{registerErrors.get('phone')}}</small>
+            </div>
+          </div>
+          <div *ngIf="selectedRole != 'DEALER'" class="form-group row">
+            <label class="col-md-3 col-form-label" for="Country">Country</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="user.country"  name="country" class="form-control" required>
+              <small *ngIf="registerErrors.has('Country')" class="form-text" style="color: red;">{{registerErrors.get('Country')}}</small>
+            </div>
+          </div>
+          <div *ngIf="selectedRole != 'DEALER'"class="form-group row">
+            <label class="col-md-3 col-form-label" for="City">City</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="user.city"  name="City" class="form-control" required>
+              <small *ngIf="registerErrors.has('City')" class="form-text" style="color: red;">{{registerErrors.get('City')}}</small>
             </div>
           </div>
           <div class="form-group row">
