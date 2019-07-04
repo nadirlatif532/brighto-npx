@@ -2,7 +2,7 @@
   #sha
   [paginator]="true"
   [rows]="20"
-  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50, 100]"
   rowHover="true"
   [loading]="loading"
   [value]="shades"
@@ -16,8 +16,12 @@
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Sr. #</th>
-      <th>Item Code</th>
-      <th>Name</th>
+      <th [pSortableColumn]="'itemCode'">Item Code
+        <p-sortIcon [field]="'itemCode'" ></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'name'">Name
+        <p-sortIcon [field]="'name'"></p-sortIcon>
+      </th>
       <th>Shade Type</th>
       <th>Products</th>
       <th>RGB</th>

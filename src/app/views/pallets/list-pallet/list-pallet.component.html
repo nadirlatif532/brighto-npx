@@ -2,7 +2,7 @@
   #col
   [paginator]="true"
   [rows]="20"
-  [rowsPerPageOptions]="[20, 25, 30, 30, 50]"
+  [rowsPerPageOptions]="[20, 25, 30, 30, 50, 100]"
   rowHover="true"
   [value]="pallets"
   selectionMode="single"
@@ -14,8 +14,12 @@
     <ng-template pTemplate="header">
         <tr>
           <th>Sr. #</th>
-          <th>Name</th>
-          <th>Likes</th>
+          <th [pSortableColumn]="'name'">Name
+            <p-sortIcon [field]="'name'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'likes'">Likes
+            <p-sortIcon [field]="'likes'"></p-sortIcon>
+          </th>
           <th>Pallete By</th>
           <th>Shade 1 </th>
           <th>Shade 2 </th>
