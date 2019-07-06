@@ -56,6 +56,7 @@ countries: Country[];
     formData.append('countries', JSON.stringify(this.luxuryFinishing.Countries));
     formData.append('image1',this.images[0]);
     formData.append('coverImage',this.images[1]);
+    formData.append('sequence',this.luxuryFinishing.sequence.toString());
 
     let i ;
     for( i = 2 ; i < this.images.length; i++){

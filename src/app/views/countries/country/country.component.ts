@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CountryService } from '../../../core/services/country.service';
-import { Country } from '../../../core/models/country.interface';
+import { Component, OnInit } from "@angular/core";
+import { CountryService } from "../../../core/services/country.service";
+import { Country } from "../../../core/models/country.interface";
 
 @Component({
-  selector: 'app-country',
-  templateUrl: './country.component.html',
+  selector: "app-country",
+  templateUrl: "./country.component.html",
   styleUrls: []
 })
 export class CountryComponent implements OnInit {
-
   displayDialog: boolean;
   cols: any[];
   countries: Country[];
@@ -17,14 +16,16 @@ export class CountryComponent implements OnInit {
   selectedCountry: Country;
   loading: boolean = true;
 
-  constructor(private countryService: CountryService) { }
+  constructor(private countryService: CountryService) {}
 
   ngOnInit() {
-    this.countryService.getAll().subscribe(
-      next => this.countries = next,
-      () => {},
-      () => this.loading = false
-    );
+    this.countryService
+      .getAll()
+      .subscribe(
+        next => (this.countries = next),
+        () => {},
+        () => (this.loading = false)
+      );
   }
 
   showDialogToAdd() {
@@ -35,14 +36,10 @@ export class CountryComponent implements OnInit {
 
   save() {
     this.loading = true;
-    if(this.newCountry) {
-      this.countryService.save(this.country).subscribe(
-        () => this.ngOnInit()
-      )
+    if (this.newCountry) {
+      this.countryService.save(this.country).subscribe(() => this.ngOnInit());
     } else {
-      this.countryService.update(this.country).subscribe(
-        () => this.ngOnInit()
-      )
+      this.countryService.update(this.country).subscribe(() => this.ngOnInit());
     }
     this.country = null;
     this.displayDialog = false;
@@ -50,12 +47,10 @@ export class CountryComponent implements OnInit {
 
   delete() {
     this.loading = true;
-    this.countryService.delete(this.selectedCountry).subscribe(
-      () => {
-        this.displayDialog = false;
-        this.ngOnInit();
-      }
-    )
+    this.countryService.delete(this.selectedCountry).subscribe(() => {
+      this.displayDialog = false;
+      this.ngOnInit();
+    });
   }
 
   onRowSelect(event) {
@@ -65,7 +60,11 @@ export class CountryComponent implements OnInit {
   }
 
   cloneCountry(country) {
-    let count: Country = {id: country.id, name: country.name};
+    let count: Country = {
+      id: country.id,
+      name: country.name,
+      sequence: country.sequence
+    };
     return count;
   }
 }

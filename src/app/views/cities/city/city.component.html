@@ -22,6 +22,7 @@
         <th [pSortableColumn]="'Country.name'">Country
           <p-sortIcon [field]="'Country.name'"></p-sortIcon>
         </th>
+        <th>Sequence</th>
       </tr>
       <tr>
         <th></th>
@@ -59,6 +60,7 @@
             )
           "
         /></th>
+        <th></th>
       </tr>
     </ng-template>
   <ng-template pTemplate="body" let-city let-rowIndex="rowIndex">
@@ -66,13 +68,14 @@
       <td>{{ rowIndex + 1 }}</td>
       <td>{{city.name}}</td>
       <td>{{city.Country.name}}</td>
+      <td>{{city.sequence}}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
       <div style="text-align:left">
           <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
       </div>
-  </ng-template>    
+  </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
       <td [attr.colspan]="3">
@@ -98,9 +101,9 @@
       </div>
       <div class="form-group">
         <label for="country-dropdown">Countries</label>
-        <p-dropdown 
-          [options]="dropdown" 
-          id="country-dropdown" 
+        <p-dropdown
+          [options]="dropdown"
+          id="country-dropdown"
           [filter]="true"
           required
           name="country-dropdown"
@@ -110,23 +113,34 @@
           [(ngModel)]="city.Country"
         ></p-dropdown>
       </div>
+      <div class="form-group">
+          <label for="sequence">Sequence</label>
+          <input
+            type="number"
+            name="sequence"
+            required
+            class="form-control"
+            id="sequence"
+            [(ngModel)]="city.sequence"
+          />
+        </div>
     </div>
     <div class="form-group">
       <p-footer>
-        <button 
-          type="button" 
-          pButton 
+        <button
+          type="button"
+          pButton
           icon="fa fa-close"
           [disabled]="!cityForm.form.valid || newCity"
-          (click)="delete()" 
+          (click)="delete()"
           label="Delete"
         ></button>
-        <button 
+        <button
           type="button"
-          pButton 
+          pButton
           icon="fa fa-check"
           [disabled]="!cityForm.form.valid"
-          (click)="save()" 
+          (click)="save()"
           label="Save"
         ></button>
       </p-footer>

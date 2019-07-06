@@ -124,12 +124,12 @@
   <form #familyForm="ngForm">
     <div *ngIf="family">
         <div class="form-group">
-            <label for="name">Sequence</label>
+            <label for="sequence">Sequence</label>
             <input
               type="number"
               class="form-control"
               pKeyFilter="num"
-              name="name"
+              name="sequence"
               id="name"
               required
               [(ngModel)]="family.sequence"
@@ -149,8 +149,8 @@
       </div>
       <div class="form-group">
         <label for="family-dropdown">Select Shade</label>
-        <p-dropdown 
-          [options]="dropdown" 
+        <p-dropdown
+          [options]="dropdown"
           [filter]="true"
           name="family-dropdown"
           appendTo="body"

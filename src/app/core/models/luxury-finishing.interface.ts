@@ -7,4 +7,5 @@ export interface LuxuryFinishing {
   description: string;
   images: any[];
   Countries: Country[];
+  sequence: number;
 }

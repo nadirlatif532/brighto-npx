@@ -4,6 +4,7 @@ import { Project } from './project.interface';
 import { Surface } from './surface.interface';
 import { Finish } from './finish.interface';
 import { Packagings } from './packaging.interface';
+import { sequence } from '@angular/animations';
 
 export interface Product {
   id: number;
@@ -18,5 +19,6 @@ export interface Product {
   Surfaces: Surface[],
   FinishTypes:Finish[],
   Countries: Country[],
-  Packagings: Packagings[]
+  Packagings: Packagings[],
+  sequence: number
 }

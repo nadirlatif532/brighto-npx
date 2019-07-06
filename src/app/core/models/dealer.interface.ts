@@ -12,4 +12,5 @@ export interface Dealer {
   Country: Country;
   City: City;
   user: User;
+  sequence: number;
 }

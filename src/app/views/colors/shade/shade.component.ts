@@ -35,7 +35,7 @@ export class ShadeComponent implements OnInit {
     private productService: ProductService,
     private countryService: CountryService,
     private familyService: FamilyService,
-    private activatedRoute: ActivatedRoute,) { 
+    private activatedRoute: ActivatedRoute,) {
       this.types =[
         {name: 'ALL COLORS', value:false},
         {name: 'READY MIX', value:true}
@@ -54,10 +54,10 @@ export class ShadeComponent implements OnInit {
         this.shades = next[0];
         this.products = next[1];
         this.countries = next[2];
-        this.families = next[3].map(family => {
-          delete family["ShadeFilter"]
-          return family;
-        });
+        // this.families = next[3].map(family => {
+        //   delete family["ShadeFilter"]
+        //   return family;
+        // });
       },
       () => {},
       () => {
