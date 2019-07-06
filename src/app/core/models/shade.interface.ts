@@ -4,6 +4,7 @@ import { Family } from './family.interface';
 
 export interface Shade {
   id: number;
+  sequence: number;
   name: string;
   color: {
     r: number;

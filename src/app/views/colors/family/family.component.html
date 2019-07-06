@@ -16,13 +16,34 @@
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Sr. #</th>
+      <th [pSortableColumn]="'sequence'">Sequence
+          <p-sortIcon [field]="'sequence'"></p-sortIcon>
+      </th>
       <th [pSortableColumn]="'name'">Name
         <p-sortIcon [field]="'name'"></p-sortIcon>
       </th>
+      <th>Shade Type</th>
       <th>RGB</th>
     </tr>
     <tr>
       <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          fam.filters['sequence']
+            ? fam.filters['sequence'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          fam.filter(
+            $event.target.value,
+            'sequence',
+            'contains'
+          )
+        "
+      /></th>
       <th><input
         style="width: 100%"
         [value]="
@@ -64,6 +85,7 @@
   <ng-template pTemplate="body" let-family let-rowIndex="rowIndex">
     <tr [pSelectableRow]="family">
       <td>{{ rowIndex + 1 }}</td>
+      <td>{{ family.sequence }}</td>
       <td>{{ family.name }}</td>
       <td>{{  family.ShadeFilter?.name}}</td>
       <td style.background-color="rgb({{ family.color.r }}, {{family.color.g}}, {{family.color.b}})">
@@ -101,6 +123,18 @@
 >
   <form #familyForm="ngForm">
     <div *ngIf="family">
+        <div class="form-group">
+            <label for="name">Sequence</label>
+            <input
+              type="number"
+              class="form-control"
+              pKeyFilter="num"
+              name="name"
+              id="name"
+              required
+              [(ngModel)]="family.sequence"
+            />
+          </div>
       <div class="form-group">
         <label for="name">Name</label>
         <input

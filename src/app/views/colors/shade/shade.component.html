@@ -16,6 +16,9 @@
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Sr. #</th>
+      <th [pSortableColumn]="'sequence'">Sequence
+        <p-sortIcon [field]="'sequence'"></p-sortIcon>
+    </th>
       <th [pSortableColumn]="'itemCode'">Item Code
         <p-sortIcon [field]="'itemCode'" ></p-sortIcon>
       </th>
@@ -28,6 +31,23 @@
     </tr>
     <tr>
       <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          sha.filters['sequence']
+            ? sha.filters['sequence'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          sha.filter(
+            $event.target.value,
+            'sequence',
+            'contains'
+          )
+        "
+      /></th>
       <th><input
         style="width: 100%"
         [value]="
@@ -83,6 +103,7 @@
   <ng-template pTemplate="body" let-shade let-rowIndex="rowIndex">
     <tr [pSelectableRow]="shade">
       <td>{{ rowIndex + 1 }}</td>
+      <td>{{ shade.sequence }}</td>
       <td>{{ shade.itemCode }}</td>
       <td>{{ shade.name }}</td>
       <td><div *ngIf="shade.isAC">
@@ -104,7 +125,7 @@
   </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="6">
+      <td [attr.colspan]="7">
         No records found
       </td>
     </tr>
