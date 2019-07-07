@@ -96,7 +96,8 @@ export class CreateUserComponent implements OnInit {
       },
       ()=>{
         if(this.selectedRole == 'DEALER'){
-          this.dealer['name'] = this.user['firstname'] +''+ this.user['lastname']
+          this.dealer['name'] = this.user['firstname'] +''+ this.user['lastname'];
+          this.dealer['phone'] = this.user['phone'];
           this.dealer['CountryId'] = this.dealer['Country'].id;
           this.dealer['CityId'] = this.dealer['City'].id;
           if(this.selectedStatus == "isRM") {
