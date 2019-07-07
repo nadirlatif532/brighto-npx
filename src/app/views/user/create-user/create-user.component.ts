@@ -68,7 +68,6 @@ export class CreateUserComponent implements OnInit {
     ).subscribe(
       next => {
         this.countries = next[0];
-        console.log(this.countries)
         this.cities = next[1];
       },
       () => {},
@@ -93,8 +92,6 @@ export class CreateUserComponent implements OnInit {
         this.router.navigate(['user/list'])
       }},
       (error) => {
-        console.log(error);
-        //this.registerErrors = this.sharedService.errorObjToMap(error.errors);
         this.registrationError = true;
       },
       ()=>{
@@ -126,7 +123,6 @@ export class CreateUserComponent implements OnInit {
         });
       }
   filterCities(event){
-    console.log(this.dealer)
     let countryId = this.dealer.Country.id;
     this.filteredCities =this.cities.filter(function(city){
       return city.Country.id === countryId;
