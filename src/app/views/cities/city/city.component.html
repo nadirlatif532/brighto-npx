@@ -66,9 +66,9 @@
   <ng-template pTemplate="body" let-city let-rowIndex="rowIndex">
     <tr [pSelectableRow]="city">
       <td>{{ rowIndex + 1 }}</td>
-      <td>{{city.name}}</td>
-      <td>{{city.Country.name}}</td>
-      <td>{{city.sequence}}</td>
+      <td>{{city?.name}}</td>
+      <td>{{city?.Country?.name}}</td>
+      <td>{{city?.sequence}}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
@@ -78,7 +78,7 @@
   </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="3">
+      <td [attr.colspan]="4">
         No records found
       </td>
     </tr>

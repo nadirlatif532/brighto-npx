@@ -66,8 +66,8 @@
       <td>{{dealer.longitude}}</td>
       <td>{{dealer.latitude}}</td>
       <td>{{dealer.status}}</td>
-      <td *ngIf="dealer.Country">{{dealer.Country.name}}</td>
-      <td *ngIf="dealer.City">{{dealer.City.name}}</td>
+      <td>{{dealer?.Country?.name}}</td>
+      <td>{{dealer?.City?.name}}</td>
       <td >{{dealer.sequence}}</td>
     </tr>
   </ng-template>
