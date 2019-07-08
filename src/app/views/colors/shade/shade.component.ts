@@ -54,10 +54,9 @@ export class ShadeComponent implements OnInit {
         this.shades = next[0];
         this.products = next[1];
         this.countries = next[2];
-        // this.families = next[3].map(family => {
-        //   delete family["ShadeFilter"]
-        //   return family;
-        // });
+        this.families = next[3].map(family => {
+         return family;
+        });
       },
       () => {},
       () => {
@@ -74,6 +73,7 @@ export class ShadeComponent implements OnInit {
   showDialogToAdd() {
     this.newShade = true;
     this.shade = {} as Shade;
+    this.selectedProducts = null;
     this.shade.color = {r: null, g: null, b: null};
     this.displayDialog = true;
   }
