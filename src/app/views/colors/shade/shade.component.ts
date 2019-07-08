@@ -28,7 +28,9 @@ export class ShadeComponent implements OnInit {
   displayDialog: boolean = false;
   radioVal: string = 'RM';
   loading: boolean = true;
-  types:any[] = []
+  types:any[] = [];
+  currentShades:Shade[] = [];
+  matchedShades: Shade[] = [];
 
   constructor(
     private shadeService: ShadeService,
@@ -62,13 +64,26 @@ export class ShadeComponent implements OnInit {
       () => {
         if(id){
           this.shadeService.getShadesByProductId(id).subscribe(
-            (next) => {this.shades = next},
+            (next) => {
+              this.currentShades = next;
+              this.setShades()
+            },
             () => {},
             () => {})
         }
         this.loading = false
       }
     );
+  }
+  setShades(){
+    for (let currentShade of this.currentShades){
+      for (let shade of this.shades){
+        if (shade.id == currentShade.id){
+          this.matchedShades.push(shade)
+        }
+      }
+    }
+    this.shades = this.matchedShades;
   }
   showDialogToAdd() {
     this.newShade = true;
