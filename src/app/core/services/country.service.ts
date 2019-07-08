@@ -19,8 +19,7 @@ export class CountryService {
   }
 
   public save(country: Country) {
-    const name = {name:country['name']};
-    return this.api.post('admin/country/create', name );
+    return this.api.post('admin/country/create', country );
   }
 
   public update(country: Country) {

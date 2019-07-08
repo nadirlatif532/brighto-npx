@@ -31,7 +31,7 @@ export class CityComponent implements OnInit {
     ).subscribe(
       next => {
         this.cities = next[0];
-        this.dropdown = next[1].map(item => { 
+        this.dropdown = next[1].map(item => {
             return { label: item.name, value: {id: item.id, name: item.name} }
           }
         );
@@ -52,6 +52,7 @@ export class CityComponent implements OnInit {
     let formData = new FormData();
     formData.append('name', this.city.name)
     formData.append('CountryId', this.city.Country.id.toString());
+    formData.append('sequence', this.city.sequence.toString());
 
     if (this.newCity) {
       this.cityService.save(formData).subscribe(() => this.ngOnInit())
@@ -77,7 +78,7 @@ export class CityComponent implements OnInit {
   }
 
   cloneCity(city) {
-    let count: City = {id: city.id,name: city.name, Country: city.Country};
+    let count: City = {id: city.id,name: city.name, Country: city.Country, sequence: city.sequence};
     return count;
   }
 }

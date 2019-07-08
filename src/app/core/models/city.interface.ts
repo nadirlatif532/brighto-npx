@@ -4,4 +4,5 @@ export interface City {
   id: number;
   name: string;
   Country: Country;
+  sequence: number;
 }

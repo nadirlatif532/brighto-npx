@@ -35,7 +35,7 @@ export class ShadeComponent implements OnInit {
     private productService: ProductService,
     private countryService: CountryService,
     private familyService: FamilyService,
-    private activatedRoute: ActivatedRoute,) { 
+    private activatedRoute: ActivatedRoute,) {
       this.types =[
         {name: 'ALL COLORS', value:false},
         {name: 'READY MIX', value:true}
@@ -55,8 +55,7 @@ export class ShadeComponent implements OnInit {
         this.products = next[1];
         this.countries = next[2];
         this.families = next[3].map(family => {
-          delete family["ShadeFilter"]
-          return family;
+         return family;
         });
       },
       () => {},
@@ -74,6 +73,7 @@ export class ShadeComponent implements OnInit {
   showDialogToAdd() {
     this.newShade = true;
     this.shade = {} as Shade;
+    this.selectedProducts = null;
     this.shade.color = {r: null, g: null, b: null};
     this.displayDialog = true;
   }
@@ -94,7 +94,7 @@ export class ShadeComponent implements OnInit {
         }
       }
     }
-    let shade: Shade = {id: s.id, name: s.name, color: {r: s.color.r, g: s.color.g, b: s.color.b}, description: s.description, itemCode: s.itemCode, isAC: s.isAC, isRM: s.isRM, Products: null, Countries: s.Countries, Family: s.Family };
+    let shade: Shade = {id: s.id, sequence: s.sequence, name: s.name, color: {r: s.color.r, g: s.color.g, b: s.color.b}, description: s.description, itemCode: s.itemCode, isAC: s.isAC, isRM: s.isRM, Products: null, Countries: s.Countries, Family: s.Family };
     return shade;
   }
 

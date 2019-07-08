@@ -25,16 +25,16 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="country">Luxury Products</label>
+            <label class="col-md-3 col-form-label" for="country">Luxury Finishes</label>
             <div class="col-md-9">
-            <p-listbox 
-              [options]="luxuryProducts" 
-              name="products" 
-              multiple="multiple" 
-              checkbox="checkbox" 
-              filter="filter" 
-              [(ngModel)]="luxuryShade.LuxuryFinishes" 
-              optionLabel="name" 
+            <p-listbox
+              [options]="luxuryProducts"
+              name="products"
+              multiple="multiple"
+              checkbox="checkbox"
+              filter="filter"
+              [(ngModel)]="luxuryShade.LuxuryFinishes"
+              optionLabel="name"
               required
               [style]="{width: '100%'}"
             ></p-listbox>
@@ -55,6 +55,12 @@
                 <span *ngIf="imageErr" class='error'>Image should be provided.</span>
               </div>
           </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="sequence">Sequence</label>
+              <div class="col-md-9">
+                  <input type="text" [(ngModel)]="luxuryShade.sequence" id="text-input" name="sequence" class="form-control" required/>
+            </div>
+            </div>
       </div>
       <div class="card-footer" style="text-align: right;">
         <button [disabled]="!addForm.form.valid" type="submit" pButton icon="fa fa-plus" label="Submit"></button>

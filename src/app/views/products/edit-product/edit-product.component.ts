@@ -146,6 +146,7 @@ export class EditProductComponent implements OnInit {
     formData.append('description',this.product.description.toString());
     formData.append('countries', JSON.stringify(this.product.Countries));
     formData.append('PackagingId', JSON.stringify(packagings));
+    formData.append('sequence', this.product.sequence.toString())
 
     this.productService.update(formData, this.product.id).subscribe(
       () => this.router.navigate(['products', 'list'])

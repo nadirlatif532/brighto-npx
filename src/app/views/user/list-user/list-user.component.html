@@ -164,7 +164,7 @@ showEffect="fade"
         [filter]="true"
         [options]="roles" [(ngModel)]="selectedRole" optionLabel="value"></p-dropdown>
     </div>
-    <div class="form-group ">
+    <div *ngIf="user.role != 'DEALER'" class="form-group ">
       <label for="profession">Profession</label>
           <p-dropdown
             name="role"
@@ -223,7 +223,19 @@ showEffect="fade"
         [(ngModel)]="user.city"
         />
     </div>
-</div>
+    <div class="form-group">
+      <label for="city">Reset Password</label><br>
+      <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
+    </div>
+    <div *ngIf="checked" class="form-group">
+      <label for="password">Enter Password</label>
+      <input
+        type="password"
+        class="form-control"
+        [(ngModel)]="user.password"
+        />
+    </div>
+  </div>
   <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
           <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>

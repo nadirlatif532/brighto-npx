@@ -18,6 +18,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
+import {InputSwitchModule} from 'primeng/inputswitch';
+
 
 @NgModule({
   declarations: [CreateUserComponent, EditUserComponent, ListUserComponent],
@@ -38,6 +40,7 @@ import { TableModule } from 'primeng/table';
     InputTextModule,
     ConfirmDialogModule,
     PanelModule,
+    InputSwitchModule
   ]
 })
 export class UserModule { }

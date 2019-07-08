@@ -16,6 +16,9 @@
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Sr. #</th>
+      <th [pSortableColumn]="'sequence'">Sequence
+        <p-sortIcon [field]="'sequence'"></p-sortIcon>
+    </th>
       <th [pSortableColumn]="'itemCode'">Item Code
         <p-sortIcon [field]="'itemCode'" ></p-sortIcon>
       </th>
@@ -28,6 +31,23 @@
     </tr>
     <tr>
       <th></th>
+      <th><input
+        style="width: 100%"
+        [value]="
+          sha.filters['sequence']
+            ? sha.filters['sequence'].value
+            : ''
+        "
+        pInputText
+        type="text"
+        (input)="
+          sha.filter(
+            $event.target.value,
+            'sequence',
+            'contains'
+          )
+        "
+      /></th>
       <th><input
         style="width: 100%"
         [value]="
@@ -83,6 +103,7 @@
   <ng-template pTemplate="body" let-shade let-rowIndex="rowIndex">
     <tr [pSelectableRow]="shade">
       <td>{{ rowIndex + 1 }}</td>
+      <td>{{ shade.sequence }}</td>
       <td>{{ shade.itemCode }}</td>
       <td>{{ shade.name }}</td>
       <td><div *ngIf="shade.isAC">
@@ -104,7 +125,7 @@
   </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="6">
+      <td [attr.colspan]="7">
         No records found
       </td>
     </tr>
@@ -150,8 +171,8 @@
       </div>
       <div class="form-group">
         <label for="product">Product</label>
-        <p-multiSelect 
-          [options]="products" 
+        <p-multiSelect
+          [options]="products"
           [(ngModel)]="selectedProducts"
           appendTo="body"
           [style]="{ width: '100%' }"
@@ -164,7 +185,7 @@
       </div>
       <div class="form-group">
         <label for="countries">Family</label>
-        <p-dropdown 
+        <p-dropdown
         [style]="{ width: '100%' }"
         [autoDisplayFirst]="false"
         name="countries"
@@ -184,14 +205,14 @@
       </div>
       <div class="form-group">
         <label for="">Available In</label>
-        <p-listbox 
-          [options]="countries" 
-          name="country" 
-          multiple="multiple" 
-          checkbox="checkbox" 
-          filter="filter" 
-          [(ngModel)]="shade.Countries" 
-          optionLabel="name" 
+        <p-listbox
+          [options]="countries"
+          name="country"
+          multiple="multiple"
+          checkbox="checkbox"
+          filter="filter"
+          [(ngModel)]="shade.Countries"
+          optionLabel="name"
           required
           [style]="{width: '100%'}"
         ></p-listbox>
@@ -214,6 +235,10 @@
       <div class="form-group">
         <label for="description">Description</label>
         <p-editor [(ngModel)]="shade.description" name="description"  [style]="{'height':'320px'}"></p-editor>
+      </div>
+      <div class="form-group">
+        <label for="sequence">Sequence</label>
+        <input  name="sequence" required type="number" placeholder="Sequence" class="form-control" [(ngModel)]="shade.sequence" />
       </div>
     </div>
     <div class="form-group">

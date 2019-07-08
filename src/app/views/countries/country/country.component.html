@@ -1,4 +1,4 @@
-<p-table 
+<p-table
   #cou
   [paginator]="true"
   [rows]="20"
@@ -17,8 +17,9 @@
       <tr>
         <th>Sr. #</th>
         <th [pSortableColumn]="'name'">Name
-          <p-sortIcon [field]="'name'"></p-sortIcon>
+        <p-sortIcon [field]="'name'"></p-sortIcon>
         </th>
+        <th >Sequence</th>
       </tr>
       <tr>
         <th></th>
@@ -39,22 +40,24 @@
             )
           "
         /></th>
+        <th></th>
       </tr>
     </ng-template>
   <ng-template pTemplate="body" let-country let-rowIndex="rowIndex">
     <tr [pSelectableRow]="country">
       <td>{{ rowIndex + 1 }}</td>
       <td>{{country.name}}</td>
+      <td>{{country.sequence}}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
       <div style="text-align:left">
           <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
       </div>
-  </ng-template>    
+  </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td [attr.colspan]="2">
+      <td [attr.colspan]="3">
         No records found
       </td>
     </tr>
@@ -75,23 +78,34 @@
           [(ngModel)]="country.name"
         />
       </div>
+      <div class="form-group">
+          <label for="sequence">Sequence</label>
+          <input
+            type="number"
+            name="sequence"
+            required
+            class="form-control"
+            id="sequence"
+            [(ngModel)]="country.sequence"
+          />
+        </div>
     </div>
     <div class="form-group">
       <p-footer>
-        <button 
-          type="button" 
-          pButton 
+        <button
+          type="button"
+          pButton
           icon="fa fa-close"
           [disabled]="!countryForm.form.valid || newCountry"
-          (click)="delete()" 
+          (click)="delete()"
           label="Delete"
         ></button>
-        <button 
-          type="button" 
-          pButton 
-          icon="fa fa-check" 
+        <button
+          type="button"
+          pButton
+          icon="fa fa-check"
           [disabled]="!countryForm.form.valid"
-          (click)="save()" 
+          (click)="save()"
           label="Save"
         ></button>
       </p-footer>

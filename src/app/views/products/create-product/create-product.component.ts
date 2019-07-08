@@ -118,6 +118,7 @@ export class CreateProductComponent implements OnInit {
     formData.append('description',description);
     formData.append('countries', JSON.stringify(this.product.Countries));
     formData.append('PackagingId', JSON.stringify(packagings));
+    formData.append('sequence',this.product.sequence.toString())
 
     this.productService.save(formData).subscribe(
       () => this.router.navigate(['products', 'list'])

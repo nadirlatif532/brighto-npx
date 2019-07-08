@@ -92,6 +92,7 @@ export class EditFinishingComponent implements OnInit {
     formData.append("name", this.luxuryFinishing.name);
     formData.append("description", description);
     formData.append("video", this.luxuryFinishing.video);
+    formData.append('sequence',this.luxuryFinishing.sequence.toString())
     if (this.coverImage) {
       formData.append("coverImage", this.coverImage);
     }

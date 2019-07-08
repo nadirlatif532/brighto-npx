@@ -83,7 +83,8 @@ export class CreateUserComponent implements OnInit {
     delete this.user.confirmpassword;
     this.user.role = this.selectedRole
     this.user.profession = this.selectedProfession;
-    console.log(this.selectedProfession)
+    this.user.city = "city";
+    this.user.country = "country";
     this.api.post('admin/user/create', this.user).subscribe(
       (data) => {
         this.userId = data.data.id
@@ -91,13 +92,12 @@ export class CreateUserComponent implements OnInit {
         this.router.navigate(['user/list'])
       }},
       (error) => {
-        //this.registerErrors = this.sharedService.errorObjToMap(error.errors);
         this.registrationError = true;
       },
       ()=>{
         if(this.selectedRole == 'DEALER'){
-          if(!this.registrationError){
-          this.dealer['name'] = this.user['firstname'] +''+ this.user['lastname']
+          this.dealer['name'] = this.user['firstname'] +''+ this.user['lastname'];
+          this.dealer['phone'] = this.user['phone'];
           this.dealer['CountryId'] = this.dealer['Country'].id;
           this.dealer['CityId'] = this.dealer['City'].id;
           if(this.selectedStatus == "isRM") {
@@ -119,11 +119,11 @@ export class CreateUserComponent implements OnInit {
                 ()=>{}
               )
             })
-          }
+          
         }
         });
       }
-  filterCities(){
+  filterCities(event){
     let countryId = this.dealer.Country.id;
     this.filteredCities =this.cities.filter(function(city){
       return city.Country.id === countryId;

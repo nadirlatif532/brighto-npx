@@ -16,6 +16,7 @@ export class ListUserComponent implements OnInit {
   displayDialog = false;
   professions:any[];
   selectedProfession: any = {};
+  checked: boolean = false;
 
   constructor(
     private userService: UserService) {
