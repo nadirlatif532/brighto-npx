@@ -98,7 +98,7 @@ export class DealerComponent implements OnInit {
   onRowSelect(event) {
     this.newDealer = false;
     this.dealer = this.cloneDealer(event.data);
-    console.log(this.dealer.City.name)
+    this.filterCities();
     this.displayDialog = true;
   }
 
